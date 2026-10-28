@@ -183,3 +183,11 @@ Waldos must assign electronic occupancy independently of the nuclear proton/neut
 `sum(orbital occupancy) + unresolved electrons = e_bound_for_atom`.
 
 **Invariant 029:** The electronic configuration is derived from the atom's existing electron count; assigning electrons to modeled orbitals does not create or destroy electrons, alter the nuclear proton/neutron inventory, unseal the top port, or change cobalt `{{i}}`. This is an idealized occupancy display, not an accurate many-electron quantum calculation or spectroscopic prediction. Ground-state filling exceptions and spin-resolved Pauli/Hund behavior are beyond this boundary.
+
+## GWELL 036 — Minimum three Ice IX cubes, W/M/S resonant coupling
+
+The reference 3D renderer displays **three** discrete vibrating, rotating cubical Ice IX proxies inside the fused CALVIN boundary, with three adjustable interaction bands W (weak), M (medium), S (strong). The band names denote **relative phenomenological spring-like couplings**, not the Standard Model weak or strong nuclear forces; "medium" is not a fundamental force.
+
+A reference displacement mode for cube `j` is `q_j(t) = sin(ω_j t+φ_j)+0.3 k_j sin(ω_c t)` with dimensionless `k_j ∈ [0,1]`. Distinct phase and frequency proxies provide visually distinguishable motion. This is not yet a dynamically coupled differential equation or an experimentally calibrated ice-IX phonon spectrum.
+
+**Invariant 036:** `N_cubes >= 3`, every cube has its own bounded vibratory state, `0 <= k_W,k_M,k_S <= 1`, inventory accounting remains unchanged, cobalt identity `{{i}}` is immutable, and the upper negative port is sealed. Further work requires a material stiffness tensor, density, pressure, damping, inter-cube force laws, and an energy ledger for physical predictions.
