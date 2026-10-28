@@ -207,3 +207,15 @@ Each of the three minimum Ice IX proxies is now represented as a diatom-inspired
 Diatoms in biology have siliceous frustules consisting of two overlapping valves joined by girdle bands; intricate porous shells motivate the depicted geometry. See https://diatoms.org/glossary/frustule and https://www.nature.com/articles/s41598-020-76318-5 . A genuine diatom is biological and primarily silica-walled; ice IX under high pressure is an entirely different material. Here `DIOTOMIC` is a named synthetic geometric abstraction.
 
 **Invariant 039:** `N_[()] >= 3`; each unit preserves its paired-valve containment and its distinguished inner cavity; inter-unit W/M/S springs conserve energy for fixed parameters up to numerical integration error; the `{{i}}` identity remains unchanged. Material porosity and pore conductance are illustrative only and have no physical transport equation in this boundary.
+
+## GWELL 040 — Conservative DIOTOMIC pore transport
+
+The 3D page contains a dedicated discrete marker ledger: twelve initial tokens outside three [()] DIOTOMIC compartments. Manual intake moves outside → D1, relay moves D1 → D2 or D2 → D3, and release moves D3 → outside. Each successful transfer moves exactly one token. The oscillator's mechanical energy is a separate ledger.
+
+Invariant 040: outside + D1 + D2 + D3 = 12. No negative inventory, source-less creation, or transfer through fully closed pores.
+
+## GWELL 041 — Resonance-gated permeability
+
+DIOTOMIC-to-DIOTOMIC relay is permitted only when the instantaneous oscillator phase difference is within a specified gate. Define phase φ_i = atan2(v_i / 2, q_i), a dimensionless reference for the oscillator with pinning stiffness 4 and unit mass. Circular phase gap Δφ_ij = acos(cos(φ_i−φ_j)) lies in [0,π]. The pore is open when Δφ_ij ≤ πp where p ∈ (0,1] is the permeability slider. At p=0 every pore is closed. External intake/release uses the simpler p>0 gate.
+
+Invariant 041: phase can block or admit a transfer, but cannot create or destroy token inventory; W/M/S mechanical coupling and cobalt identity {{i}} remain unchanged. The phase-gating function is a model rule, not a measured physical law for Ice IX or diatom pores.
