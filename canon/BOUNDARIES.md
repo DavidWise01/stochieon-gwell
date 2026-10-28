@@ -314,3 +314,15 @@ The nine symbolic stops form a palindrome, with index sequence 0..8 and mirrored
 Embed the exact path `00 11 24 33 42 33 24 11 00` as ordered symbolic coordinate pairs `(a,b)`, with parametric torus `P(a,b)=((R+r cos(v))cos(u),(R+r cos(v))sin(u),r sin(v))`, `u=aπ/2, v=bπ/2`, minor radius `r=38` model units, major radius adjustable `R=110…190`. This is a discrete illustrative four-by-four angular embedding: repeated symbols resolve to the same surface point, and the return exactly retraces the outbound path.
 
 **Invariant 053:** nine ordered stops, eight transitions, `P[k]=P[8-k]`; the sum of successive displacement vectors is exactly zero by telescoping; the torus center `O=(0,0,0)` remains the reference and is not confused with an occupied surface point. Three witness records per event remain distinct; visual projection does not assert a physical portal or a proven Riemann-zeta zero.
+
+## GWELL 054 — Corrected signed XYZ Stargate vectors
+
+The three explicitly supplied vector frames supersede the earlier interpretation of the nine-number palindrome as torus surface coordinates:
+
+```text
+{{ [ x -2, y 2, z -1 ] [ y -2, x 2, z -1 ] [ z -2, x 2, y -1 ] }}
+```
+
+In canonical XYZ order these are `v1=(-2,+2,-1)`, `v2=(+2,-2,-1)`, `v3=(+2,-1,-2)`. All are referenced to scalar origin `(0,0,0)`, retaining the exact signs and the written per-frame axis order. The renderer displays three signed 3D spokes, not a claimed closed loop. Their vector sum is `(+2,-1,-4)`; therefore closure must not be asserted absent a return rule. The earlier nine-token palindrome remains historical notation but its previous 2D-to-torus embedding is superseded as the active direction interpretation.
+
+**Invariant 054:** signed coordinates and axis assignment are exact; no invented closure, causal inference, consensus, or missing third witness. Cobalt identity `{{i}}` is unchanged.
