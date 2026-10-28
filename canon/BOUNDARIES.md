@@ -369,3 +369,9 @@ The GitHub Pages entrypoint is rebuilt with Three.js r170, an explicit browser i
 An anonymous twelve-token conservation ledger and a separate identified twelve-packet FIFO/ACK ledger are provided with append-only three-node witness observations and deterministic event-prefix replay. Browser errors are surfaced in the status area. The scene adapts to container size, limits device-pixel ratio, and honors reduced-motion preferences. As a page rewrite, some previously separate advanced transport controls are consolidated; no claim of feature-by-feature parity with the preceding Canvas2D page is made.
 
 **Invariant 059:** the migration must not alter foundational vectors P=(-2,+3,-1), T=(+2,-3,+1), I=(0,0,0) or the /0\\ pin; retained inventories are conserved; W/M/S remain phenomenological model couplings, and Three.js geometry is not a physically certified Ice IX or Casimir simulation.
+
+## GWELL 060 — Full- and half-vector delimitation
+
+The Three.js scene adds a user-selectable subdivision grid anchored at /0\\: full vector step 1 or half-vector step 0.5, on each of x/y/z from -4 to +4. Visual ticks identify addressable intervals; no point is moved to satisfy the display grid. The Patricia (-2,+3,-1), Toph (+2,-3,+1), Icarium (0,0,0) foundation positions and their zero sum remain unchanged.
+
+**Invariant 060:** a delimiter changes the visualization/address resolution, not a physical field or event. The interval count over [-4,+4] is 8 / step (8 at full-vector resolution; 16 at half-vector resolution). All coordinates remain relative to immutable scalar zero. Independent witnesses remain separate.
