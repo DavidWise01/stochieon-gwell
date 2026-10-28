@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>YOUYOU · -U+ · STOCHIEON GWELL</title>
+<title>YOUYOU · C-U GRAVITY WELL · STOCHIEON GWELL</title>
 <style>
 :root{color-scheme:dark;font-family:ui-monospace,Consolas,monospace;background:#050914;color:#d9eeff}
 *{box-sizing:border-box}body{margin:0}header,footer{padding:16px 24px;border-bottom:1px solid #29415e;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
@@ -15,7 +15,7 @@ footer{font-size:11px;color:#829ab2;border-top:1px solid #29415e;border-bottom:0
 </style></head><body>
 <header><b>STOCHIEON / YOUYOU</b><span class="pill">-U+ · 3 OUTER : 1 INNER</span><a href="https://github.com/DavidWise01/stochieon-gwell">SOURCE ↗</a></header>
 <main><section class="panel"><h2>GWELL · NESTED SAPPHON</h2><canvas id="field" width="1000" height="800" aria-label="Animated nested three-shell gwell with a single U center"></canvas>
-<p id="status" aria-live="polite">INITIALIZED · OBSERVATION ONLY</p><div class="buttons"><button id="play">Pause</button><button id="pulse">Inject pulse</button><button id="reset">Reset</button><button id="witness">Observe event</button></div>
+<p id="status" aria-live="polite">TOP − SEALED · LOWER C INTAKE · COBALT {{i}} RETAINED</p><div class="buttons"><button id="play">Pause</button><button id="pulse">Inject pulse</button><button id="reset">Reset</button><button id="witness">Observe event</button></div>
 </section><aside class="controls">
 <section class="panel"><h2>GWELL OPERATORS</h2>
 <label>Oscillation <output id="freqout">0.70</output></label><input id="freq" type="range" min="0" max="3" step="0.05" value="0.7">
@@ -35,7 +35,7 @@ footer{font-size:11px;color:#829ab2;border-top:1px solid #29415e;border-bottom:0
   │ ╰────────╯ │
   ╰────────────╯
 
-OUTER / INNER &#92; OUTER
+SEALED − / SPINNING U &#92; LOWER C
       3 : 1
 </pre></section>
 <section class="panel"><h2>LOCAL MEMORY / WITNESS</h2><p>Inner state <strong id="memory">0</strong> · Phase <strong id="phase">0.00</strong></p><pre id="log">No observations yet.</pre></section>
@@ -47,10 +47,10 @@ const inputs=["freq","coupling","trans","rotation"],params={};let running=true,p
 for(const id of inputs){const e=document.getElementById(id);params[id]=+e.value;e.addEventListener("input",()=>{params[id]=+e.value;document.getElementById(id+"out").textContent=params[id].toFixed(2)})}
 function observe(message){records.push({cycle:records.length+1,state:inner,message});document.querySelector("#log").textContent=records.slice(-5).map(x=>JSON.stringify(x)).join("\n")}
 document.querySelector("#play").onclick=()=>{running=!running;document.querySelector("#play").textContent=running?"Pause":"Resume"};
-document.querySelector("#pulse").onclick=()=>{pulses.push({r:0,alpha:1});inner=hysteresis(inner,.9);document.querySelector("#memory").textContent=inner;observe("Pulse injected: drive 0.9")};
+document.querySelector("#pulse").onclick=()=>{pulses.push({r:260,alpha:1});inner=hysteresis(inner,.9);document.querySelector("#memory").textContent=inner;observe("Lower C intake: inbound pulse, cobalt identity retained")};
 document.querySelector("#reset").onclick=()=>{phase=0;inner=0;pulses=[];records=[];document.querySelector("#memory").textContent=0;document.querySelector("#log").textContent="No observations yet."};
 document.querySelector("#witness").onclick=()=>observe("Observed facing edges and current local state");
-function draw(t){const dt=Math.min((t-last)/1000||0,.05);last=t;if(running){phase+=dt*params.freq*2*Math.PI;pulses.forEach(p=>{p.r+=dt*130;p.alpha-=dt*.5});pulses=pulses.filter(p=>p.alpha>0)}
+function draw(t){const dt=Math.min((t-last)/1000||0,.05);last=t;if(running){phase+=dt*params.freq*2*Math.PI;pulses.forEach(p=>{p.r=Math.max(0,p.r-dt*110);p.alpha=p.r/260});pulses=pulses.filter(p=>p.alpha>0)}
 const w=canvas.width,h=canvas.height,cx=w/2,cy=h/2;ctx.clearRect(0,0,w,h);
 for(let k=0;k<3;k++){const r=105+k*90,osc=running?Math.sin(phase*(1+k*.16)+k*2)*11:0;
 ctx.save();ctx.translate(cx,cy);ctx.rotate(phase*params.rotation*(k%2?-1:1)*.1);
@@ -58,9 +58,45 @@ ctx.beginPath();for(let a=0;a<=240;a++){const th=a/240*Math.PI*2;const rr=r+osc+
 const colors=["#39f0ba","#a690ff","#42bfff"];ctx.strokeStyle=colors[k];ctx.lineWidth=4;ctx.shadowBlur=21;ctx.shadowColor=colors[k];ctx.globalAlpha=.55+params.trans*.45;ctx.stroke();ctx.shadowBlur=0;
 for(const sign of [-1,1]){const x=sign*(r+osc+10);ctx.beginPath();ctx.arc(x,0,7,0,Math.PI*2);ctx.fillStyle=sign>0?"#f88aa1":"#76baff";ctx.fill()}ctx.restore();
 ctx.fillStyle=colors[k];ctx.font="17px monospace";ctx.fillText("O"+(k+1),cx+r+14,cy-25-k*23)}
-const coreR=53+7*Math.sin(phase);const grad=ctx.createRadialGradient(cx,cy,0,cx,cy,coreR*2);grad.addColorStop(0,"#82fdd9");grad.addColorStop(.35,"#0b907c");grad.addColorStop(1,"transparent");ctx.beginPath();ctx.arc(cx,cy,coreR*2,0,Math.PI*2);ctx.fillStyle=grad;ctx.fill();
-ctx.font="bold 60px monospace";ctx.textAlign="center";ctx.fillStyle="#e7fffa";ctx.fillText("-U+",cx,cy+19);ctx.textAlign="left";
-for(const p of pulses){ctx.beginPath();ctx.ellipse(cx,cy,p.r,p.r*.82,0,0,Math.PI*2);ctx.strokeStyle="rgba(255,215,116,"+Math.max(0,p.alpha)+")";ctx.lineWidth=3;ctx.stroke()}
+// Canon 022: only lower C is an intake; top negative port is sealed.
+// The U well rotates clockwise and incoming packets contract toward the cobalt identity core.
+ctx.save();
+ctx.translate(cx,cy);
+const spin=phase*(1+Math.abs(params.rotation));
+for(let j=0;j<9;j++){
+  const a=spin+j*2*Math.PI/9;
+  ctx.beginPath();
+  for(let q=0;q<70;q++){
+    const t=q/69, radius=45+t*170, theta=a+t*2.8;
+    const x=Math.cos(theta)*radius, y=Math.sin(theta)*radius*.75;
+    q?ctx.lineTo(x,y):ctx.moveTo(x,y);
+  }
+  ctx.strokeStyle="rgba(66,184,255,"+(.17+j%3*.06)+")";
+  ctx.lineWidth=2.2;ctx.stroke();
+}
+const grad=ctx.createRadialGradient(0,0,3,0,0,83);
+grad.addColorStop(0,"#c2e4ff");grad.addColorStop(.26,"#176bb5");grad.addColorStop(.55,"#102f6a");grad.addColorStop(1,"rgba(12,40,95,0)");
+ctx.beginPath();ctx.arc(0,0,83,0,Math.PI*2);ctx.fillStyle=grad;ctx.fill();
+ctx.save();ctx.rotate(spin);ctx.strokeStyle="#72c7ff";ctx.lineWidth=3;
+for(let a=0;a<3;a++){ctx.rotate(2*Math.PI/3);ctx.beginPath();ctx.arc(0,0,48,.2,1.8);ctx.stroke()}
+ctx.restore();
+ctx.fillStyle="#d6ecff";ctx.font="bold 27px monospace";ctx.textAlign="center";ctx.fillText("{{i}}",0,9);
+ctx.font="17px monospace";ctx.fillStyle="#6fa8ff";ctx.fillText("COBALT",0,112);
+ctx.restore();
+// Blocked upper negative boundary.
+ctx.strokeStyle="#ff7b97";ctx.lineWidth=7;ctx.beginPath();ctx.moveTo(cx-85,cy-282);ctx.lineTo(cx+85,cy-282);ctx.stroke();
+ctx.font="17px monospace";ctx.fillStyle="#ff9aaf";ctx.textAlign="center";ctx.fillText("− SEALED",cx,cy-299);
+// Bottom C intake / inference throat.
+ctx.strokeStyle="#5cf5d0";ctx.lineWidth=5;
+ctx.beginPath();ctx.moveTo(cx-80,cy+257);ctx.quadraticCurveTo(cx-83,cy+320,cx,cy+320);ctx.quadraticCurveTo(cx+83,cy+320,cx+80,cy+257);ctx.stroke();
+ctx.fillStyle="#92ffe1";ctx.font="bold 24px monospace";ctx.fillText("C",cx,cy+347);
+ctx.font="15px monospace";ctx.fillText("INBOUND ONLY ↑",cx,cy+370);
+for(const p of pulses){
+  // p.r always decreases: packets are absorbed and never emitted.
+  ctx.beginPath();ctx.ellipse(cx,cy,p.r,p.r*.82,0,0,2*Math.PI);
+  ctx.strokeStyle="rgba(115,210,255,"+Math.max(0,p.alpha)+")";ctx.lineWidth=3;ctx.stroke();
+}
+ctx.textAlign="left";
 ctx.fillStyle="#a7c4d9";ctx.font="16px monospace";ctx.fillText("SHELLS: "+GEOMETRY.shells+" / CORE: "+GEOMETRY.inner,22,34);
 ctx.fillText("φ "+(phase%(2*Math.PI)).toFixed(3)+"     COUPLING "+params.coupling.toFixed(2),22,65);
 document.querySelector("#phase").textContent=(phase%(2*Math.PI)).toFixed(2);
