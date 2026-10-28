@@ -39,3 +39,18 @@ export function restore063(bundle){
  if(JSON.stringify(expected)!==JSON.stringify(bundle))throw Error("Witness bundle divergence");
  return state;
 }
+
+export function witness064(){return {a1:[],b1:[],c1:[]}}
+export function append064(logs,id,tick,value){
+ if(!["a1","b1","c1"].includes(id))throw Error("Unknown witness");
+ if(!Number.isSafeInteger(tick)||tick<0)throw Error("Bad tick");
+ const next=JSON.parse(JSON.stringify(logs)),list=next[id];
+ if(list.length&&tick<list[list.length-1].tick)throw Error("Earlier tick");
+ list.push({ordinal:list.length+1,tick,value});
+ return next;
+}
+export function compare064(logs,tick){
+ const entries=["a1","b1","c1"].map(id=>(logs[id]||[]).filter(e=>e.tick===tick).at(-1));
+ const abc2=entries.some(e=>!e)?"INCOMPLETE":entries.every(e=>JSON.stringify(e.value)===JSON.stringify(entries[0].value))?"MATCH":"DIVERGENT";
+ return {abc2,entries,zero:[0,0,0]};
+}
