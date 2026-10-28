@@ -271,3 +271,11 @@ An independent replay view processes the append-only GWELL 047 witness events in
 The DIOTOMIC route is oriented vertically downward into the C throat, not sideways across the enclosure. Three [()] modules appear in order D1 above D2 above D3, and the transport arrow points down toward C. This corrects the displayed geometry, not the conserved packet inventories or event-order rules.
 
 **Invariant:** directed containment path `D1 ↓ D2 ↓ D3 ↓ C`; upper negative port stays sealed; cobalt `{{i}}` is the stationary identity anchor. Downward is a chosen gravity-like model orientation, not evidence of microscopic gravitationally driven pore transport. Earlier horizontal diagrams are superseded for spatial orientation.
+
+## GWELL 049 — Three independent boundary witnesses
+
+The 3D page restores the non-downward DIOTOMIC layout from the confirmed GWELL 048 implementation. The appended GWELL 048a downward-orientation correction is superseded and is retained only as an immutable historical record, not an active geometric requirement.
+
+D1, D2, and D3 each witness only their own packet events. The comparison view projects the GWELL 047 append-only event sequence into three node-local reports: D1 send, D2 receive/forward, and D3 receive/ack. It checks per-packet order against the expected handoff sequence, then reports the earliest recorded contradiction by global sequence number. A partial history with no contradiction is marked **unknown/incomplete**, never falsely marked as complete delivery.
+
+**Invariant 049:** no votes, no quorums, no invented observations, no retroactive modifications. Independent records may be compared, but they cannot establish an unobserved event. Packet inventory and cobalt identity {{i}} remain preserved. The model's packet witness remains a logical simulation, not authenticated Ethernet telemetry.
