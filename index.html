@@ -1,5 +1,5 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>YOUYOU 3D · STOCHIEON GWELL 028</title><style>
+<title>YOUYOU 3D · STOCHIEON GWELL 029</title><style>
 :root{color-scheme:dark;font:16px system-ui;background:#070e1b;color:#e1eeff}*{box-sizing:border-box}body{margin:0}a{color:#8defff}
 .skip{position:absolute;left:-9999px}.skip:focus{left:15px;top:8px;z-index:10;background:white;color:black;padding:12px}
 header,footer{padding:16px 22px;border-bottom:1px solid #324960}header strong{letter-spacing:.08em}main{display:grid;grid-template-columns:minmax(0,2fr) minmax(270px,1fr);gap:16px;max-width:1220px;margin:auto;padding:18px}
@@ -12,7 +12,7 @@ p{line-height:1.5}small{color:#b9c9d9}footer{border-top:1px solid #36506a;border
 @media(max-width:790px){main{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){canvas{scroll-behavior:auto}}
 </style></head><body>
-<a class="skip" href="#controls">Skip animation to controls</a><header><h1>STOCHIEON · YOUYOU 3D · GWELL 028</h1><a href="https://github.com/DavidWise01/stochieon-gwell">Source and canon</a></header>
+<a class="skip" href="#controls">Skip animation to controls</a><header><h1>STOCHIEON · YOUYOU 3D · GWELL 029</h1><a href="https://github.com/DavidWise01/stochieon-gwell">Source and canon</a></header>
 <main><div><section><h2>Three nested shells · Five atomic waldos · C intake</h2>
 <canvas id="view" width="640" height="480" tabindex="0" role="img" aria-label="Interactive three-dimensional projection of three nested shells, five color-coded rotating waldo rings and a spinning inward U around a stationary cobalt identity. Drag or use arrow keys to rotate the view.">3D view requires canvas support; all actions remain available below.</canvas>
 <p id="status" role="status" aria-live="polite">Ready. Upper minus sealed. Lower C intake open.</p>
@@ -23,7 +23,7 @@ p{line-height:1.5}small{color:#b9c9d9}footer{border-top:1px solid #36506a;border
 <p>Inventory invariant: <strong id="totals">12 / 12 / 12</strong> · electric charge (e): <strong id="charge">0</strong></p>
 <p>Identity: <strong>{{i}}</strong> (cobalt, unchanged) · Top port: <strong>SEALED</strong> · Intake: <strong>C only</strong></p>
 <p><small>Waldos assign and release individually tracked proton, neutron, and electron tokens. Build creates a neutral hydrogen-1 model from one p and one e. Neutron/electron operations act on the latest atom. No binding energy or physical stability is simulated.</small></p></section>
-<section><h2>Configuration validity · GWELL 028</h2><p id="validity" role="status">No atom yet. UNKNOWN is not INVALID.</p></section><section><h2>Observation ledger</h2><pre id="log" aria-live="polite">No operations.</pre></section></div>
+<section><h2>Configuration validity · GWELL 029</h2><p id="validity" role="status">No atom yet. UNKNOWN is not INVALID.</p></section><section><h2>Electron orbital occupancy · GWELL 029</h2><p id="orbitals" role="status">No electronic configuration.</p><p><small>Aufbau filling-order approximation with subshell capacities; actual orbital energies and excited states require more detailed treatment.</small></p></section><section><h2>Observation ledger</h2><pre id="log" aria-live="polite">No operations.</pre></section></div>
 <aside id="controls"><section><h2>Camera and motion</h2>
 <label for="yaw">Yaw <output id="yawValue">25°</output></label><input id="yaw" type="range" min="-180" max="180" value="25">
 <label for="tilt">Tilt <output id="tiltValue">18°</output></label><input id="tilt" type="range" min="-75" max="75" value="18">
@@ -37,7 +37,7 @@ p{line-height:1.5}small{color:#b9c9d9}footer{border-top:1px solid #36506a;border
      COBALT {{i}}
           ↑
         C INTAKE</pre></section></aside></main>
-<footer>GWELL 028 · Auditable symbolic assembly and 3D waldo geometry · STOCHIEON</footer>
+<footer>GWELL 029 · Auditable symbolic assembly and 3D waldo geometry · STOCHIEON</footer>
 <script>
 "use strict";
 const $=id=>document.getElementById(id),canvas=$("view"),ctx=canvas.getContext("2d");
@@ -45,6 +45,8 @@ let yaw=25*Math.PI/180,tilt=18*Math.PI/180,zoom=1,phase=0,last=0,paused=matchMed
 const rings=[["−","#a58cff",70,-1],["W","#42cef8",105,1],["M","#4de9ae",140,-1],["S","#ffc06b",175,1],["+","#fb75b3",210,-1]];
 function status(t){$("status").textContent=t}
 function log(t){ledger.push(Object.freeze({step:ledger.length+1,action:t,atoms,stock,bound,identity:"{{i}}"}));$("log").textContent=ledger.slice(-8).map(x=>JSON.stringify(x)).join("\n")}
+const subshells=[["1s",2],["2s",2],["2p",6],["3s",2],["3p",6],["4s",2],["3d",10],["4p",6]];
+function occupancy(n){let left=n;const parts=[];for(const [name,cap] of subshells){if(!left)break;const num=Math.min(left,cap);parts.push(name+"^"+num);left-=num}if(left)parts.push("UNRESOLVED +"+left);return parts.join(" ")}
 function update(){
   atoms=species.length;
   const bound={p:0,n:0,e:0};
@@ -55,6 +57,7 @@ function update(){
   $("charge").textContent=species.reduce((v,a)=>v+a.p-a.e,0);
   const a=species.at(-1);
   $("species").textContent=a?"Z="+a.p+" N="+a.n+" e="+a.e:"none";
+  $("orbitals").textContent=a?"Electron configuration: "+occupancy(a.e)+" · occupancy total "+a.e:"No electronic configuration.";
   $("validity").textContent=!a?"No atom yet.":a.p===1&&a.n===0&&a.e===1?"KNOWN CONFIGURATION: neutral hydrogen-1":a.p===1&&a.n===1&&a.e===1?"KNOWN CONFIGURATION: neutral deuterium":a.p===1&&a.n===2&&a.e===1?"KNOWN CONFIGURATION: neutral tritium (radioactive)":a.p===1&&a.n<=2?"KNOWN NUCLEUS: hydrogen isotope with modeled charge "+(a.p-a.e):"UNVERIFIED CONFIGURATION: inventory-valid does not establish nuclear stability";
 }
 function mutate(action){
