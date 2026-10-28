@@ -15,7 +15,7 @@ footer{font-size:11px;color:#829ab2;border-top:1px solid #29415e;border-bottom:0
 </style></head><body>
 <header><b>STOCHIEON / YOUYOU</b><span class="pill">-U+ · 3 OUTER : 1 INNER</span><a href="https://github.com/DavidWise01/stochieon-gwell">SOURCE ↗</a></header>
 <main><section class="panel"><h2>GWELL · NESTED SAPPHON</h2><canvas id="field" width="1000" height="800" aria-label="Animated nested three-shell gwell with a single U center"></canvas>
-<p id="status" aria-live="polite">TOP − SEALED · LOWER C INTAKE · COBALT {{i}} RETAINED</p><div class="buttons"><button id="play">Pause</button><button id="pulse">Inject pulse</button><button id="reset">Reset</button><button id="witness">Observe event</button></div>
+<p id="status" aria-live="polite">TOP − SEALED · LOWER C INTAKE · COBALT {{i}} RETAINED</p><div class="buttons"><button id="play">Pause</button><button id="pulse">Inject pulse</button><button id="reset">Reset</button><button id="witness">Observe event</button><button id="infer">Infer at C</button></div>
 </section><aside class="controls">
 <section class="panel"><h2>GWELL OPERATORS</h2>
 <label>Oscillation <output id="freqout">0.70</output></label><input id="freq" type="range" min="0" max="3" step="0.05" value="0.7">
@@ -38,18 +38,19 @@ footer{font-size:11px;color:#829ab2;border-top:1px solid #29415e;border-bottom:0
 SEALED − / SPINNING U &#92; LOWER C
       3 : 1
 </pre></section>
-<section class="panel"><h2>LOCAL MEMORY / WITNESS</h2><p>Inner state <strong id="memory">0</strong> · Phase <strong id="phase">0.00</strong></p><pre id="log">No observations yet.</pre></section>
+<section class="panel"><h2>LOCAL MEMORY / WITNESS</h2><p>Inner state <strong id="memory">0</strong> · Phase <strong id="phase">0.00</strong></p><pre id="log">No observations yet.</pre><p id="inference">INFERENCE: UNKNOWN · no sufficient causal evidence</p></section>
 </aside></main><footer><span>GWELL 001–021 · CANONICAL INTERACTIVE REFERENCE</span><span>Speculative mathematical model · not established particle physics</span></footer>
 <script type="module">
 import {GEOMETRY, hysteresis} from "./src/gwell.mjs";
 const canvas=document.querySelector("#field"),ctx=canvas.getContext("2d");
 const inputs=["freq","coupling","trans","rotation"],params={};let running=true,phase=0,last=0,pulses=[],inner=0,records=[];
 for(const id of inputs){const e=document.getElementById(id);params[id]=+e.value;e.addEventListener("input",()=>{params[id]=+e.value;document.getElementById(id+"out").textContent=params[id].toFixed(2)})}
-function observe(message){records.push({cycle:records.length+1,state:inner,message});document.querySelector("#log").textContent=records.slice(-5).map(x=>JSON.stringify(x)).join("\n")}
+function observe(message){records.push({id:"obs-"+(records.length+1),source:"C",arrival:records.length+1,cycle:records.length+1,state:inner,message});document.querySelector("#log").textContent=records.slice(-5).map(x=>JSON.stringify(x)).join("\n")}
 document.querySelector("#play").onclick=()=>{running=!running;document.querySelector("#play").textContent=running?"Pause":"Resume"};
 document.querySelector("#pulse").onclick=()=>{pulses.push({r:260,alpha:1});inner=hysteresis(inner,.9);document.querySelector("#memory").textContent=inner;observe("Lower C intake: inbound pulse, cobalt identity retained")};
-document.querySelector("#reset").onclick=()=>{phase=0;inner=0;pulses=[];records=[];document.querySelector("#memory").textContent=0;document.querySelector("#log").textContent="No observations yet."};
+document.querySelector("#reset").onclick=()=>{phase=0;inner=0;pulses=[];records=[];document.querySelector("#inference").textContent="INFERENCE: UNKNOWN · no sufficient causal evidence";document.querySelector("#memory").textContent=0;document.querySelector("#log").textContent="No observations yet."};
 document.querySelector("#witness").onclick=()=>observe("Observed facing edges and current local state");
+document.querySelector("#infer").onclick=()=>{const ids=records.map(x=>x.id);document.querySelector("#inference").textContent="INFERENCE: UNKNOWN · "+ids.length+" observation(s) retained; correlation alone does not verify a cause";observe("Inference HOLD — no causally distinguishing evidence")};
 function draw(t){const dt=Math.min((t-last)/1000||0,.05);last=t;if(running){phase+=dt*params.freq*2*Math.PI;pulses.forEach(p=>{p.r=Math.max(0,p.r-dt*110);p.alpha=p.r/260});pulses=pulses.filter(p=>p.alpha>0)}
 const w=canvas.width,h=canvas.height,cx=w/2,cy=h/2;ctx.clearRect(0,0,w,h);
 for(let k=0;k<3;k++){const r=105+k*90,osc=running?Math.sin(phase*(1+k*.16)+k*2)*11:0;
