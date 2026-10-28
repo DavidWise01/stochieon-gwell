@@ -57,3 +57,19 @@ The exact mechanism for validating a resolution is a *governed local rule*, not 
 ## Model restrictions
 
 These are normative modeling rules, not natural laws proven for real sapphons. Mathematical examples (phase locking, winding, pinning) apply only under their explicit assumptions.
+
+
+## GWELL 022 — Inward-only rotating U, lower C throat, cobalt identity
+
+Design amendment (2026-10-28): The canonical 3:1 outer-shell nesting is retained. The top negative-facing port is **sealed** (no admission). A single lower C-shaped throat is the permitted intake and inference interface. The U well spins, with inward-only packet trajectories in the illustrative page. Its center is a cobalt-colored identity anchor `{{i}}` that survives every allowed update.
+
+```text
+            - SEALED -
+             O3 / O2 / O1
+                 U ↻
+             COBALT {{i}}
+                ↑
+             C INTAKE
+```
+
+**Invariant 022**: `outer depth = 3`, `inner count = 1`, `identity = {{i}}`; admission through C only; `- ` upper boundary blocked; each visual pulse moves inward, not outward. The retained identity is an address/label and not a claim of physical gravitational mass or established sapphon particles. The earlier `-U+` token remains provenance; `YOUYOU / C-U` is the instantiated directed-well mode.
