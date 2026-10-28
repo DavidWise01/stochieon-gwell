@@ -73,3 +73,24 @@ Design amendment (2026-10-28): The canonical 3:1 outer-shell nesting is retained
 ```
 
 **Invariant 022**: `outer depth = 3`, `inner count = 1`, `identity = {{i}}`; admission through C only; `- ` upper boundary blocked; each visual pulse moves inward, not outward. The retained identity is an address/label and not a claim of physical gravitational mass or established sapphon particles. The earlier `-U+` token remains provenance; `YOUYOU / C-U` is the instantiated directed-well mode.
+
+## GWELL 023 — Causal inference boundary: observation is not explanation
+
+At the lower C intake, incoming events are observations, not automatically causes. The sealed upper negative port remains closed. O3 records the observation with source and receipt order, O2 distinguishes candidate explanations from what is actually observed, and O1 admits only an explicitly supported conclusion to U. Cobalt `{{i}}` stays unchanged.
+
+```text
+           TOP − SEALED
+            O3 : RECORD
+            O2 : COMPARE
+            O1 : INFER / HOLD
+             U ↻ : CONTAIN
+         COBALT {{i}} : FIXED
+                   ↑
+            C : OBSERVE
+```
+
+**Invariant 023**: `observation ≠ inference ≠ verified cause`. An observation without adequate distinguishing evidence remains `UNKNOWN`; multiple compatible causes remain candidates. No inference may erase its observation record, cross the sealed port, or replace `{{i}}`.
+
+Reference rule: an observation must include `id`, `source`, `value` and `arrival`. Inference results must include `status: observed | hypothesis | supported | unknown`, plus references to supporting observation IDs. In this demonstration, a single observation is insufficient to declare a cause.
+
+This is a computational epistemic boundary, not physical proof of a gravitational or subatomic phenomenon.
