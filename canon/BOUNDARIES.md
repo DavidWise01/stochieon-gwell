@@ -341,3 +341,11 @@ ALL PINNED TO /0\\
 In XYZ order, Patricia = (-2,+3,-1), Toph = (+2,-3,+1), Icarium = (0,0,0). Patricia and Toph are exact opposites and sum to zero; Icarium occupies the shared scalar-zero pin. The two nonzero vectors both have magnitude sqrt(14). The visualization uses distinct purple, green, and white markers, fixed at the same origin reference. The three roles remain distinguished even though their sum is zero.
 
 **Invariant 055:** P + T + I = (0,0,0), with all positions addressed relative to /0\\. No invented physical force, consensus, or geometry reversal. Preserve three independent observations and cobalt {{i}} identity.
+
+## GWELL 056 — Four-strand stretch to toroidal enclosure
+
+Canonical deformation: `|||| → //()\\\\`. Four parallel symbolic strands are preserved as four distinct continuous traces. The left and right pairs tilt outward in opposition and create a bounded central `()` aperture when stretch `t>0`. The scalar-zero `/0\\` pin and the Patricia (-2,+3,-1), Toph (+2,-3,+1), Icarium (0,0,0) triad are unaffected.
+
+The 3D page now exposes a stretch control `t in [0,1]`; this is a model of a geometry deformation, not a physical claim about the Casimir force, ice or plasma. The displayed aperture increases with stretch. No strand is annihilated, and the three witness observations continue to be separate.
+
+**Invariant 056:** preserve four strand identities across the deformation; the interior must be formed by boundaries rather than invented matter; the opposing-vector sum remains (0,0,0), and cobalt {{i}} stays pinned at scalar zero.
