@@ -1,5 +1,5 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>YOUYOU 3D · STOCHIEON GWELL 026</title><style>
+<title>YOUYOU 3D · STOCHIEON GWELL 027</title><style>
 :root{color-scheme:dark;font:16px system-ui;background:#070e1b;color:#e1eeff}*{box-sizing:border-box}body{margin:0}a{color:#8defff}
 .skip{position:absolute;left:-9999px}.skip:focus{left:15px;top:8px;z-index:10;background:white;color:black;padding:12px}
 header,footer{padding:16px 22px;border-bottom:1px solid #324960}header strong{letter-spacing:.08em}main{display:grid;grid-template-columns:minmax(0,2fr) minmax(270px,1fr);gap:16px;max-width:1220px;margin:auto;padding:18px}
@@ -12,15 +12,17 @@ p{line-height:1.5}small{color:#b9c9d9}footer{border-top:1px solid #36506a;border
 @media(max-width:790px){main{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){canvas{scroll-behavior:auto}}
 </style></head><body>
-<a class="skip" href="#controls">Skip animation to controls</a><header><h1>STOCHIEON · YOUYOU 3D · GWELL 026</h1><a href="https://github.com/DavidWise01/stochieon-gwell">Source and canon</a></header>
+<a class="skip" href="#controls">Skip animation to controls</a><header><h1>STOCHIEON · YOUYOU 3D · GWELL 027</h1><a href="https://github.com/DavidWise01/stochieon-gwell">Source and canon</a></header>
 <main><div><section><h2>Three nested shells · Five atomic waldos · C intake</h2>
 <canvas id="view" width="960" height="720" tabindex="0" role="img" aria-label="Interactive three-dimensional projection of three nested shells, five color-coded rotating waldo rings and a spinning inward U around a stationary cobalt identity. Drag or use arrow keys to rotate the view.">3D view requires canvas support; all actions remain available below.</canvas>
 <p id="status" role="status" aria-live="polite">Ready. Upper minus sealed. Lower C intake open.</p>
-<div><button id="build">Build model atom</button><button id="unbuild">Unbuild model atom</button><button id="pause">Pause motion</button><button id="reset">Reset view</button></div>
+<div><button id="build">Build hydrogen-1</button><button id="unbuild">Unbuild last atom</button><button id="neutron">Add neutron</button><button id="removeNeutron">Remove neutron</button><button id="electron">Add electron</button><button id="removeElectron">Remove electron</button><button id="pause">Pause motion</button><button id="reset">Reset view</button></div>
 <p><small>Drag the scene, use arrow keys when focused, or adjust camera sliders. Reduced-motion preference pauses automatic spin. This is a symbolic 3D projection, not a physical atom simulator.</small></p></section>
-<section><h2>Inventory and immutable identity</h2><p>Model atoms: <strong id="atoms">0</strong> · Available constituent tokens: <strong id="stock">12</strong> · Bound constituent tokens: <strong id="bound">0</strong> · Total: <strong id="total">12</strong></p>
+<section><h2>Inventory and immutable identity</h2><p>Model atoms: <strong id="atoms">0</strong>. Current atom register: <strong id="species">none</strong>.</p>
+<p>Free p/n/e: <strong id="freep">12</strong> / <strong id="freen">12</strong> / <strong id="freee">12</strong>. Bound p/n/e: <strong id="boundp">0</strong> / <strong id="boundn">0</strong> / <strong id="bounde">0</strong>.</p>
+<p>Inventory invariant: <strong id="totals">12 / 12 / 12</strong> · electric charge (e): <strong id="charge">0</strong></p>
 <p>Identity: <strong>{{i}}</strong> (cobalt, unchanged) · Top port: <strong>SEALED</strong> · Intake: <strong>C only</strong></p>
-<p><small>Build consumes one available token and creates one symbolic atom register; unbuild reverses it. This is inventory bookkeeping, not creation of physical atoms.</small></p></section>
+<p><small>Waldos assign and release individually tracked proton, neutron, and electron tokens. Build creates a neutral hydrogen-1 model from one p and one e. Neutron/electron operations act on the latest atom. No binding energy or physical stability is simulated.</small></p></section>
 <section><h2>Observation ledger</h2><pre id="log" aria-live="polite">No operations.</pre></section></div>
 <aside id="controls"><section><h2>Camera and motion</h2>
 <label for="yaw">Yaw <output id="yawValue">25°</output></label><input id="yaw" type="range" min="-180" max="180" value="25">
@@ -35,17 +37,42 @@ p{line-height:1.5}small{color:#b9c9d9}footer{border-top:1px solid #36506a;border
      COBALT {{i}}
           ↑
         C INTAKE</pre></section></aside></main>
-<footer>GWELL 026 · Auditable symbolic assembly and 3D waldo geometry · STOCHIEON</footer>
+<footer>GWELL 027 · Auditable symbolic assembly and 3D waldo geometry · STOCHIEON</footer>
 <script>
 "use strict";
 const $=id=>document.getElementById(id),canvas=$("view"),ctx=canvas.getContext("2d");
-let yaw=25*Math.PI/180,tilt=18*Math.PI/180,zoom=1,phase=0,last=0,paused=matchMedia("(prefers-reduced-motion: reduce)").matches,atoms=0,stock=12,bound=0,ledger=[],drag=null;
+let yaw=25*Math.PI/180,tilt=18*Math.PI/180,zoom=1,phase=0,last=0,paused=matchMedia("(prefers-reduced-motion: reduce)").matches,atoms=0,stock=12,bound=0,ledger=[],drag=null; const initial={p:12,n:12,e:12},free={...initial},species=[];
 const rings=[["−","#a58cff",100,-1],["W","#42cef8",136,1],["M","#4de9ae",172,-1],["S","#ffc06b",209,1],["+","#fb75b3",246,-1]];
 function status(t){$("status").textContent=t}
 function log(t){ledger.push(Object.freeze({step:ledger.length+1,action:t,atoms,stock,bound,identity:"{{i}}"}));$("log").textContent=ledger.slice(-8).map(x=>JSON.stringify(x)).join("\n")}
-function update(){ $("atoms").textContent=atoms;$("stock").textContent=stock;$("bound").textContent=bound;$("total").textContent=stock+bound }
-$("build").onclick=()=>{if(!stock){status("Build blocked: no inventory available");return}stock--;bound++;atoms++;update();log("BUILD");status("Waldos assembled a symbolic atom register; {{i}} preserved")};
-$("unbuild").onclick=()=>{if(!atoms){status("Unbuild blocked: no atoms in register");return}atoms--;bound--;stock++;update();log("UNBUILD");status("Waldos disassembled a symbolic atom register; constituents returned")};
+function update(){
+  atoms=species.length;
+  const bound={p:0,n:0,e:0};
+  for(const a of species){bound.p+=a.p;bound.n+=a.n;bound.e+=a.e}
+  for(const k of ["p","n","e"]){$("free"+k).textContent=free[k];$("bound"+k).textContent=bound[k]}
+  $("atoms").textContent=atoms;
+  $("totals").textContent=["p","n","e"].map(k=>free[k]+bound[k]).join(" / ");
+  $("charge").textContent=species.reduce((v,a)=>v+a.p-a.e,0);
+  const a=species.at(-1);
+  $("species").textContent=a?"Z="+a.p+" N="+a.n+" e="+a.e:"none";
+}
+function mutate(action){
+  let a=species.at(-1),ok=true;
+  if(action==="BUILD"){if(free.p<1||free.e<1)ok=false;else{free.p--;free.e--;species.push({p:1,n:0,e:1})}}
+  if(action==="UNBUILD"){if(!a)ok=false;else{for(const k of ["p","n","e"])free[k]+=a[k];species.pop()}}
+  if(action==="ADD_N"){if(!a||free.n<1)ok=false;else{free.n--;a.n++}}
+  if(action==="REMOVE_N"){if(!a||a.n<1)ok=false;else{free.n++;a.n--}}
+  if(action==="ADD_E"){if(!a||free.e<1)ok=false;else{free.e--;a.e++}}
+  if(action==="REMOVE_E"){if(!a||a.e<1)ok=false;else{free.e++;a.e--}}
+  if(!ok){status("Blocked "+action+": unavailable constituent or atom");return}
+  update();log(action+" p/n/e tracked");status(action+" accepted; cobalt {{i}} preserved");
+}
+$("build").onclick=()=>mutate("BUILD");
+$("unbuild").onclick=()=>mutate("UNBUILD");
+$("neutron").onclick=()=>mutate("ADD_N");
+$("removeNeutron").onclick=()=>mutate("REMOVE_N");
+$("electron").onclick=()=>mutate("ADD_E");
+$("removeElectron").onclick=()=>mutate("REMOVE_E");
 $("pause").onclick=()=>{paused=!paused;$("pause").textContent=paused?"Resume motion":"Pause motion"};
 $("reset").onclick=()=>{yaw=25*Math.PI/180;tilt=18*Math.PI/180;zoom=1;phase=0;for(const [id,value] of [["yaw",25],["tilt",18],["zoom",1]])$(id).value=value;sync();status("Camera reset; identity retained")};
 function sync(){for(const [id,unit] of [["yaw","°"],["tilt","°"],["zoom","×"],["speed","×"]])$(id+"Value").textContent=Number($(id).value).toFixed(unit==="°"?0:2)+unit}
@@ -67,7 +94,7 @@ const p=project([0,0,0]);const grad=ctx.createRadialGradient(p.x,p.y,2,p.x,p.y,6
 ctx.fillStyle="#e0f6ff";ctx.font="bold 29px monospace";ctx.textAlign="center";ctx.fillText("{{i}}",p.x,p.y+10);ctx.font="18px monospace";ctx.fillStyle="#93c5fd";ctx.fillText("COBALT",p.x,p.y+88);
 ctx.strokeStyle="#ff718d";ctx.lineWidth=7;ctx.beginPath();ctx.moveTo(390,75);ctx.lineTo(570,75);ctx.stroke();ctx.fillStyle="#ff9fb4";ctx.fillText("− SEALED",480,61);
 ctx.strokeStyle="#69f3c0";ctx.lineWidth=5;ctx.beginPath();ctx.arc(480,605,51,0,Math.PI);ctx.stroke();ctx.fillStyle="#a4ffe2";ctx.fillText("C  ↑  INTAKE ONLY",480,684);
-ctx.font="17px monospace";ctx.textAlign="left";ctx.fillStyle="#bdd7f5";ctx.fillText("3 SHELLS · 5 WALDOS · 1 U",20,35);ctx.fillText("ATOM REGISTERS: "+atoms,20,61);
+ctx.font="17px monospace";ctx.textAlign="left";ctx.fillStyle="#bdd7f5";ctx.fillText("3 SHELLS · 5 WALDOS · 1 U",20,35);ctx.fillText("ATOM REGISTERS: "+atoms+" · P/N/E INVENTORY",20,61);
 requestAnimationFrame(render)}
 sync();update();$("pause").textContent=paused?"Resume motion":"Pause motion";requestAnimationFrame(render);
 </script></body></html>
