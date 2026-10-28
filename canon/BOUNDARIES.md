@@ -289,3 +289,11 @@ User-defined combinatorial form: `24! / (24 × 12 × 4 × 3 × 2 × 1 × 1)` = `
 For every event, maintain three independent append-only witness records A, B, C, each recording its own event identifier, observation, timestamp and source. No consensus, Byzantine general protocol, voting, quorum, or forced reconciliation is allowed. An absent record is MISSING; contradictory reports are DIVERGENT; identical reports are AGREEMENT OF OBSERVATIONS, not infallible truth. The winner/loser fields label event outcomes and do not grant a witness authority.
 
 **Invariant 050:** scalar-zero reference is immutable; no evidence is manufactured; reporting disagreement never overwrites original observations; toroidal address arithmetic is exact and separable from physical interpretation; cobalt {{i}} remains unchanged.
+
+## GWELL 051 — Factorial-zero invariant and Riemann-line indexing
+
+Each registry invariant carries a canonical `0!` identity marker. In standard mathematics `0! = 1`, so it is a neutral multiplicative unit rather than numerical zero. A distinct, optional Riemann-line coordinate may be attached to each invariant as an indexed witness position; this is a model convention, not an identification of `0!` with a nontrivial zero of the Riemann zeta function.
+
+Formal record: `I_j = {address_j, factorial_unit: 1, line_coordinate: t_j, witnesses: [A_j,B_j,C_j]}`. A mathematical Riemann zero may only be asserted if a specified complex value `s_j` satisfies `zeta(s_j)=0`; placing a marker on the critical line `Re(s)=1/2` alone does not establish that it is a zero. Likewise the 24!/6912 registry count is combinatorial, not a proof of any zeta-zero correspondence.
+
+**Invariant 051:** `0! = 1` for every indexed record; each assigned address must be unique; three independent witness observations remain append-only, with no votes, forced agreement, or unobserved certainty. Cobalt identity `{{i}}` remains unchanged.
