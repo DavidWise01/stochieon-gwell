@@ -1,5 +1,5 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>YOUYOU 3D · STOCHIEON GWELL 037</title><style>
+<title>YOUYOU 3D · STOCHIEON GWELL 039</title><style>
 :root{color-scheme:dark;font:16px system-ui;background:#070e1b;color:#e1eeff}*{box-sizing:border-box}body{margin:0}a{color:#8defff}
 .skip{position:absolute;left:-9999px}.skip:focus{left:15px;top:8px;z-index:10;background:white;color:black;padding:12px}
 header,footer{padding:16px 22px;border-bottom:1px solid #324960}header strong{letter-spacing:.08em}main{display:grid;grid-template-columns:minmax(0,2fr) minmax(270px,1fr);gap:16px;max-width:1220px;margin:auto;padding:18px}
@@ -12,7 +12,7 @@ p{line-height:1.5}small{color:#b9c9d9}footer{border-top:1px solid #36506a;border
 @media(max-width:790px){main{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){canvas{scroll-behavior:auto}}
 </style></head><body>
-<a class="skip" href="#controls">Skip animation to controls</a><header><h1>STOCHIEON · YOUYOU 3D · GWELL 037</h1><a href="https://github.com/DavidWise01/stochieon-gwell">Source and canon</a></header>
+<a class="skip" href="#controls">Skip animation to controls</a><header><h1>STOCHIEON · YOUYOU 3D · GWELL 039</h1><a href="https://github.com/DavidWise01/stochieon-gwell">Source and canon</a></header>
 <main><div><section><h2>Three nested shells · Five atomic waldos · C intake</h2>
 <canvas id="view" width="640" height="480" tabindex="0" role="img" aria-label="Interactive three-dimensional projection of three nested shells, five color-coded rotating waldo rings and a spinning inward U around a stationary cobalt identity. Drag or use arrow keys to rotate the view.">3D view requires canvas support; all actions remain available below.</canvas>
 <p id="status" role="status" aria-live="polite">Ready. Upper minus sealed. Lower C intake open.</p>
@@ -23,12 +23,12 @@ p{line-height:1.5}small{color:#b9c9d9}footer{border-top:1px solid #36506a;border
 <p>Inventory invariant: <strong id="totals">12 / 12 / 12</strong> · electric charge (e): <strong id="charge">0</strong></p>
 <p>Identity: <strong>{{i}}</strong> (cobalt, unchanged) · Top port: <strong>SEALED</strong> · Intake: <strong>C only</strong></p>
 <p><small>Waldos assign and release individually tracked proton, neutron, and electron tokens. Build creates a neutral hydrogen-1 model from one p and one e. Neutron/electron operations act on the latest atom. No binding energy or physical stability is simulated.</small></p></section>
-<section><h2>Configuration validity · GWELL 037</h2><p id="validity" role="status">No atom yet. UNKNOWN is not INVALID.</p></section><section><h2>Electron orbital occupancy · GWELL 037</h2><p id="orbitals" role="status">No electronic configuration.</p><p><small>Aufbau filling-order approximation with subshell capacities; actual orbital energies and excited states require more detailed treatment.</small></p></section><section><h2>Observation ledger</h2><pre id="log" aria-live="polite">No operations.</pre></section></div>
-<aside id="controls"><section><h2>Three-cube resonance coupling</h2>
+<section><h2>Configuration validity · GWELL 039</h2><p id="validity" role="status">No atom yet. UNKNOWN is not INVALID.</p></section><section><h2>Electron orbital occupancy · GWELL 039</h2><p id="orbitals" role="status">No electronic configuration.</p><p><small>Aufbau filling-order approximation with subshell capacities; actual orbital energies and excited states require more detailed treatment.</small></p></section><section><h2>Observation ledger</h2><pre id="log" aria-live="polite">No operations.</pre></section></div>
+<aside id="controls"><section><h2>Three diatom-inspired [()] resonance modules</h2><p><small>Two modeled overlapping silica-like valve faces + a girdle band + porous ribs around a resonating inner toroidal compartment; cube is an Ice IX proxy, not a real diatom or crystallographic reconstruction.</small></p>
 <label for="weak">Weak coupling W <output id="weakValue">0.30</output></label><input id="weak" type="range" min="0" max="1" step=".05" value=".30">
 <label for="medium">Medium coupling M <output id="mediumValue">0.55</output></label><input id="medium" type="range" min="0" max="1" step=".05" value=".55">
 <label for="strong">Strong coupling S <output id="strongValue">0.85</output></label><input id="strong" type="range" min="0" max="1" step=".05" value=".85">
-<button id="restartCubes">Reset cubic energy</button><p id="cubeStatus" aria-live="polite">3 coupled Ice IX model cubes · conservative spring dynamics</p>
+<button id="restartCubes">Reset cubic energy</button><p id="cubeStatus" aria-live="polite">3 diatom-inspired [()] modules · coupled conservative motion</p>
 <p><small>W, M, S are adjustable conservative spring constants, not weak or strong nuclear interactions. Changing a slider changes the Hamiltonian and can change total energy.</small></p></section><section><h2>Camera and motion</h2>
 <label for="yaw">Yaw <output id="yawValue">25°</output></label><input id="yaw" type="range" min="-180" max="180" value="25">
 <label for="tilt">Tilt <output id="tiltValue">18°</output></label><input id="tilt" type="range" min="-75" max="75" value="18">
@@ -42,7 +42,7 @@ p{line-height:1.5}small{color:#b9c9d9}footer{border-top:1px solid #36506a;border
      COBALT {{i}}
           ↑
         C INTAKE</pre></section></aside></main>
-<footer>GWELL 037 · Auditable symbolic assembly and 3D waldo geometry · STOCHIEON</footer>
+<footer>GWELL 039 · Auditable symbolic assembly and 3D waldo geometry · STOCHIEON</footer>
 <script>
 "use strict";
 const $=id=>document.getElementById(id),canvas=$("view"),ctx=canvas.getContext("2d");
@@ -100,6 +100,16 @@ function drawCube(center,size,rot,color){
   const c=Math.cos(rot),s=Math.sin(rot);
   const verts=vertices.map(([x,y,z])=>{const a=x*c-z*s,b=x*s+z*c;return [center[0]+a*size,center[1]+y*size,center[2]+b*size]});
   for(const [u,v] of edges)line3([verts[u],verts[v]],color,2.5,.96);
+  // Diatom-inspired frustule: paired valves, transverse girdle band, porous ribs.
+  const cc=Math.cos(rot),ss=Math.sin(rot);
+  function tx(x,y,z){return[center[0]+x*cc-z*ss,center[1]+y,center[2]+x*ss+z*cc]}
+  for(const z of [-size*.85,size*.85]){
+    for(let k=-2;k<=2;k++){let u=k*size*.31;line3([tx(u,-size*.83,z),tx(u,size*.83,z)],color,1.1,.48)}
+  }
+  for(let i=0;i<=24;i++){const t=i*Math.PI*2/24;line3([tx(Math.cos(t)*size*.9,Math.sin(t)*size*.9,-size*.18),tx(Math.cos(t)*size*.9,Math.sin(t)*size*.9,size*.18)],color,1.3,.65)}
+  // Inner () toroid: locally resonant cavity, kept distinct from outer [] shell.
+  const tor=[];for(let i=0;i<=60;i++){const t=i*Math.PI*2/60;tor.push(tx(Math.cos(t)*size*.48,Math.sin(t)*size*.48,0))}
+  line3(tor,"#f9e8ab",2.2,.95);
   const p=project(center);ctx.fillStyle=color;ctx.beginPath();ctx.arc(p.x,p.y,3.5,0,Math.PI*2);ctx.fill();
 }
 // Unit-mass, three-body conservative lattice: velocity-Verlet, fixed-step integrator.
@@ -121,8 +131,8 @@ function drawCubes(){
  const pos=[[-116,0,0],[0,0,0],[116,0,0]],colors=["#72ddff","#bafaf3","#ffc894"];
  for(let j=0;j<3;j++){const osc=cubes[j].q,shift=[pos[j][0],osc*.65,0],radius=27+Math.min(3,Math.abs(osc)*.12);
  drawCube(shift,radius,phase*(j%2?-.18:.18)+osc*.012,colors[j]);
- const p=project([shift[0],shift[1]+42,0]);ctx.fillStyle=colors[j];ctx.textAlign="center";ctx.font="13px monospace";ctx.fillText("ICE IX "+(j+1),p.x,p.y)}
- $("cubeStatus").textContent="3 cubes | q: "+cubes.map(c=>c.q.toFixed(2)).join(" / ")+" | E: "+energyLast.toFixed(3)+" | ΔE: "+drift.toExponential(2);
+ const p=project([shift[0],shift[1]+42,0]);ctx.fillStyle=colors[j];ctx.textAlign="center";ctx.font="13px monospace";ctx.fillText("DIOTOM "+(j+1),p.x,p.y)}
+ $("cubeStatus").textContent="3 [()] diotomic modules | q: "+cubes.map(c=>c.q.toFixed(2)).join(" / ")+" | E: "+energyLast.toFixed(3)+" | ΔE: "+drift.toExponential(2);
 }
 for(const id of ["weak","medium","strong"])$(id).addEventListener("input",()=>$(id+"Value").textContent=Number($(id).value).toFixed(2));
 $("restartCubes").onclick=()=>{cubes[0]={q:24,v:0};cubes[1]={q:0,v:0};cubes[2]={q:0,v:0};steps=0;energyInitial=energy(stiffness());energyLast=energyInitial;drift=0;status("Three-cube displacement reset; energy reference established")};
