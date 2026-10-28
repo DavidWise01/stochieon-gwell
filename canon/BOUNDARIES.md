@@ -279,3 +279,13 @@ The 3D page restores the non-downward DIOTOMIC layout from the confirmed GWELL 0
 D1, D2, and D3 each witness only their own packet events. The comparison view projects the GWELL 047 append-only event sequence into three node-local reports: D1 send, D2 receive/forward, and D3 receive/ack. It checks per-packet order against the expected handoff sequence, then reports the earliest recorded contradiction by global sequence number. A partial history with no contradiction is marked **unknown/incomplete**, never falsely marked as complete delivery.
 
 **Invariant 049:** no votes, no quorums, no invented observations, no retroactive modifications. Independent records may be compared, but they cannot establish an unobserved event. Packet inventory and cobalt identity {{i}} remain preserved. The model's packet witness remains a logical simulation, not authenticated Ethernet telemetry.
+
+## GWELL 050 — Scalar-zero toroidal address registry and triple witnessing
+
+Scalar 0 is the reference floor. Every nonzero change, including a model displacement of 0.1, is a distinguishable observation when the measurement resolution is sufficient. An observed 'globule' is a chosen visualization, not evidence of physical particles.
+
+User-defined combinatorial form: `24! / (24 × 12 × 4 × 3 × 2 × 1 × 1)` = `89,763,947,010,017,280,000`; numerator `24! = 620,448,401,733,239,439,360,000`. Interpret successive factors as 24 VOGELS, 12 VOXELS, 4 QUADS, 3 SECTORS, 2 SIDES (-/+), one WINNER, one LOSER. This is a symbolic registry specification, not a proven count of physical bodies or independent addresses without a defined assignment/injectivity rule.
+
+For every event, maintain three independent append-only witness records A, B, C, each recording its own event identifier, observation, timestamp and source. No consensus, Byzantine general protocol, voting, quorum, or forced reconciliation is allowed. An absent record is MISSING; contradictory reports are DIVERGENT; identical reports are AGREEMENT OF OBSERVATIONS, not infallible truth. The winner/loser fields label event outcomes and do not grant a witness authority.
+
+**Invariant 050:** scalar-zero reference is immutable; no evidence is manufactured; reporting disagreement never overwrites original observations; toroidal address arithmetic is exact and separable from physical interpretation; cobalt {{i}} remains unchanged.
