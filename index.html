@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>STOCHIEON · GWELL 062 · Three.js</title>
+<title>STOCHIEON · GWELL 063 · Three.js</title>
 <style>
 :root{color-scheme:dark;font:15px system-ui;background:#07101d;color:#e7f3ff}*{box-sizing:border-box}body{margin:0}header,footer{padding:14px 20px;background:#101e31;border-bottom:1px solid #304760}h1{font-size:1.25rem;margin:0 0 8px}h2{font-size:1rem;margin:0 0 12px;color:#8fe7ea}a{color:#86e5f3}main{display:grid;grid-template-columns:minmax(320px,2fr) minmax(275px,1fr);max-width:1400px;margin:auto;gap:14px;padding:14px}section{background:#102137;border:1px solid #35516f;border-radius:12px;padding:14px;margin-bottom:14px}#scene{width:100%;height:min(69vh,680px);min-height:420px;position:relative;background:radial-gradient(ellipse,#19334d,#040b16);border-radius:8px;overflow:hidden}#scene canvas{display:block;width:100%;height:100%;touch-action:none}#overlay{position:absolute;top:10px;left:12px;pointer-events:none;color:#d9edff;font:12px monospace;white-space:pre-line}button{background:#164e61;color:white;border:1px solid #6cd6d4;border-radius:8px;padding:9px 12px;margin:3px;cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #ffe28e}label{display:block;margin:12px 0 5px}input[type=range]{width:100%;accent-color:#6ce3df}select{background:#071523;color:#e7f3ff;border:1px solid #6cd6d4;border-radius:7px;padding:8px;width:100%}p{line-height:1.45}small,.muted{color:#aabfd2}pre{white-space:pre-wrap;word-break:break-word;background:#071523;border-radius:7px;padding:10px;max-height:230px;overflow:auto}#status{min-height:40px}.pill{display:inline-block;padding:3px 8px;border:1px solid #365d70;border-radius:30px;margin-right:5px}footer{font-size:12px}@media(max-width:810px){main{grid-template-columns:1fr}#scene{height:55vh;min-height:340px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 </style></head><body>
-<header><h1>STOCHIEON · YOUYOU · GWELL 062 / Three.js</h1><a href="https://github.com/DavidWise01/stochieon-gwell">Repository</a> · <a href="canon/BOUNDARIES.md">Append-only canon</a> <span class="pill">/0\ pinned</span> <span class="pill">Three independent witnesses</span></header>
+<header><h1>STOCHIEON · YOUYOU · GWELL 063 / Three.js</h1><a href="https://github.com/DavidWise01/stochieon-gwell">Repository</a> · <a href="canon/BOUNDARIES.md">Append-only canon</a> <span class="pill">/0\ pinned</span> <span class="pill">Three independent witnesses</span></header>
 <main><div>
 <section><h2>3D CALVIN / DIOTOMIC / Foundation</h2><div id="scene" role="img" aria-label="Interactive 3D scene with three diotomic resonators, four stretching strands, toroidal aperture, optional containment shell and Patricia Toph Icarium vectors"><div id="overlay">THREE.JS 3D
 Patricia −2,+3,−1 · Toph +2,−3,+1 · Icarium 0,0,0</div></div>
@@ -27,7 +27,7 @@ Patricia −2,+3,−1 · Toph +2,−3,+1 · Icarium 0,0,0</div></div>
 <label for="speed">Animation speed <output id="speedV">0.75</output></label><input id="speed" type="range" min="0" max="2" step=".05" value=".75">
 <label for="permeability">Pore opening <output id="permeabilityV">0.50</output></label><input id="permeability" type="range" min="0" max="1" step=".05" value=".50">
 <p id="energy">Energy baseline pending.</p><p id="phases">Phase witness pending.</p></section>
-<section><h2>GWELL 062 · Six-phase persistence</h2><p><code>{{ a1,b1,c1,abc2,0 }}</code></p><p id="persistStatus" role="status">No saved checkpoint.</p><button id="rotorStep">Advance rotor</button><button id="rotorSave">Save checkpoint</button><button id="rotorRestore">Restore checkpoint</button><button id="rotorReplay">Replay and verify</button><pre id="rotorView">PAST / PRESENT / FUTURE / FUTURE / PRESENT / PAST</pre><small>Checkpoint is stored in this browser's localStorage, not pushed to GitHub. The GitHub repository contains executable source.</small></section><section><h2>Invariant</h2><pre>Patricia: (-2,+3,-1)
+<section><h2>GWELL 063 · Six-phase persistence</h2><p><code>{{ a1,b1,c1,abc2,0 }}</code></p><p id="persistStatus" role="status">No saved checkpoint.</p><button id="rotorStep">Advance rotor</button><button id="rotorSave">Save checkpoint</button><button id="rotorRestore">Restore checkpoint</button><button id="rotorReplay">Replay and verify</button><button id="bundleExport">Export witness bundle</button><input id="bundleImport" type="file" accept=".json,application/json" aria-label="Import witness bundle"><p id="witness063">a1 / b1 / c1: missing</p><pre id="rotorView">PAST / PRESENT / FUTURE / FUTURE / PRESENT / PAST</pre><small>Checkpoint is stored in this browser's localStorage, not pushed to GitHub. The GitHub repository contains executable source.</small></section><section><h2>Invariant</h2><pre>Patricia: (-2,+3,-1)
 Toph:     (+2,-3,+1)
 Icarium:  ( 0, 0, 0)
 SUM:      ( 0, 0, 0)
@@ -39,7 +39,7 @@ No created tokens</pre></section></aside></main>
 <footer>Three.js module from CDN. Requires an internet connection and WebGL; displays a diagnostic instead of a blank canvas when unavailable. Geometry and couplings are symbolic models, not experimentally established Ice IX or Casimir dynamics.</footer>
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
 <script type="module">
-import {FRAME,PHASES,genesis,step as rotorAdvance,replay as rotorReplay,save as rotorSave,load as rotorLoad} from "./src/wankel-persistence.mjs";
+import {FRAME,PHASES,genesis,step as rotorAdvance,replay as rotorReplay,save as rotorSave,load as rotorLoad,bind063,restore063} from "./src/wankel-persistence.mjs";
 const $=id=>document.getElementById(id);
 let rotor=genesis();
 function rotorPaint(message){
@@ -50,6 +50,18 @@ $("rotorStep").onclick=()=>{rotor=rotorAdvance(rotor);rotorPaint("Rotor advanced
 $("rotorSave").onclick=()=>{try{rotorSave(localStorage,rotor);rotorPaint("Saved tick "+rotor.tick+" in browser localStorage")}catch(e){rotorPaint("Save failed: "+e.message)}};
 $("rotorRestore").onclick=()=>{try{const saved=rotorLoad(localStorage);if(!saved)throw Error("No checkpoint");rotor=saved;rotorPaint("Restored and validated tick "+rotor.tick)}catch(e){rotorPaint("Restore failed: "+e.message)}};
 $("rotorReplay").onclick=()=>{try{const checked=rotorReplay(rotor.events);if(JSON.stringify(checked.chambers)!==JSON.stringify(rotor.chambers))throw Error("state mismatch");rotorPaint("REPLAY PASS: "+rotor.tick+" transitions; no divergence")}catch(e){rotorPaint("REPLAY FAIL: "+e.message)}};
+$("bundleExport").onclick=()=>{
+ const observed={a1:{tick:rotor.tick,chambers:[...rotor.chambers]},b1:{tick:rotor.tick,chambers:[...rotor.chambers]},c1:{tick:rotor.tick,chambers:[...rotor.chambers]}};
+ const bundle=bind063(rotor,observed),blob=new Blob([JSON.stringify(bundle,null,2)],{type:"application/json"});
+ const url=URL.createObjectURL(blob),a=document.createElement("a");a.href=url;a.download="gwell063-witness-"+rotor.tick+".json";a.click();URL.revokeObjectURL(url);
+ $("witness063").textContent="abc2: "+bundle.abc2+" · three simulated observers, one source snapshot";
+};
+$("bundleImport").onchange=async()=>{
+ try{const f=$("bundleImport").files?.[0];if(!f)return;
+ const candidate=restore063(JSON.parse(await f.text()));rotor=candidate;rotorPaint("Imported and replay-verified tick "+rotor.tick);
+ $("witness063").textContent="Imported bundle verified; witnesses derived from source snapshot";
+ }catch(e){rotorPaint("Import rejected: "+e.message)}
+};
 rotorPaint("Ready: click Advance rotor, then Save checkpoint.");
 const say=msg=>$("status").textContent=msg;
 let THREE,OrbitControls;
