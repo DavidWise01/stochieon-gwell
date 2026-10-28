@@ -137,3 +137,15 @@ UNBUILD: A[n] -> A[n-1]  (floor n=0)
 ```
 
 **Invariant 025:** reversible construction intent, explicit operation ledger, single core identity. Each model operation records previous register count, new count, direction and waldo set. No physical nuclear synthesis, elemental chemistry, binding energies, particle conservation or radioactive decay is claimed by the visualization. Real atomic assembly would need explicit constituent inventories, energy and conservation laws.
+
+## GWELL 026 — Conserved inventory and accessible 3D waldos
+
+Five rotating symbolic atomic manipulators `−, W, M, S, +` are rendered as 3D projected circles around three preserved GWELL outer shells and one cobalt `{{i}}` core. Upper negative port remains sealed; C intake remains inbound.
+
+A finite inventory of 12 symbolic constituent tokens enforces:
+`available + bound = 12`.
+Each BUILD transfers exactly one token from available to bound and increments the model atom register by one. Each UNBUILD reverses that transfer. No physical protons, neutrons or electrons are synthesized in this reference model.
+
+The page supports pointer drag, keyboard arrow-key camera control, labeled camera sliders, pause for reduced motion, clearly named actions, responsive layout, and a text-based status and history display. The 3D view is projected on a 2D canvas with depth rotation, rather than WebGL or a volumetric physical simulation.
+
+**Invariant 026**: no source-less creation or deletion of symbolic constituent inventory; `available + bound` is constant, and cobalt identity is unchanged. Physical atomic conservation and binding energetics remain unspecified.
