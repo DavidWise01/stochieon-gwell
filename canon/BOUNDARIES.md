@@ -383,3 +383,9 @@ Canonical frame: `{{ a1,b1,c1,abc2,0 }}`. The phase vector is `[past,present,fut
 The browser page imports `src/wankel-persistence.mjs`, exposes Advance, Save, Restore and Replay, and stores serialized checkpoints under a fixed versioned browser-localStorage key. A restored checkpoint is structurally validated and replayed against its event history; a divergence raises an error rather than repairing evidence. The GitHub commit persists the *implementation source*, while browser checkpoint data remains local to the browser and origin and is not autonomously committed to GitHub.
 
 **Invariant 062:** exact frame `a1,b1,c1,abc2,0`; six phase positions; each tick retains exactly one append-only event; replay must reconstruct the six chamber positions; failed validation must not replace the active state; source commits are distinct from runtime checkpoint persistence. Three independent witness records remain a separate observation requirement: the rotor snapshot alone does not constitute three attestations.
+
+## GWELL 063 — Portable six-phase witness checkpoint
+
+Frame `{{ a1,b1,c1,abc2,0 }}` binds three named observation slots, a comparison result, and immutable zero origin. Export produces a portable JSON file containing a replay-verifiable rotor snapshot and observation entries. Import validates replay and comparison before replacing live state. Browser-localStorage saves remain browser-scoped; GitHub commits source code only, not user runtime checkpoints.
+
+**Invariant 063:** no votes, no quorums; disagreements remain visible. The three current export observations derive from one simulated state, so they are consistency checks, not independent attestations. Rejected import cannot change active state.
