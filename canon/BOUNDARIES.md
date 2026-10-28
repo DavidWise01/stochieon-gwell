@@ -375,3 +375,11 @@ An anonymous twelve-token conservation ledger and a separate identified twelve-p
 The Three.js scene adds a user-selectable subdivision grid anchored at /0\\: full vector step 1 or half-vector step 0.5, on each of x/y/z from -4 to +4. Visual ticks identify addressable intervals; no point is moved to satisfy the display grid. The Patricia (-2,+3,-1), Toph (+2,-3,+1), Icarium (0,0,0) foundation positions and their zero sum remain unchanged.
 
 **Invariant 060:** a delimiter changes the visualization/address resolution, not a physical field or event. The interval count over [-4,+4] is 8 / step (8 at full-vector resolution; 16 at half-vector resolution). All coordinates remain relative to immutable scalar zero. Independent witnesses remain separate.
+
+## GWELL 062 — Wankel six-phase persistence and frame binding
+
+Canonical frame: `{{ a1,b1,c1,abc2,0 }}`. The phase vector is `[past,present,future,future,present,past]`. A rotor tick atomically derives the six destination chamber labels from the previous snapshot by cyclic rotation, then appends an immutable event with tick, phases and chamber positions. An event is not a physical rotation or simultaneous computation at the hardware level: it is an atomic model-state transition.
+
+The browser page imports `src/wankel-persistence.mjs`, exposes Advance, Save, Restore and Replay, and stores serialized checkpoints under a fixed versioned browser-localStorage key. A restored checkpoint is structurally validated and replayed against its event history; a divergence raises an error rather than repairing evidence. The GitHub commit persists the *implementation source*, while browser checkpoint data remains local to the browser and origin and is not autonomously committed to GitHub.
+
+**Invariant 062:** exact frame `a1,b1,c1,abc2,0`; six phase positions; each tick retains exactly one append-only event; replay must reconstruct the six chamber positions; failed validation must not replace the active state; source commits are distinct from runtime checkpoint persistence. Three independent witness records remain a separate observation requirement: the rotor snapshot alone does not constitute three attestations.
