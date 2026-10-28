@@ -1,5 +1,5 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>YOUYOU 3D · STOCHIEON GWELL 039</title><style>
+<title>YOUYOU 3D · STOCHIEON GWELL 040</title><style>
 :root{color-scheme:dark;font:16px system-ui;background:#070e1b;color:#e1eeff}*{box-sizing:border-box}body{margin:0}a{color:#8defff}
 .skip{position:absolute;left:-9999px}.skip:focus{left:15px;top:8px;z-index:10;background:white;color:black;padding:12px}
 header,footer{padding:16px 22px;border-bottom:1px solid #324960}header strong{letter-spacing:.08em}main{display:grid;grid-template-columns:minmax(0,2fr) minmax(270px,1fr);gap:16px;max-width:1220px;margin:auto;padding:18px}
@@ -12,7 +12,7 @@ p{line-height:1.5}small{color:#b9c9d9}footer{border-top:1px solid #36506a;border
 @media(max-width:790px){main{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){canvas{scroll-behavior:auto}}
 </style></head><body>
-<a class="skip" href="#controls">Skip animation to controls</a><header><h1>STOCHIEON · YOUYOU 3D · GWELL 039</h1><a href="https://github.com/DavidWise01/stochieon-gwell">Source and canon</a></header>
+<a class="skip" href="#controls">Skip animation to controls</a><header><h1>STOCHIEON · YOUYOU 3D · GWELL 040</h1><a href="https://github.com/DavidWise01/stochieon-gwell">Source and canon</a></header>
 <main><div><section><h2>Three nested shells · Five atomic waldos · C intake</h2>
 <canvas id="view" width="640" height="480" tabindex="0" role="img" aria-label="Interactive three-dimensional projection of three nested shells, five color-coded rotating waldo rings and a spinning inward U around a stationary cobalt identity. Drag or use arrow keys to rotate the view.">3D view requires canvas support; all actions remain available below.</canvas>
 <p id="status" role="status" aria-live="polite">Ready. Upper minus sealed. Lower C intake open.</p>
@@ -23,7 +23,11 @@ p{line-height:1.5}small{color:#b9c9d9}footer{border-top:1px solid #36506a;border
 <p>Inventory invariant: <strong id="totals">12 / 12 / 12</strong> · electric charge (e): <strong id="charge">0</strong></p>
 <p>Identity: <strong>{{i}}</strong> (cobalt, unchanged) · Top port: <strong>SEALED</strong> · Intake: <strong>C only</strong></p>
 <p><small>Waldos assign and release individually tracked proton, neutron, and electron tokens. Build creates a neutral hydrogen-1 model from one p and one e. Neutron/electron operations act on the latest atom. No binding energy or physical stability is simulated.</small></p></section>
-<section><h2>Configuration validity · GWELL 039</h2><p id="validity" role="status">No atom yet. UNKNOWN is not INVALID.</p></section><section><h2>Electron orbital occupancy · GWELL 039</h2><p id="orbitals" role="status">No electronic configuration.</p><p><small>Aufbau filling-order approximation with subshell capacities; actual orbital energies and excited states require more detailed treatment.</small></p></section><section><h2>Observation ledger</h2><pre id="log" aria-live="polite">No operations.</pre></section></div>
+<section><h2>Configuration validity · GWELL 040</h2><p id="validity" role="status">No atom yet. UNKNOWN is not INVALID.</p></section><section><h2>Electron orbital occupancy · GWELL 040</h2><p id="orbitals" role="status">No electronic configuration.</p><p><small>Aufbau filling-order approximation with subshell capacities; actual orbital energies and excited states require more detailed treatment.</small></p></section><section><h2>DIOTOMIC membrane transport · GWELL 040</h2>
+<p>Outside reservoir: <strong id="outside">12</strong> · Inside D1/D2/D3: <strong id="inside">0 / 0 / 0</strong> · Total: <strong id="transportTotal">12</strong></p>
+<label for="permeability">Pore permeability <output id="permeabilityValue">0.35</output></label><input id="permeability" type="range" min="0" max="1" step=".05" value=".35">
+<button id="intake">Transfer into D1</button><button id="relay">Relay D1 → D2 → D3</button><button id="release">Release D3</button>
+<p><small>Discrete conserved marker tokens represent permitted transport. No real diffusion, energy conversion, or biological membrane selectivity is implied.</small></p></section><section><h2>Observation ledger</h2><pre id="log" aria-live="polite">No operations.</pre></section></div>
 <aside id="controls"><section><h2>Three diatom-inspired [()] resonance modules</h2><p><small>Two modeled overlapping silica-like valve faces + a girdle band + porous ribs around a resonating inner toroidal compartment; cube is an Ice IX proxy, not a real diatom or crystallographic reconstruction.</small></p>
 <label for="weak">Weak coupling W <output id="weakValue">0.30</output></label><input id="weak" type="range" min="0" max="1" step=".05" value=".30">
 <label for="medium">Medium coupling M <output id="mediumValue">0.55</output></label><input id="medium" type="range" min="0" max="1" step=".05" value=".55">
@@ -42,7 +46,7 @@ p{line-height:1.5}small{color:#b9c9d9}footer{border-top:1px solid #36506a;border
      COBALT {{i}}
           ↑
         C INTAKE</pre></section></aside></main>
-<footer>GWELL 039 · Auditable symbolic assembly and 3D waldo geometry · STOCHIEON</footer>
+<footer>GWELL 040 · Auditable symbolic assembly and 3D waldo geometry · STOCHIEON</footer>
 <script>
 "use strict";
 const $=id=>document.getElementById(id),canvas=$("view"),ctx=canvas.getContext("2d");
@@ -138,6 +142,28 @@ for(const id of ["weak","medium","strong"])$(id).addEventListener("input",()=>$(
 $("restartCubes").onclick=()=>{cubes[0]={q:24,v:0};cubes[1]={q:0,v:0};cubes[2]={q:0,v:0};steps=0;energyInitial=energy(stiffness());energyLast=energyInitial;drift=0;status("Three-cube displacement reset; energy reference established")};
 for(const id of ["weak","medium","strong"])$(id).addEventListener("change",()=>{energyInitial=energy(stiffness());drift=0;status("Coupling adjusted; energy baseline reset after parameter work")});
 energyInitial=energy(stiffness());energyLast=energyInitial;
+// Transport is a separate conservative ledger: existing oscillator energy is unchanged.
+const reservoir={outside:12,inside:[0,0,0]};
+function transportUpdate(){
+ $("outside").textContent=reservoir.outside;
+ $("inside").textContent=reservoir.inside.join(" / ");
+ $("transportTotal").textContent=reservoir.outside+reservoir.inside.reduce((a,b)=>a+b,0);
+ $("permeabilityValue").textContent=Number($("permeability").value).toFixed(2);
+}
+function transfer(from,to){
+ if(+$("permeability").value===0){status("Pores closed: zero permeability");return false}
+ if(from==="outside"){if(reservoir.outside<=0)return false;reservoir.outside--}else{if(reservoir.inside[from]<=0)return false;reservoir.inside[from]--}
+ if(to==="outside")reservoir.outside++;else reservoir.inside[to]++;
+ transportUpdate();return true
+}
+$("intake").onclick=()=>status(transfer("outside",0)?"Intake: outside → D1; token conserved":"Intake blocked");
+$("relay").onclick=()=>{
+ const step=reservoir.inside[1]>0?[1,2]:[0,1];
+ status(transfer(step[0],step[1])?"Relay D"+(step[0]+1)+" → D"+(step[1]+1):"Relay blocked")
+};
+$("release").onclick=()=>status(transfer(2,"outside")?"Release: D3 → outside; token conserved":"Release blocked");
+$("permeability").addEventListener("input",transportUpdate);
+transportUpdate();
 function render(t){const dt=Math.min(.05,(t-last)/1000||0);last=t;if(!paused){const speed=Number($("speed").value);phase+=dt*speed;const n=6;for(let j=0;j<n;j++)integrate(dt*speed/n)}ctx.clearRect(0,0,W,H);
 const bg=ctx.createRadialGradient(320,230,0,320,230,330);bg.addColorStop(0,"#172d4c");bg.addColorStop(1,"#050b17");ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
 for(let i=2;i>=0;i--){const r=65+i*54;for(let m=0;m<3;m++)circle3(r,phase*.14*(i%2?-1:1),m,["#41f0bc","#a28af9","#4ab7ff"][i],1.8,.35)}
