@@ -389,3 +389,9 @@ The browser page imports `src/wankel-persistence.mjs`, exposes Advance, Save, Re
 Frame `{{ a1,b1,c1,abc2,0 }}` binds three named observation slots, a comparison result, and immutable zero origin. Export produces a portable JSON file containing a replay-verifiable rotor snapshot and observation entries. Import validates replay and comparison before replacing live state. Browser-localStorage saves remain browser-scoped; GitHub commits source code only, not user runtime checkpoints.
 
 **Invariant 063:** no votes, no quorums; disagreements remain visible. The three current export observations derive from one simulated state, so they are consistency checks, not independent attestations. Rejected import cannot change active state.
+
+## GWELL 064 — Independent witness entry
+
+The rotor frame remains `{{ a1,b1,c1,abc2,0 }}`. Witnesses a1, b1 and c1 have separate append-only observation arrays in `src/wankel-persistence.mjs`. `append064` records one named observation without fabricating the others. `compare064` returns INCOMPLETE until all three slots report, MATCH for equal reported values, and DIVERGENT otherwise. No voting or quorum. Origin zero remains [0,0,0]. This is model evidence, not independently authenticated external observation.
+
+**Invariant 064:** never create an absent witness entry; never turn a mismatch into agreement. Browser UI wiring and crash-safe external storage are separate requirements, not established by this source commit.
