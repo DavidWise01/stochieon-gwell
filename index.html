@@ -15,7 +15,7 @@ footer{font-size:11px;color:#829ab2;border-top:1px solid #29415e;border-bottom:0
 </style></head><body>
 <header><b>STOCHIEON / YOUYOU</b><span class="pill">-U+ · 3 OUTER : 1 INNER</span><a href="https://github.com/DavidWise01/stochieon-gwell">SOURCE ↗</a></header>
 <main><section class="panel"><h2>GWELL · NESTED SAPPHON</h2><canvas id="field" width="1000" height="800" aria-label="Animated nested three-shell gwell with a single U center"></canvas>
-<p id="status" aria-live="polite">TOP − SEALED · LOWER C INTAKE · COBALT {{i}} RETAINED</p><div class="buttons"><button id="play">Pause</button><button id="pulse">Inject pulse</button><button id="reset">Reset</button><button id="witness">Observe event</button><button id="infer">Infer at C</button></div>
+<p id="status" aria-live="polite">TOP − SEALED · LOWER C INTAKE · COBALT {{i}} RETAINED</p><div class="buttons"><button id="play">Pause</button><button id="pulse">Inject pulse</button><button id="reset">Reset</button><button id="witness">Observe event</button><button id="infer">Infer at C</button><button id="build">Build atom</button><button id="unbuild">Unbuild atom</button></div>
 </section><aside class="controls">
 <section class="panel"><h2>GWELL OPERATORS</h2>
 <label>Oscillation <output id="freqout">0.70</output></label><input id="freq" type="range" min="0" max="3" step="0.05" value="0.7">
@@ -23,7 +23,7 @@ footer{font-size:11px;color:#829ab2;border-top:1px solid #29415e;border-bottom:0
 <label>Shell transmission <output id="transout">0.75</output></label><input id="trans" type="range" min="0" max="1" step="0.01" value="0.75">
 <label>Rotation <output id="rotationout">0.30</output></label><input id="rotation" type="range" min="-2" max="2" step="0.05" value="0.3">
 </section>
-<section class="panel"><h2>− + 5 FORCE SPHERES</h2><p>Five nested rotating field shells: − / W / M / S / +. F is the composite field. These are symbolic model channels, not five independently established fundamental forces.</p><label>Field strength <output id="forceout">0.65</output></label><input id="force" type="range" min="0" max="1" step=".01" value=".65"><label>Field speed <output id="fieldspinout">1.00</output></label><input id="fieldspin" type="range" min="0" max="3" step=".05" value="1"><p id="fieldmetrics">F: composite · +/− balanced</p></section><section class="panel"><h2>CANONICAL GEOMETRY</h2><pre>   TENSOR STATE
+<section class="panel"><h2>− + 5 ATOMIC WALDOS</h2><p>Five rotating manipulators: − / W / M / S / +. Build and unbuild a symbolic atom register; cobalt {{i}} remains the fixed identity.</p><label>Field strength <output id="forceout">0.65</output></label><input id="force" type="range" min="0" max="1" step=".01" value=".65"><label>Field speed <output id="fieldspinout">1.00</output></label><input id="fieldspin" type="range" min="0" max="3" step=".05" value="1"><p id="fieldmetrics">Waldos active · atom register 0</p><p>Atom register: <strong id="atomcount">0</strong> · operations: <strong id="opcount">0</strong></p></section><section class="panel"><h2>CANONICAL GEOMETRY</h2><pre>   TENSOR STATE
        │
     SAPPHON
        │
@@ -39,16 +39,28 @@ SEALED − / SPINNING U &#92; LOWER C
       3 : 1
 </pre></section>
 <section class="panel"><h2>LOCAL MEMORY / WITNESS</h2><p>Inner state <strong id="memory">0</strong> · Phase <strong id="phase">0.00</strong></p><pre id="log">No observations yet.</pre><p id="inference">INFERENCE: UNKNOWN · no sufficient causal evidence</p></section>
-</aside></main><footer><span>GWELL 001–024 · FIVE FORCE SPHERES</span><span>Speculative mathematical model · not established particle physics</span></footer>
+</aside></main><footer><span>GWELL 001–025 · ATOMIC WALDOS</span><span>Speculative mathematical model · not established particle physics</span></footer>
 <script type="module">
 import {GEOMETRY, hysteresis} from "./src/gwell.mjs";
 const canvas=document.querySelector("#field"),ctx=canvas.getContext("2d");
-const inputs=["freq","coupling","trans","rotation","force","fieldspin"],params={};let running=true,phase=0,last=0,pulses=[],inner=0,records=[];
+const inputs=["freq","coupling","trans","rotation","force","fieldspin"],params={};let running=true,phase=0,last=0,pulses=[],inner=0,records=[],atomCount=0,operations=[];
 for(const id of inputs){const e=document.getElementById(id);params[id]=+e.value;e.addEventListener("input",()=>{params[id]=+e.value;document.getElementById(id+"out").textContent=params[id].toFixed(2)})}
 function observe(message){records.push({id:"obs-"+(records.length+1),source:"C",arrival:records.length+1,cycle:records.length+1,state:inner,message});document.querySelector("#log").textContent=records.slice(-5).map(x=>JSON.stringify(x)).join("\n")}
+// GWELL 025: reversible symbolic atom assembly, not nuclear transmutation.
+function waldoStep(direction){
+  const before=atomCount;
+  atomCount=Math.max(0,Math.min(20,atomCount+direction));
+  const action=direction>0?"BUILD":"UNBUILD";
+  operations.push(Object.freeze({sequence:operations.length+1,action,before,after:atomCount,identity:"{{i}}",channels:["−","W","M","S","+"]}));
+  document.querySelector("#atomcount").textContent=atomCount;
+  document.querySelector("#opcount").textContent=operations.length;
+  observe("WALDO "+action+" modeled atom register "+before+" → "+atomCount+"; cobalt {{i}} unchanged");
+}
+document.querySelector("#build").onclick=()=>waldoStep(1);
+document.querySelector("#unbuild").onclick=()=>waldoStep(-1);
 document.querySelector("#play").onclick=()=>{running=!running;document.querySelector("#play").textContent=running?"Pause":"Resume"};
 document.querySelector("#pulse").onclick=()=>{pulses.push({r:260,alpha:1});inner=hysteresis(inner,.9);document.querySelector("#memory").textContent=inner;observe("Lower C intake: inbound pulse, cobalt identity retained")};
-document.querySelector("#reset").onclick=()=>{phase=0;inner=0;pulses=[];records=[];document.querySelector("#inference").textContent="INFERENCE: UNKNOWN · no sufficient causal evidence";document.querySelector("#memory").textContent=0;document.querySelector("#log").textContent="No observations yet."};
+document.querySelector("#reset").onclick=()=>{phase=0;inner=0;pulses=[];records=[];atomCount=0;operations=[];document.querySelector("#atomcount").textContent=0;document.querySelector("#opcount").textContent=0;document.querySelector("#inference").textContent="INFERENCE: UNKNOWN · no sufficient causal evidence";document.querySelector("#memory").textContent=0;document.querySelector("#log").textContent="No observations yet."};
 document.querySelector("#witness").onclick=()=>observe("Observed facing edges and current local state");
 document.querySelector("#infer").onclick=()=>{const ids=records.map(x=>x.id);document.querySelector("#inference").textContent="INFERENCE: UNKNOWN · "+ids.length+" observation(s) retained; correlation alone does not verify a cause";observe("Inference HOLD — no causally distinguishing evidence")};
 function draw(t){const dt=Math.min((t-last)/1000||0,.05);last=t;if(running){phase+=dt*params.freq*2*Math.PI;pulses.forEach(p=>{p.r=Math.max(0,p.r-dt*110);p.alpha=p.r/260});pulses=pulses.filter(p=>p.alpha>0)}
@@ -84,7 +96,7 @@ ctx.restore();
 ctx.fillStyle="#d6ecff";ctx.font="bold 27px monospace";ctx.textAlign="center";ctx.fillText("{{i}}",0,9);
 ctx.font="17px monospace";ctx.fillStyle="#6fa8ff";ctx.fillText("COBALT",0,112);
 ctx.restore();
-// Five orbiting, perspective-projected symbolic force spheres; all surround the same U.
+// Five orbiting, perspective-projected symbolic atomic waldos; all surround the same U.
 // Order: −, W, M, S, +; F denotes their composite and is not a sixth sphere.
 const fields=[
  {name:"−",radius:112,color:"#857aff",rate:-.75},
@@ -106,7 +118,7 @@ for(let j=0;j<fields.length;j++){
  ctx.restore();
  ctx.fillStyle=f.color;ctx.font="15px monospace";ctx.fillText(f.name,cx+f.radius+10,cy-14-j*13);
 }
-document.querySelector("#fieldmetrics").textContent="F = (−,W,M,S,+) · strength "+params.force.toFixed(2)+" · spin "+params.fieldspin.toFixed(2);
+document.querySelector("#fieldmetrics").textContent="WALDOS −/W/M/S/+ · strength "+params.force.toFixed(2)+" · spin "+params.fieldspin.toFixed(2);
 // Note: physical gravity, electromagnetic, strong and weak interactions are not simulated.
 // Blocked upper negative boundary.
 ctx.strokeStyle="#ff7b97";ctx.lineWidth=7;ctx.beginPath();ctx.moveTo(cx-85,cy-282);ctx.lineTo(cx+85,cy-282);ctx.stroke();
