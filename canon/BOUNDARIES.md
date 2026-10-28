@@ -231,3 +231,13 @@ The observer derives oscillator phase for each of three DIOTOMIC proxy modes by 
 A separate user-initiated action attempts one complete D1 → D2 → D3 relay. Admission requires the GWELL 042 witness state SUSTAINED ALIGNMENT (at least 2 model-seconds without phase-threshold violation), at least one token in D1, and both individual resonance-gated pores 1→2 and 2→3 open at the instant of transfer. A successful operation atomically moves one token from D1 to D3 through an admissible D2 path; it does not hold a token in D2 across separate animation frames. The interface reports WITNESSED or HELD. Failure leaves all compartments unchanged.
 
 **Invariant 043:** no partial transfer on rejection; outside + D1 + D2 + D3 remains 12, oscillator energy and parameters are unmodified, and cobalt identity {{i}} is unchanged. This is an abstract discrete transport transaction, not a validated physical molecular transport mechanism. No spontaneous synchronization or automatic pumping is assumed.
+
+## GWELL 044 — Finite transport latency, Ethernet comparison
+
+The three DIOTOMIC compartments form a two-hop **store-and-forward analogy**: D1 → D2 → D3. A manually initiated transfer requires sustained phase alignment and the D1→D2 pore gate. After finite modeled hop duration, the token reaches a real D2 buffer. The D2→D3 forwarding stage begins only when phase alignment and that second pore gate permit it; otherwise the token remains buffered at D2. The interface exposes hop duration, in-flight state, D2 occupancy and completed delivery count. Only one hop can be in flight at a time in this simple model.
+
+The marker-token invariant expands to `outside + D1 + D2 + D3 + in_flight = 12`. Each transition decrements its source exactly once and increments destination exactly once; transit is never unaccounted. The mechanical oscillator energy ledger remains independent. Link transitions are user-started and auto-forward at D2; no retransmission or corruption model is claimed.
+
+**Ethernet comparison:** An Ethernet store-and-forward switch receives/buffers a complete frame before forwarding; link serialization, processing, propagation and queuing contribute to latency. This model resembles a two-hop buffered path, but its resonance-based gate is NOT Ethernet's addressing, link layer, physical signals or frame error checking, and units are model-seconds, not observed network timings. Reference: https://www.ciscopress.com/articles/article.asp?p=3089352&seqNum=7 and https://www.rfc-editor.org/info/rfc8238/ .
+
+**Invariant 044:** a closed pore can delay but not annihilate the transported token; finite transit must appear in the ledger; `{{i}}` is unchanged.
