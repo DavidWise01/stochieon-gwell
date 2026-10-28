@@ -1,10 +1,10 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>STOCHIEON · GWELL 059 · Three.js</title>
+<title>STOCHIEON · GWELL 060 · Three.js</title>
 <style>
 :root{color-scheme:dark;font:15px system-ui;background:#07101d;color:#e7f3ff}*{box-sizing:border-box}body{margin:0}header,footer{padding:14px 20px;background:#101e31;border-bottom:1px solid #304760}h1{font-size:1.25rem;margin:0 0 8px}h2{font-size:1rem;margin:0 0 12px;color:#8fe7ea}a{color:#86e5f3}main{display:grid;grid-template-columns:minmax(320px,2fr) minmax(275px,1fr);max-width:1400px;margin:auto;gap:14px;padding:14px}section{background:#102137;border:1px solid #35516f;border-radius:12px;padding:14px;margin-bottom:14px}#scene{width:100%;height:min(69vh,680px);min-height:420px;position:relative;background:radial-gradient(ellipse,#19334d,#040b16);border-radius:8px;overflow:hidden}#scene canvas{display:block;width:100%;height:100%;touch-action:none}#overlay{position:absolute;top:10px;left:12px;pointer-events:none;color:#d9edff;font:12px monospace;white-space:pre-line}button{background:#164e61;color:white;border:1px solid #6cd6d4;border-radius:8px;padding:9px 12px;margin:3px;cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #ffe28e}label{display:block;margin:12px 0 5px}input[type=range]{width:100%;accent-color:#6ce3df}p{line-height:1.45}small,.muted{color:#aabfd2}pre{white-space:pre-wrap;word-break:break-word;background:#071523;border-radius:7px;padding:10px;max-height:230px;overflow:auto}#status{min-height:40px}.pill{display:inline-block;padding:3px 8px;border:1px solid #365d70;border-radius:30px;margin-right:5px}footer{font-size:12px}@media(max-width:810px){main{grid-template-columns:1fr}#scene{height:55vh;min-height:340px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 </style></head><body>
-<header><h1>STOCHIEON · YOUYOU · GWELL 059 / Three.js</h1><a href="https://github.com/DavidWise01/stochieon-gwell">Repository</a> · <a href="canon/BOUNDARIES.md">Append-only canon</a> <span class="pill">/0\ pinned</span> <span class="pill">Three independent witnesses</span></header>
+<header><h1>STOCHIEON · YOUYOU · GWELL 060 / Three.js</h1><a href="https://github.com/DavidWise01/stochieon-gwell">Repository</a> · <a href="canon/BOUNDARIES.md">Append-only canon</a> <span class="pill">/0\ pinned</span> <span class="pill">Three independent witnesses</span></header>
 <main><div>
 <section><h2>3D CALVIN / DIOTOMIC / Foundation</h2><div id="scene" role="img" aria-label="Interactive 3D scene with three diotomic resonators, four stretching strands, toroidal aperture, optional containment shell and Patricia Toph Icarium vectors"><div id="overlay">THREE.JS 3D
 Patricia −2,+3,−1 · Toph +2,−3,+1 · Icarium 0,0,0</div></div>
@@ -15,7 +15,7 @@ Patricia −2,+3,−1 · Toph +2,−3,+1 · Icarium 0,0,0</div></div>
 <section><h2>Identified packet and triple-witness ledger</h2><p id="packets">Source 12 · D2 queue 0 · D3 received 0 · ACK 0</p><button id="send">Send packet</button><button id="forward">Forward FIFO</button><button id="ack">ACK at D3</button><button id="replay">Replay witnesses</button>
 <pre id="ledger">No recorded observations.</pre><p id="audit" role="status">Evidence unverified.</p></section>
 </div><aside>
-<section><h2>Geometry</h2>
+<section><h2>Vector delimiters</h2><label for="vectorStep">Subdivision</label><select id="vectorStep"><option value="1">1 vector</option><option value="0.5" selected>½ vector</option></select><p id="vectorState" role="status">½-vector divisions measured from /0\.</p><p><small>Guide planes and position ticks are symbolic coordinate delimiters. Foundation vector endpoints are unchanged.</small></p></section><section><h2>Geometry</h2>
 <label for="stretch">Stretch |||| → //()\ <output id="stretchV">0.55</output></label><input id="stretch" type="range" min="0" max="1" step=".01" value=".55">
 <label for="twist">Aperture torsion <output id="twistV">0°</output></label><input id="twist" type="range" min="-180" max="180" step="1" value="0">
 <label for="seal">Enclosure surface <output id="sealV">30%</output></label><input id="seal" type="range" min="0" max="100" step="1" value="30">
@@ -64,6 +64,24 @@ const shell=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry
 const core=new THREE.Mesh(new THREE.TorusGeometry(.54,.14,12,64),torusMaterial(cubeColors[j],.85));core.rotation.x=Math.PI/2;group.add(core);
 for(let n=-2;n<=2;n++){const rib=new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(n*.24,-.8,.88),new THREE.Vector3(n*.24,.8,.88)]),new THREE.LineBasicMaterial({color:cubeColors[j],transparent:true,opacity:.48}));group.add(rib)}
 cubes.push({group,core,q:j===0?1:0,v:0})}
+const delimiterGroup=new THREE.Group();root.add(delimiterGroup);
+function redrawDelimiters(){
+ while(delimiterGroup.children.length){const o=delimiterGroup.children[0];delimiterGroup.remove(o);o.geometry?.dispose();o.material?.dispose()}
+ const step=+$("vectorStep").value;
+ for(let axis=0;axis<3;axis++){
+  const color=[0x9cc8ff,0x8fffc7,0xd3acff][axis];
+  for(let k=-4;k<=4+1e-8;k+=step){
+   const pos=[0,0,0];pos[axis]=k;
+   const tick=new THREE.Mesh(new THREE.BoxGeometry(.055,.055,.055),new THREE.MeshBasicMaterial({color}));
+   tick.position.set(...pos);delimiterGroup.add(tick);
+  }
+  const vector=[0,0,0];vector[axis]=4;
+  const pts=[new THREE.Vector3(...vector),new THREE.Vector3(0,0,0),new THREE.Vector3(...vector.map(v=>-v))];
+  const ln=new THREE.Line(new THREE.BufferGeometry().setFromPoints(pts),new THREE.LineBasicMaterial({color,transparent:true,opacity:.35}));delimiterGroup.add(ln);
+ }
+ $("vectorState").textContent=(step===.5?"½ vector":"1 vector")+" | "+(9/step|0)+" approximate intervals per axis | /0\\ fixed";
+}
+$("vectorStep").addEventListener("change",redrawDelimiters);redrawDelimiters();
 const apertureGroup=new THREE.Group();root.add(apertureGroup);
 const aperture=new THREE.Mesh(new THREE.TorusGeometry(1,.045,10,100),new THREE.MeshBasicMaterial({color:0xe5f9ff}));apertureGroup.add(aperture);
 const strands=[];for(let j=0;j<4;j++){const g=new THREE.BufferGeometry(),m=new THREE.LineBasicMaterial({color:j<2?0xb98bff:0x5df4a3});const obj=new THREE.Line(g,m);root.add(obj);strands.push(obj)}
