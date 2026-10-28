@@ -1,22 +1,69 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>STOCHIEON · GWELL 3:1</title>
-<style>body{margin:0;background:#080d19;color:#dceafa;font:16px system-ui}main{max-width:980px;margin:auto;padding:32px}h1{color:#7dd3fc}section{background:#101d30;border:1px solid #263f59;border-radius:18px;padding:24px;margin:20px 0}pre{white-space:pre-wrap;color:#a7f3d0}button{background:#164e63;color:white;border:1px solid #38bdf8;border-radius:9px;padding:12px 18px;cursor:pointer}button:hover{background:#155e75}.shell{border:2px solid #38bdf8;border-radius:50%;display:grid;place-items:center;margin:auto;width:270px;height:270px}.two{border-color:#a78bfa;width:195px;height:195px}.one{border-color:#34d399;width:120px;height:120px}.well{font-weight:bold;color:#fcd34d}small{color:#94a3b8}#log{max-height:220px;overflow:auto}</style></head>
-<body><main><h1>STOCHIEON / GWELL</h1><p>Canonical nested sapphon · three outer shells / one inner well · <code>-U+</code></p>
-<section><div class="shell">O3<div class="shell two">O2<div class="shell one">O1<div class="well">− U +</div></div></div></div></section>
-<section><h2>Boundary 020–021: isolate, observe, recover</h2><p>Single authoritative inner well. No voting, quorum, silent repair or history rewriting.</p>
-<p>Committed U: <strong id="state">0</strong> · Records: <strong id="count">0</strong></p>
-<button id="good">Admit + drive</button> <button id="bad">Observe dispute</button> <button id="dependent">Dependent event</button> <button id="resolve">Append recovery</button> <button id="reset">Reset demonstration</button>
-<pre id="log" aria-live="polite"></pre><small>Local demonstration only; no storage or network writes. Model rules are proposed, not experimentally established particle physics.</small></section>
-<section><h2>Canonical boundary chain</h2><p>001 Geometry → 002 Facing → 003 Coupling → 004 Impedance → 005 Accounting → 006 Cycle → 007 Phase → 008 Locking → 009 Coherence → 010 Winding → 011 Transport → 012 Pinning → 013 Memory → 014 Propagation → 015 Horizon → 016 Convergence → 017 Ordering → 018 Replay → 019 Divergence → 020 Isolation → 021 Recovery provenance.</p></section>
-</main><script type="module">
-import {newLedger,record,recovery} from "./src/gwell.mjs";
-let ledger=newLedger(),n=0,dispute=null;
-const out=document.getElementById("log");
-function render(){document.getElementById("state").textContent=ledger.state;document.getElementById("count").textContent=ledger.history.length;out.textContent=ledger.history.map(e=>JSON.stringify(e)).join("\n");out.scrollTop=out.scrollHeight}
-document.getElementById("good").onclick=()=>{record(ledger,{id:"e"+(++n),drive:.9});render()};
-document.getElementById("bad").onclick=()=>{dispute="e"+(++n);record(ledger,{id:dispute,drive:.1,disputed:true});render()};
-document.getElementById("dependent").onclick=()=>{record(ledger,{id:"e"+(++n),drive:.1,dependsOn:dispute?[dispute]:[]});render()};
-document.getElementById("resolve").onclick=()=>{if(!dispute)return alert("Observe a dispute first");recovery(ledger,{id:"r"+(++n),disputeId:dispute,evidence:"separate observation",decision:"reject"});render()};
-document.getElementById("reset").onclick=()=>{ledger=newLedger();n=0;dispute=null;render()};render();
+<title>YOUYOU · -U+ · STOCHIEON GWELL</title>
+<style>
+:root{color-scheme:dark;font-family:ui-monospace,Consolas,monospace;background:#050914;color:#d9eeff}
+*{box-sizing:border-box}body{margin:0}header,footer{padding:16px 24px;border-bottom:1px solid #29415e;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+header b{letter-spacing:.16em;color:#8fe8ff}a{color:#67e8f9}main{max-width:1190px;margin:auto;padding:20px;display:grid;grid-template-columns:minmax(0,2fr) minmax(260px,1fr);gap:18px}
+.panel{background:linear-gradient(145deg,#0b1528,#0b1020);border:1px solid #29415e;border-radius:15px;padding:16px}.panel h2{font-size:15px;margin:0 0 14px;color:#b0f0ff}
+canvas{width:100%;display:block;aspect-ratio:1.25;background:radial-gradient(circle,#132742,#060b17 70%);border-radius:10px}
+.controls{display:grid;gap:13px}label{font-size:12px;display:flex;justify-content:space-between;gap:10px;color:#b4c7df}input{width:100%;accent-color:#4de8cd}
+button{border:1px solid #30667f;background:#103047;color:#d8fbff;padding:10px;border-radius:8px;cursor:pointer}button:hover{background:#1b506b}.buttons{display:flex;gap:8px;flex-wrap:wrap}
+pre{font-size:12px;white-space:pre-wrap;line-height:1.6;color:#a7f3d0}.pill{border:1px solid #34775f;border-radius:30px;padding:5px 10px;color:#83f5ba;font-size:12px}
+footer{font-size:11px;color:#829ab2;border-top:1px solid #29415e;border-bottom:0}
+@media(max-width:760px){main{grid-template-columns:1fr}}
+</style></head><body>
+<header><b>STOCHIEON / YOUYOU</b><span class="pill">-U+ · 3 OUTER : 1 INNER</span><a href="https://github.com/DavidWise01/stochieon-gwell">SOURCE ↗</a></header>
+<main><section class="panel"><h2>GWELL · NESTED SAPPHON</h2><canvas id="field" width="1000" height="800" aria-label="Animated nested three-shell gwell with a single U center"></canvas>
+<p id="status" aria-live="polite">INITIALIZED · OBSERVATION ONLY</p><div class="buttons"><button id="play">Pause</button><button id="pulse">Inject pulse</button><button id="reset">Reset</button><button id="witness">Observe event</button></div>
+</section><aside class="controls">
+<section class="panel"><h2>GWELL OPERATORS</h2>
+<label>Oscillation <output id="freqout">0.70</output></label><input id="freq" type="range" min="0" max="3" step="0.05" value="0.7">
+<label>Coupling <output id="couplingout">0.45</output></label><input id="coupling" type="range" min="0" max="1" step="0.01" value="0.45">
+<label>Shell transmission <output id="transout">0.75</output></label><input id="trans" type="range" min="0" max="1" step="0.01" value="0.75">
+<label>Rotation <output id="rotationout">0.30</output></label><input id="rotation" type="range" min="-2" max="2" step="0.05" value="0.3">
+</section>
+<section class="panel"><h2>CANONICAL GEOMETRY</h2><pre>   TENSOR STATE
+       │
+    SAPPHON
+       │
+  ╭────────────╮ O3
+  │ ╭────────╮ │ O2
+  │ │ ╭────╮ │ │ O1
+  │ │ │-U+ │ │ │
+  │ │ ╰────╯ │ │
+  │ ╰────────╯ │
+  ╰────────────╯
+
+OUTER / INNER &#92; OUTER
+      3 : 1
+</pre></section>
+<section class="panel"><h2>LOCAL MEMORY / WITNESS</h2><p>Inner state <strong id="memory">0</strong> · Phase <strong id="phase">0.00</strong></p><pre id="log">No observations yet.</pre></section>
+</aside></main><footer><span>GWELL 001–021 · CANONICAL INTERACTIVE REFERENCE</span><span>Speculative mathematical model · not established particle physics</span></footer>
+<script type="module">
+import {GEOMETRY, hysteresis} from "./src/gwell.mjs";
+const canvas=document.querySelector("#field"),ctx=canvas.getContext("2d");
+const inputs=["freq","coupling","trans","rotation"],params={};let running=true,phase=0,last=0,pulses=[],inner=0,records=[];
+for(const id of inputs){const e=document.getElementById(id);params[id]=+e.value;e.addEventListener("input",()=>{params[id]=+e.value;document.getElementById(id+"out").textContent=params[id].toFixed(2)})}
+function observe(message){records.push({cycle:records.length+1,state:inner,message});document.querySelector("#log").textContent=records.slice(-5).map(x=>JSON.stringify(x)).join("\n")}
+document.querySelector("#play").onclick=()=>{running=!running;document.querySelector("#play").textContent=running?"Pause":"Resume"};
+document.querySelector("#pulse").onclick=()=>{pulses.push({r:0,alpha:1});inner=hysteresis(inner,.9);document.querySelector("#memory").textContent=inner;observe("Pulse injected: drive 0.9")};
+document.querySelector("#reset").onclick=()=>{phase=0;inner=0;pulses=[];records=[];document.querySelector("#memory").textContent=0;document.querySelector("#log").textContent="No observations yet."};
+document.querySelector("#witness").onclick=()=>observe("Observed facing edges and current local state");
+function draw(t){const dt=Math.min((t-last)/1000||0,.05);last=t;if(running){phase+=dt*params.freq*2*Math.PI;pulses.forEach(p=>{p.r+=dt*130;p.alpha-=dt*.5});pulses=pulses.filter(p=>p.alpha>0)}
+const w=canvas.width,h=canvas.height,cx=w/2,cy=h/2;ctx.clearRect(0,0,w,h);
+for(let k=0;k<3;k++){const r=105+k*90,osc=running?Math.sin(phase*(1+k*.16)+k*2)*11:0;
+ctx.save();ctx.translate(cx,cy);ctx.rotate(phase*params.rotation*(k%2?-1:1)*.1);
+ctx.beginPath();for(let a=0;a<=240;a++){const th=a/240*Math.PI*2;const rr=r+osc+9*Math.sin(3*th+phase*(k+1)*.3);const x=rr*Math.cos(th),y=rr*.82*Math.sin(th);a?ctx.lineTo(x,y):ctx.moveTo(x,y)}ctx.closePath();
+const colors=["#39f0ba","#a690ff","#42bfff"];ctx.strokeStyle=colors[k];ctx.lineWidth=4;ctx.shadowBlur=21;ctx.shadowColor=colors[k];ctx.globalAlpha=.55+params.trans*.45;ctx.stroke();ctx.shadowBlur=0;
+for(const sign of [-1,1]){const x=sign*(r+osc+10);ctx.beginPath();ctx.arc(x,0,7,0,Math.PI*2);ctx.fillStyle=sign>0?"#f88aa1":"#76baff";ctx.fill()}ctx.restore();
+ctx.fillStyle=colors[k];ctx.font="17px monospace";ctx.fillText("O"+(k+1),cx+r+14,cy-25-k*23)}
+const coreR=53+7*Math.sin(phase);const grad=ctx.createRadialGradient(cx,cy,0,cx,cy,coreR*2);grad.addColorStop(0,"#82fdd9");grad.addColorStop(.35,"#0b907c");grad.addColorStop(1,"transparent");ctx.beginPath();ctx.arc(cx,cy,coreR*2,0,Math.PI*2);ctx.fillStyle=grad;ctx.fill();
+ctx.font="bold 60px monospace";ctx.textAlign="center";ctx.fillStyle="#e7fffa";ctx.fillText("-U+",cx,cy+19);ctx.textAlign="left";
+for(const p of pulses){ctx.beginPath();ctx.ellipse(cx,cy,p.r,p.r*.82,0,0,Math.PI*2);ctx.strokeStyle="rgba(255,215,116,"+Math.max(0,p.alpha)+")";ctx.lineWidth=3;ctx.stroke()}
+ctx.fillStyle="#a7c4d9";ctx.font="16px monospace";ctx.fillText("SHELLS: "+GEOMETRY.shells+" / CORE: "+GEOMETRY.inner,22,34);
+ctx.fillText("φ "+(phase%(2*Math.PI)).toFixed(3)+"     COUPLING "+params.coupling.toFixed(2),22,65);
+document.querySelector("#phase").textContent=(phase%(2*Math.PI)).toFixed(2);
+requestAnimationFrame(draw)}
+requestAnimationFrame(draw);
 </script></body></html>
