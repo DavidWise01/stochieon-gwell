@@ -1,142 +1,73 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>YOUYOU · C-U GRAVITY WELL · STOCHIEON GWELL</title>
-<style>
-:root{color-scheme:dark;font-family:ui-monospace,Consolas,monospace;background:#050914;color:#d9eeff}
-*{box-sizing:border-box}body{margin:0}header,footer{padding:16px 24px;border-bottom:1px solid #29415e;display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
-header b{letter-spacing:.16em;color:#8fe8ff}a{color:#67e8f9}main{max-width:1190px;margin:auto;padding:20px;display:grid;grid-template-columns:minmax(0,2fr) minmax(260px,1fr);gap:18px}
-.panel{background:linear-gradient(145deg,#0b1528,#0b1020);border:1px solid #29415e;border-radius:15px;padding:16px}.panel h2{font-size:15px;margin:0 0 14px;color:#b0f0ff}
-canvas{width:100%;display:block;aspect-ratio:1.25;background:radial-gradient(circle,#132742,#060b17 70%);border-radius:10px}
-.controls{display:grid;gap:13px}label{font-size:12px;display:flex;justify-content:space-between;gap:10px;color:#b4c7df}input{width:100%;accent-color:#4de8cd}
-button{border:1px solid #30667f;background:#103047;color:#d8fbff;padding:10px;border-radius:8px;cursor:pointer}button:hover{background:#1b506b}.buttons{display:flex;gap:8px;flex-wrap:wrap}
-pre{font-size:12px;white-space:pre-wrap;line-height:1.6;color:#a7f3d0}.pill{border:1px solid #34775f;border-radius:30px;padding:5px 10px;color:#83f5ba;font-size:12px}
-footer{font-size:11px;color:#829ab2;border-top:1px solid #29415e;border-bottom:0}
-@media(max-width:760px){main{grid-template-columns:1fr}}
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>YOUYOU 3D · STOCHIEON GWELL 026</title><style>
+:root{color-scheme:dark;font:16px system-ui;background:#070e1b;color:#e1eeff}*{box-sizing:border-box}body{margin:0}a{color:#8defff}
+.skip{position:absolute;left:-9999px}.skip:focus{left:15px;top:8px;z-index:10;background:white;color:black;padding:12px}
+header,footer{padding:16px 22px;border-bottom:1px solid #324960}header strong{letter-spacing:.08em}main{display:grid;grid-template-columns:minmax(0,2fr) minmax(270px,1fr);gap:16px;max-width:1220px;margin:auto;padding:18px}
+section{background:#0f1b2b;border:1px solid #36506a;border-radius:12px;padding:16px;margin-bottom:16px}h1{font-size:1.35rem}h2{font-size:1rem;color:#a2e4fd}
+canvas{display:block;width:100%;aspect-ratio:4/3;border-radius:8px;background:#060d1a;touch-action:none}label{display:block;margin:13px 0 5px}input{width:100%;accent-color:#39d7d4}
+button{padding:11px 12px;border-radius:8px;background:#14475b;border:1px solid #6ddbd8;color:white;cursor:pointer;margin:4px}
+button:focus-visible,input:focus-visible,canvas:focus-visible{outline:3px solid #ffe17b;outline-offset:3px}button:hover{background:#24667d}
+output,strong{font-variant-numeric:tabular-nums}pre{white-space:pre-wrap;word-break:break-word;font-size:12px;color:#c6ffdf}
+p{line-height:1.5}small{color:#b9c9d9}footer{border-top:1px solid #36506a;border-bottom:0}
+@media(max-width:790px){main{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){canvas{scroll-behavior:auto}}
 </style></head><body>
-<header><b>STOCHIEON / YOUYOU</b><span class="pill">-U+ · 3 OUTER : 1 INNER</span><a href="https://github.com/DavidWise01/stochieon-gwell">SOURCE ↗</a></header>
-<main><section class="panel"><h2>GWELL · NESTED SAPPHON</h2><canvas id="field" width="1000" height="800" aria-label="Animated nested three-shell gwell with a single U center"></canvas>
-<p id="status" aria-live="polite">TOP − SEALED · LOWER C INTAKE · COBALT {{i}} RETAINED</p><div class="buttons"><button id="play">Pause</button><button id="pulse">Inject pulse</button><button id="reset">Reset</button><button id="witness">Observe event</button><button id="infer">Infer at C</button><button id="build">Build atom</button><button id="unbuild">Unbuild atom</button></div>
-</section><aside class="controls">
-<section class="panel"><h2>GWELL OPERATORS</h2>
-<label>Oscillation <output id="freqout">0.70</output></label><input id="freq" type="range" min="0" max="3" step="0.05" value="0.7">
-<label>Coupling <output id="couplingout">0.45</output></label><input id="coupling" type="range" min="0" max="1" step="0.01" value="0.45">
-<label>Shell transmission <output id="transout">0.75</output></label><input id="trans" type="range" min="0" max="1" step="0.01" value="0.75">
-<label>Rotation <output id="rotationout">0.30</output></label><input id="rotation" type="range" min="-2" max="2" step="0.05" value="0.3">
-</section>
-<section class="panel"><h2>− + 5 ATOMIC WALDOS</h2><p>Five rotating manipulators: − / W / M / S / +. Build and unbuild a symbolic atom register; cobalt {{i}} remains the fixed identity.</p><label>Field strength <output id="forceout">0.65</output></label><input id="force" type="range" min="0" max="1" step=".01" value=".65"><label>Field speed <output id="fieldspinout">1.00</output></label><input id="fieldspin" type="range" min="0" max="3" step=".05" value="1"><p id="fieldmetrics">Waldos active · atom register 0</p><p>Atom register: <strong id="atomcount">0</strong> · operations: <strong id="opcount">0</strong></p></section><section class="panel"><h2>CANONICAL GEOMETRY</h2><pre>   TENSOR STATE
-       │
-    SAPPHON
-       │
-  ╭────────────╮ O3
-  │ ╭────────╮ │ O2
-  │ │ ╭────╮ │ │ O1
-  │ │ │-U+ │ │ │
-  │ │ ╰────╯ │ │
-  │ ╰────────╯ │
-  ╰────────────╯
-
-SEALED − / SPINNING U &#92; LOWER C
-      3 : 1
-</pre></section>
-<section class="panel"><h2>LOCAL MEMORY / WITNESS</h2><p>Inner state <strong id="memory">0</strong> · Phase <strong id="phase">0.00</strong></p><pre id="log">No observations yet.</pre><p id="inference">INFERENCE: UNKNOWN · no sufficient causal evidence</p></section>
-</aside></main><footer><span>GWELL 001–025 · ATOMIC WALDOS</span><span>Speculative mathematical model · not established particle physics</span></footer>
-<script type="module">
-import {GEOMETRY, hysteresis} from "./src/gwell.mjs";
-const canvas=document.querySelector("#field"),ctx=canvas.getContext("2d");
-const inputs=["freq","coupling","trans","rotation","force","fieldspin"],params={};let running=true,phase=0,last=0,pulses=[],inner=0,records=[],atomCount=0,operations=[];
-for(const id of inputs){const e=document.getElementById(id);params[id]=+e.value;e.addEventListener("input",()=>{params[id]=+e.value;document.getElementById(id+"out").textContent=params[id].toFixed(2)})}
-function observe(message){records.push({id:"obs-"+(records.length+1),source:"C",arrival:records.length+1,cycle:records.length+1,state:inner,message});document.querySelector("#log").textContent=records.slice(-5).map(x=>JSON.stringify(x)).join("\n")}
-// GWELL 025: reversible symbolic atom assembly, not nuclear transmutation.
-function waldoStep(direction){
-  const before=atomCount;
-  atomCount=Math.max(0,Math.min(20,atomCount+direction));
-  const action=direction>0?"BUILD":"UNBUILD";
-  operations.push(Object.freeze({sequence:operations.length+1,action,before,after:atomCount,identity:"{{i}}",channels:["−","W","M","S","+"]}));
-  document.querySelector("#atomcount").textContent=atomCount;
-  document.querySelector("#opcount").textContent=operations.length;
-  observe("WALDO "+action+" modeled atom register "+before+" → "+atomCount+"; cobalt {{i}} unchanged");
-}
-document.querySelector("#build").onclick=()=>waldoStep(1);
-document.querySelector("#unbuild").onclick=()=>waldoStep(-1);
-document.querySelector("#play").onclick=()=>{running=!running;document.querySelector("#play").textContent=running?"Pause":"Resume"};
-document.querySelector("#pulse").onclick=()=>{pulses.push({r:260,alpha:1});inner=hysteresis(inner,.9);document.querySelector("#memory").textContent=inner;observe("Lower C intake: inbound pulse, cobalt identity retained")};
-document.querySelector("#reset").onclick=()=>{phase=0;inner=0;pulses=[];records=[];atomCount=0;operations=[];document.querySelector("#atomcount").textContent=0;document.querySelector("#opcount").textContent=0;document.querySelector("#inference").textContent="INFERENCE: UNKNOWN · no sufficient causal evidence";document.querySelector("#memory").textContent=0;document.querySelector("#log").textContent="No observations yet."};
-document.querySelector("#witness").onclick=()=>observe("Observed facing edges and current local state");
-document.querySelector("#infer").onclick=()=>{const ids=records.map(x=>x.id);document.querySelector("#inference").textContent="INFERENCE: UNKNOWN · "+ids.length+" observation(s) retained; correlation alone does not verify a cause";observe("Inference HOLD — no causally distinguishing evidence")};
-function draw(t){const dt=Math.min((t-last)/1000||0,.05);last=t;if(running){phase+=dt*params.freq*2*Math.PI;pulses.forEach(p=>{p.r=Math.max(0,p.r-dt*110);p.alpha=p.r/260});pulses=pulses.filter(p=>p.alpha>0)}
-const w=canvas.width,h=canvas.height,cx=w/2,cy=h/2;ctx.clearRect(0,0,w,h);
-for(let k=0;k<3;k++){const r=105+k*90,osc=running?Math.sin(phase*(1+k*.16)+k*2)*11:0;
-ctx.save();ctx.translate(cx,cy);ctx.rotate(phase*params.rotation*(k%2?-1:1)*.1);
-ctx.beginPath();for(let a=0;a<=240;a++){const th=a/240*Math.PI*2;const rr=r+osc+9*Math.sin(3*th+phase*(k+1)*.3);const x=rr*Math.cos(th),y=rr*.82*Math.sin(th);a?ctx.lineTo(x,y):ctx.moveTo(x,y)}ctx.closePath();
-const colors=["#39f0ba","#a690ff","#42bfff"];ctx.strokeStyle=colors[k];ctx.lineWidth=4;ctx.shadowBlur=21;ctx.shadowColor=colors[k];ctx.globalAlpha=.55+params.trans*.45;ctx.stroke();ctx.shadowBlur=0;
-for(const sign of [-1,1]){const x=sign*(r+osc+10);ctx.beginPath();ctx.arc(x,0,7,0,Math.PI*2);ctx.fillStyle=sign>0?"#f88aa1":"#76baff";ctx.fill()}ctx.restore();
-ctx.fillStyle=colors[k];ctx.font="17px monospace";ctx.fillText("O"+(k+1),cx+r+14,cy-25-k*23)}
-// Canon 022: only lower C is an intake; top negative port is sealed.
-// The U well rotates clockwise and incoming packets contract toward the cobalt identity core.
-ctx.save();
-ctx.translate(cx,cy);
-const spin=phase*(1+Math.abs(params.rotation));
-for(let j=0;j<9;j++){
-  const a=spin+j*2*Math.PI/9;
-  ctx.beginPath();
-  for(let q=0;q<70;q++){
-    const t=q/69, radius=45+t*170, theta=a+t*2.8;
-    const x=Math.cos(theta)*radius, y=Math.sin(theta)*radius*.75;
-    q?ctx.lineTo(x,y):ctx.moveTo(x,y);
-  }
-  ctx.strokeStyle="rgba(66,184,255,"+(.17+j%3*.06)+")";
-  ctx.lineWidth=2.2;ctx.stroke();
-}
-const grad=ctx.createRadialGradient(0,0,3,0,0,83);
-grad.addColorStop(0,"#c2e4ff");grad.addColorStop(.26,"#176bb5");grad.addColorStop(.55,"#102f6a");grad.addColorStop(1,"rgba(12,40,95,0)");
-ctx.beginPath();ctx.arc(0,0,83,0,Math.PI*2);ctx.fillStyle=grad;ctx.fill();
-ctx.save();ctx.rotate(spin);ctx.strokeStyle="#72c7ff";ctx.lineWidth=3;
-for(let a=0;a<3;a++){ctx.rotate(2*Math.PI/3);ctx.beginPath();ctx.arc(0,0,48,.2,1.8);ctx.stroke()}
-ctx.restore();
-ctx.fillStyle="#d6ecff";ctx.font="bold 27px monospace";ctx.textAlign="center";ctx.fillText("{{i}}",0,9);
-ctx.font="17px monospace";ctx.fillStyle="#6fa8ff";ctx.fillText("COBALT",0,112);
-ctx.restore();
-// Five orbiting, perspective-projected symbolic atomic waldos; all surround the same U.
-// Order: −, W, M, S, +; F denotes their composite and is not a sixth sphere.
-const fields=[
- {name:"−",radius:112,color:"#857aff",rate:-.75},
- {name:"W",radius:153,color:"#50bdfb",rate:1.15},
- {name:"M",radius:199,color:"#55e4b3",rate:-.9},
- {name:"S",radius:243,color:"#ffb45d",rate:1.35},
- {name:"+",radius:289,color:"#fb689c",rate:-.65}
-];
-for(let j=0;j<fields.length;j++){
- const f=fields[j],speed=params.fieldspin,angle=phase*f.rate*speed,alpha=.16+.55*params.force;
- ctx.save();ctx.translate(cx,cy);ctx.rotate(angle);
- ctx.strokeStyle=f.color;ctx.shadowColor=f.color;ctx.shadowBlur=13*params.force;
- ctx.lineWidth=1.4+params.force*2;ctx.globalAlpha=alpha;
- // Equatorial ring and tilted great circles give a rotating 3D sphere projection.
- ctx.beginPath();ctx.ellipse(0,0,f.radius,f.radius*.73,0,0,Math.PI*2);ctx.stroke();
- ctx.beginPath();ctx.ellipse(0,0,f.radius*.38,f.radius*.73,.65,0,Math.PI*2);ctx.stroke();
- ctx.beginPath();ctx.ellipse(0,0,f.radius*.38,f.radius*.73,-.65,0,Math.PI*2);ctx.stroke();
- ctx.beginPath();ctx.arc(f.radius*Math.cos(angle*.7),f.radius*.73*Math.sin(angle*.7),5+2*params.force,0,Math.PI*2);ctx.fillStyle=f.color;ctx.fill();
- ctx.restore();
- ctx.fillStyle=f.color;ctx.font="15px monospace";ctx.fillText(f.name,cx+f.radius+10,cy-14-j*13);
-}
-document.querySelector("#fieldmetrics").textContent="WALDOS −/W/M/S/+ · strength "+params.force.toFixed(2)+" · spin "+params.fieldspin.toFixed(2);
-// Note: physical gravity, electromagnetic, strong and weak interactions are not simulated.
-// Blocked upper negative boundary.
-ctx.strokeStyle="#ff7b97";ctx.lineWidth=7;ctx.beginPath();ctx.moveTo(cx-85,cy-282);ctx.lineTo(cx+85,cy-282);ctx.stroke();
-ctx.font="17px monospace";ctx.fillStyle="#ff9aaf";ctx.textAlign="center";ctx.fillText("− SEALED",cx,cy-299);
-// Bottom C intake / inference throat.
-ctx.strokeStyle="#5cf5d0";ctx.lineWidth=5;
-ctx.beginPath();ctx.moveTo(cx-80,cy+257);ctx.quadraticCurveTo(cx-83,cy+320,cx,cy+320);ctx.quadraticCurveTo(cx+83,cy+320,cx+80,cy+257);ctx.stroke();
-ctx.fillStyle="#92ffe1";ctx.font="bold 24px monospace";ctx.fillText("C",cx,cy+347);
-ctx.font="15px monospace";ctx.fillText("INBOUND ONLY ↑",cx,cy+370);
-for(const p of pulses){
-  // p.r always decreases: packets are absorbed and never emitted.
-  ctx.beginPath();ctx.ellipse(cx,cy,p.r,p.r*.82,0,0,2*Math.PI);
-  ctx.strokeStyle="rgba(115,210,255,"+Math.max(0,p.alpha)+")";ctx.lineWidth=3;ctx.stroke();
-}
-ctx.textAlign="left";
-ctx.fillStyle="#a7c4d9";ctx.font="16px monospace";ctx.fillText("SHELLS: "+GEOMETRY.shells+" / CORE: "+GEOMETRY.inner,22,34);
-ctx.fillText("φ "+(phase%(2*Math.PI)).toFixed(3)+"     COUPLING "+params.coupling.toFixed(2),22,65);
-document.querySelector("#phase").textContent=(phase%(2*Math.PI)).toFixed(2);
-requestAnimationFrame(draw)}
-requestAnimationFrame(draw);
+<a class="skip" href="#controls">Skip animation to controls</a><header><h1>STOCHIEON · YOUYOU 3D · GWELL 026</h1><a href="https://github.com/DavidWise01/stochieon-gwell">Source and canon</a></header>
+<main><div><section><h2>Three nested shells · Five atomic waldos · C intake</h2>
+<canvas id="view" width="960" height="720" tabindex="0" role="img" aria-label="Interactive three-dimensional projection of three nested shells, five color-coded rotating waldo rings and a spinning inward U around a stationary cobalt identity. Drag or use arrow keys to rotate the view.">3D view requires canvas support; all actions remain available below.</canvas>
+<p id="status" role="status" aria-live="polite">Ready. Upper minus sealed. Lower C intake open.</p>
+<div><button id="build">Build model atom</button><button id="unbuild">Unbuild model atom</button><button id="pause">Pause motion</button><button id="reset">Reset view</button></div>
+<p><small>Drag the scene, use arrow keys when focused, or adjust camera sliders. Reduced-motion preference pauses automatic spin. This is a symbolic 3D projection, not a physical atom simulator.</small></p></section>
+<section><h2>Inventory and immutable identity</h2><p>Model atoms: <strong id="atoms">0</strong> · Available constituent tokens: <strong id="stock">12</strong> · Bound constituent tokens: <strong id="bound">0</strong> · Total: <strong id="total">12</strong></p>
+<p>Identity: <strong>{{i}}</strong> (cobalt, unchanged) · Top port: <strong>SEALED</strong> · Intake: <strong>C only</strong></p>
+<p><small>Build consumes one available token and creates one symbolic atom register; unbuild reverses it. This is inventory bookkeeping, not creation of physical atoms.</small></p></section>
+<section><h2>Observation ledger</h2><pre id="log" aria-live="polite">No operations.</pre></section></div>
+<aside id="controls"><section><h2>Camera and motion</h2>
+<label for="yaw">Yaw <output id="yawValue">25°</output></label><input id="yaw" type="range" min="-180" max="180" value="25">
+<label for="tilt">Tilt <output id="tiltValue">18°</output></label><input id="tilt" type="range" min="-75" max="75" value="18">
+<label for="zoom">Zoom <output id="zoomValue">1.00×</output></label><input id="zoom" type="range" min="0.65" max="1.5" step=".05" value="1">
+<label for="speed">Waldo speed <output id="speedValue">0.75×</output></label><input id="speed" type="range" min="0" max="2" step=".05" value=".75">
+</section><section><h2>Canonical waldo channels</h2><p>− : violet inward gate<br>W : cyan weak band<br>M : teal medium band<br>S : amber strong band<br>+ : magenta outward orientation</p><p>All five act as manipulators around the same inner U, not independent physical force claims.</p></section>
+<section><h2>GWELL topology</h2><pre>      TOP − CLOSED
+       O3 / O2 / O1
+    + S M W −  (5)
+         U ↻
+     COBALT {{i}}
+          ↑
+        C INTAKE</pre></section></aside></main>
+<footer>GWELL 026 · Auditable symbolic assembly and 3D waldo geometry · STOCHIEON</footer>
+<script>
+"use strict";
+const $=id=>document.getElementById(id),canvas=$("view"),ctx=canvas.getContext("2d");
+let yaw=25*Math.PI/180,tilt=18*Math.PI/180,zoom=1,phase=0,last=0,paused=matchMedia("(prefers-reduced-motion: reduce)").matches,atoms=0,stock=12,bound=0,ledger=[],drag=null;
+const rings=[["−","#a58cff",100,-1],["W","#42cef8",136,1],["M","#4de9ae",172,-1],["S","#ffc06b",209,1],["+","#fb75b3",246,-1]];
+function status(t){$("status").textContent=t}
+function log(t){ledger.push(Object.freeze({step:ledger.length+1,action:t,atoms,stock,bound,identity:"{{i}}"}));$("log").textContent=ledger.slice(-8).map(x=>JSON.stringify(x)).join("\n")}
+function update(){ $("atoms").textContent=atoms;$("stock").textContent=stock;$("bound").textContent=bound;$("total").textContent=stock+bound }
+$("build").onclick=()=>{if(!stock){status("Build blocked: no inventory available");return}stock--;bound++;atoms++;update();log("BUILD");status("Waldos assembled a symbolic atom register; {{i}} preserved")};
+$("unbuild").onclick=()=>{if(!atoms){status("Unbuild blocked: no atoms in register");return}atoms--;bound--;stock++;update();log("UNBUILD");status("Waldos disassembled a symbolic atom register; constituents returned")};
+$("pause").onclick=()=>{paused=!paused;$("pause").textContent=paused?"Resume motion":"Pause motion"};
+$("reset").onclick=()=>{yaw=25*Math.PI/180;tilt=18*Math.PI/180;zoom=1;phase=0;for(const [id,value] of [["yaw",25],["tilt",18],["zoom",1]])$(id).value=value;sync();status("Camera reset; identity retained")};
+function sync(){for(const [id,unit] of [["yaw","°"],["tilt","°"],["zoom","×"],["speed","×"]])$(id+"Value").textContent=Number($(id).value).toFixed(unit==="°"?0:2)+unit}
+for(const id of ["yaw","tilt","zoom","speed"])$(id).addEventListener("input",()=>{yaw=+$("yaw").value*Math.PI/180;tilt=+$("tilt").value*Math.PI/180;zoom=+$("zoom").value;sync()});
+canvas.addEventListener("pointerdown",e=>{drag={x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId)});
+canvas.addEventListener("pointermove",e=>{if(!drag)return;yaw+=(e.clientX-drag.x)*.008;tilt=Math.max(-1.3,Math.min(1.3,tilt+(e.clientY-drag.y)*.007));drag={x:e.clientX,y:e.clientY};$("yaw").value=Math.round(yaw*180/Math.PI);$("tilt").value=Math.round(tilt*180/Math.PI);sync()});
+canvas.addEventListener("pointerup",()=>drag=null);
+canvas.addEventListener("keydown",e=>{if(!["ArrowLeft","ArrowRight","ArrowUp","ArrowDown"].includes(e.key))return;e.preventDefault();yaw+=(e.key==="ArrowRight"?1:e.key==="ArrowLeft"?-1:0)*.09;tilt+=(e.key==="ArrowDown"?1:e.key==="ArrowUp"?-1:0)*.09});
+const W=960,H=720,ctr={x:480,y:346};
+function project(v){let [x,y,z]=v;const a=x*Math.cos(yaw)-z*Math.sin(yaw),b=x*Math.sin(yaw)+z*Math.cos(yaw);const cy=y*Math.cos(tilt)-b*Math.sin(tilt),cz=y*Math.sin(tilt)+b*Math.cos(tilt);const scale=1.22*zoom*500/(500+cz*.43);return{x:ctr.x+a*scale,y:ctr.y+cy*scale,z:cz}}
+function line3(points,color,width=1,alpha=.55){ctx.beginPath();points.forEach((p,i)=>{let a=project(p);i?ctx.lineTo(a.x,a.y):ctx.moveTo(a.x,a.y)});ctx.strokeStyle=color;ctx.globalAlpha=alpha;ctx.lineWidth=width;ctx.stroke();ctx.globalAlpha=1}
+function circle3(r,rot,type,color,width=1,alpha=.5){const pts=[];for(let i=0;i<=140;i++){const a=i*2*Math.PI/140;let x=r*Math.cos(a),z=r*Math.sin(a),y=0;if(type===1){y=z*.7;z=z*.45}else if(type===2){y=x*.65;x=x*.5}const c=Math.cos(rot),s=Math.sin(rot);pts.push([x*c-z*s,y,x*s+z*c])}line3(pts,color,width,alpha)}
+function render(t){const dt=Math.min(.05,(t-last)/1000||0);last=t;if(!paused)phase+=dt*Number($("speed").value);ctx.clearRect(0,0,W,H);
+const bg=ctx.createRadialGradient(480,350,0,480,350,460);bg.addColorStop(0,"#172d4c");bg.addColorStop(1,"#050b17");ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
+for(let i=2;i>=0;i--){const r=78+i*75;for(let m=0;m<3;m++)circle3(r,phase*.14*(i%2?-1:1),m,["#41f0bc","#a28af9","#4ab7ff"][i],1.8,.35)}
+for(const [j,f] of rings.entries()){const rot=phase*f[3]*(.6+j*.15);for(let k=0;k<3;k++)circle3(f[2],rot+k*.38,k,f[1],2,.58)}
+for(let j=0;j<5;j++){const r=34+j*7,a=phase*2+j*1.25;line3(Array.from({length:75},(_,i)=>{const q=i/74;const th=a+q*2.6;const rr=r+55*q;return[rr*Math.cos(th),15*Math.sin(th*2),rr*Math.sin(th)]}),"#52abff",2,.65)}
+const p=project([0,0,0]);const grad=ctx.createRadialGradient(p.x,p.y,2,p.x,p.y,65*zoom);grad.addColorStop(0,"#bde5ff");grad.addColorStop(.27,"#1a67b4");grad.addColorStop(1,"rgba(13,50,120,0)");ctx.beginPath();ctx.arc(p.x,p.y,65*zoom,0,2*Math.PI);ctx.fillStyle=grad;ctx.fill();
+ctx.fillStyle="#e0f6ff";ctx.font="bold 29px monospace";ctx.textAlign="center";ctx.fillText("{{i}}",p.x,p.y+10);ctx.font="18px monospace";ctx.fillStyle="#93c5fd";ctx.fillText("COBALT",p.x,p.y+88);
+ctx.strokeStyle="#ff718d";ctx.lineWidth=7;ctx.beginPath();ctx.moveTo(390,75);ctx.lineTo(570,75);ctx.stroke();ctx.fillStyle="#ff9fb4";ctx.fillText("− SEALED",480,61);
+ctx.strokeStyle="#69f3c0";ctx.lineWidth=5;ctx.beginPath();ctx.arc(480,605,51,0,Math.PI);ctx.stroke();ctx.fillStyle="#a4ffe2";ctx.fillText("C  ↑  INTAKE ONLY",480,684);
+ctx.font="17px monospace";ctx.textAlign="left";ctx.fillStyle="#bdd7f5";ctx.fillText("3 SHELLS · 5 WALDOS · 1 U",20,35);ctx.fillText("ATOM REGISTERS: "+atoms,20,61);
+requestAnimationFrame(render)}
+sync();update();$("pause").textContent=paused?"Resume motion":"Pause motion";requestAnimationFrame(render);
 </script></body></html>
