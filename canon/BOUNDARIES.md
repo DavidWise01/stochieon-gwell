@@ -259,3 +259,9 @@ An independent identified-packet lane accompanies the earlier anonymous marker-t
 Each packet has an append-only event sequence: D1 send, D2 receive, D2 forward, D3 receive, D3 acknowledge. Observations use a global increasing integer sequence and a local model-time stamp. Each packet's record must be a prefix of this ordered sequence. The witness does not vote, alter packets, or infer unseen actions.
 
 Invariant 047: packet IDs stay unique, event history never rewrites previous observations, and receipt precedes acknowledgment. The record is an in-memory observation log, not cryptographic proof or persistent storage. Cobalt {{i}} remains unchanged.
+
+## GWELL 048 — Deterministic replay and first divergence
+
+An independent replay view processes the append-only GWELL 047 witness events in global sequence order. Each packet starts in SOURCE and progresses across D1 send, D2 receive, D2 forward, D3 receive and D3 acknowledge. The reconstructed states are compared against the packet ledger, and the first invalid event or first state mismatch is reported. The replay operation reads the record but does not rewrite it, move packets, or interfere with the resonators. Earlier headings retain their original boundary numbers rather than being relabeled on each iteration.
+
+**Invariant 048:** evidence is processed in its recorded order; divergence is reported, not silently repaired. An empty event log can correctly replay to all packets at SOURCE. Timestamps describe this model's clock, not Ethernet network measurements. Cobalt {{i}} stays unchanged.
