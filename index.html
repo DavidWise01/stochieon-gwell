@@ -23,7 +23,7 @@ footer{font-size:11px;color:#829ab2;border-top:1px solid #29415e;border-bottom:0
 <label>Shell transmission <output id="transout">0.75</output></label><input id="trans" type="range" min="0" max="1" step="0.01" value="0.75">
 <label>Rotation <output id="rotationout">0.30</output></label><input id="rotation" type="range" min="-2" max="2" step="0.05" value="0.3">
 </section>
-<section class="panel"><h2>CANONICAL GEOMETRY</h2><pre>   TENSOR STATE
+<section class="panel"><h2>− + 5 FORCE SPHERES</h2><p>Five nested rotating field shells: − / W / M / S / +. F is the composite field. These are symbolic model channels, not five independently established fundamental forces.</p><label>Field strength <output id="forceout">0.65</output></label><input id="force" type="range" min="0" max="1" step=".01" value=".65"><label>Field speed <output id="fieldspinout">1.00</output></label><input id="fieldspin" type="range" min="0" max="3" step=".05" value="1"><p id="fieldmetrics">F: composite · +/− balanced</p></section><section class="panel"><h2>CANONICAL GEOMETRY</h2><pre>   TENSOR STATE
        │
     SAPPHON
        │
@@ -39,11 +39,11 @@ SEALED − / SPINNING U &#92; LOWER C
       3 : 1
 </pre></section>
 <section class="panel"><h2>LOCAL MEMORY / WITNESS</h2><p>Inner state <strong id="memory">0</strong> · Phase <strong id="phase">0.00</strong></p><pre id="log">No observations yet.</pre><p id="inference">INFERENCE: UNKNOWN · no sufficient causal evidence</p></section>
-</aside></main><footer><span>GWELL 001–021 · CANONICAL INTERACTIVE REFERENCE</span><span>Speculative mathematical model · not established particle physics</span></footer>
+</aside></main><footer><span>GWELL 001–024 · FIVE FORCE SPHERES</span><span>Speculative mathematical model · not established particle physics</span></footer>
 <script type="module">
 import {GEOMETRY, hysteresis} from "./src/gwell.mjs";
 const canvas=document.querySelector("#field"),ctx=canvas.getContext("2d");
-const inputs=["freq","coupling","trans","rotation"],params={};let running=true,phase=0,last=0,pulses=[],inner=0,records=[];
+const inputs=["freq","coupling","trans","rotation","force","fieldspin"],params={};let running=true,phase=0,last=0,pulses=[],inner=0,records=[];
 for(const id of inputs){const e=document.getElementById(id);params[id]=+e.value;e.addEventListener("input",()=>{params[id]=+e.value;document.getElementById(id+"out").textContent=params[id].toFixed(2)})}
 function observe(message){records.push({id:"obs-"+(records.length+1),source:"C",arrival:records.length+1,cycle:records.length+1,state:inner,message});document.querySelector("#log").textContent=records.slice(-5).map(x=>JSON.stringify(x)).join("\n")}
 document.querySelector("#play").onclick=()=>{running=!running;document.querySelector("#play").textContent=running?"Pause":"Resume"};
@@ -84,6 +84,30 @@ ctx.restore();
 ctx.fillStyle="#d6ecff";ctx.font="bold 27px monospace";ctx.textAlign="center";ctx.fillText("{{i}}",0,9);
 ctx.font="17px monospace";ctx.fillStyle="#6fa8ff";ctx.fillText("COBALT",0,112);
 ctx.restore();
+// Five orbiting, perspective-projected symbolic force spheres; all surround the same U.
+// Order: −, W, M, S, +; F denotes their composite and is not a sixth sphere.
+const fields=[
+ {name:"−",radius:112,color:"#857aff",rate:-.75},
+ {name:"W",radius:153,color:"#50bdfb",rate:1.15},
+ {name:"M",radius:199,color:"#55e4b3",rate:-.9},
+ {name:"S",radius:243,color:"#ffb45d",rate:1.35},
+ {name:"+",radius:289,color:"#fb689c",rate:-.65}
+];
+for(let j=0;j<fields.length;j++){
+ const f=fields[j],speed=params.fieldspin,angle=phase*f.rate*speed,alpha=.16+.55*params.force;
+ ctx.save();ctx.translate(cx,cy);ctx.rotate(angle);
+ ctx.strokeStyle=f.color;ctx.shadowColor=f.color;ctx.shadowBlur=13*params.force;
+ ctx.lineWidth=1.4+params.force*2;ctx.globalAlpha=alpha;
+ // Equatorial ring and tilted great circles give a rotating 3D sphere projection.
+ ctx.beginPath();ctx.ellipse(0,0,f.radius,f.radius*.73,0,0,Math.PI*2);ctx.stroke();
+ ctx.beginPath();ctx.ellipse(0,0,f.radius*.38,f.radius*.73,.65,0,Math.PI*2);ctx.stroke();
+ ctx.beginPath();ctx.ellipse(0,0,f.radius*.38,f.radius*.73,-.65,0,Math.PI*2);ctx.stroke();
+ ctx.beginPath();ctx.arc(f.radius*Math.cos(angle*.7),f.radius*.73*Math.sin(angle*.7),5+2*params.force,0,Math.PI*2);ctx.fillStyle=f.color;ctx.fill();
+ ctx.restore();
+ ctx.fillStyle=f.color;ctx.font="15px monospace";ctx.fillText(f.name,cx+f.radius+10,cy-14-j*13);
+}
+document.querySelector("#fieldmetrics").textContent="F = (−,W,M,S,+) · strength "+params.force.toFixed(2)+" · spin "+params.fieldspin.toFixed(2);
+// Note: physical gravity, electromagnetic, strong and weak interactions are not simulated.
 // Blocked upper negative boundary.
 ctx.strokeStyle="#ff7b97";ctx.lineWidth=7;ctx.beginPath();ctx.moveTo(cx-85,cy-282);ctx.lineTo(cx+85,cy-282);ctx.stroke();
 ctx.font="17px monospace";ctx.fillStyle="#ff9aaf";ctx.textAlign="center";ctx.fillText("− SEALED",cx,cy-299);
