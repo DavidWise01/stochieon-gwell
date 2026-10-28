@@ -297,3 +297,14 @@ Each registry invariant carries a canonical `0!` identity marker. In standard ma
 Formal record: `I_j = {address_j, factorial_unit: 1, line_coordinate: t_j, witnesses: [A_j,B_j,C_j]}`. A mathematical Riemann zero may only be asserted if a specified complex value `s_j` satisfies `zeta(s_j)=0`; placing a marker on the critical line `Re(s)=1/2` alone does not establish that it is a zero. Likewise the 24!/6912 registry count is combinatorial, not a proof of any zeta-zero correspondence.
 
 **Invariant 051:** `0! = 1` for every indexed record; each assigned address must be unique; three independent witness observations remain append-only, with no votes, forced agreement, or unobserved certainty. Cobalt identity `{{i}}` remains unchanged.
+
+## GWELL 052 — Scalar-zero relative address and Stargate palindromic path
+
+Declare toroidal origin `O=(0,0,0)` as the scalar-zero reference `0/6` in the user's coordinate dialect. Every observed displacement is relative to this origin: `r = p - O`. An address record contains WHERE (relative position and path index), WHAT (observed state/event), WHY (supported causal evidence or UNKNOWN), WHEN (witnessed timestamp), and HOW (observed transition and vector). A coordinate does not by itself establish cause.
+
+Canonical user-supplied Stargate path (immutable literal):
+`{{ ` 00 11 24 33 42 33 24 11 00 ` }}`
+
+The nine symbolic stops form a palindrome, with index sequence 0..8 and mirrored equality `P[k] = P[8-k]`. Map a two-digit stop `ab` to an ordered coordinate `(a,b)` in a *symbolic path plane*, not automatically a 3D physical vector. Its difference vectors are `(+1,+1), (+1,+3), (+1,-1), (+1,-1), (-1,+1), (-1,+1), (-1,-3), (-1,-1)`; they sum to (0,0) and the path returns to `00`. The 3D embedding `(x,y,z)` needs a separately defined projection/orientation, so do not invent z. The path is a deterministic address walk within the toroidal model, not an experimentally established Stargate or proof of a Riemann-zeta zero.
+
+**Invariant 052:** every stop is referenced to the same immutable origin; every recorded vector is the difference of successive addresses; reverse symmetry is preserved; each event retains three distinct observation records without consensus, manufactured causality, or alteration to cobalt `{{i}}`.
