@@ -225,3 +225,9 @@ Invariant 041: phase can block or admit a transfer, but cannot create or destroy
 The observer derives oscillator phase for each of three DIOTOMIC proxy modes by `φ_i = atan2(v_i/2, q_i)` and records the **maximum pairwise circular phase gap**. Three-way alignment is true when permeability `p>0` and all pair gaps are at most `min(0.35 rad, πp)`. Alignment held for less than two model seconds is reported as TRANSIENT; uninterrupted alignment for two or more model seconds as SUSTAINED ALIGNMENT; all other observations are UNLOCKED. The witness records observation rather than applying synchronizing torque or changing the mechanical state.
 
 **Invariant 042:** the phase-lock observer cannot drive motion, alter W/M/S couplings, transfer tokens, manipulate mechanical energy, or change cobalt `{{i}}`. Sustained alignment is not guaranteed to occur; a passive three-oscillator conservative model need not spontaneously phase-lock.
+
+## GWELL 043 — Witnessed resonant transfer window
+
+A separate user-initiated action attempts one complete D1 → D2 → D3 relay. Admission requires the GWELL 042 witness state SUSTAINED ALIGNMENT (at least 2 model-seconds without phase-threshold violation), at least one token in D1, and both individual resonance-gated pores 1→2 and 2→3 open at the instant of transfer. A successful operation atomically moves one token from D1 to D3 through an admissible D2 path; it does not hold a token in D2 across separate animation frames. The interface reports WITNESSED or HELD. Failure leaves all compartments unchanged.
+
+**Invariant 043:** no partial transfer on rejection; outside + D1 + D2 + D3 remains 12, oscillator energy and parameters are unmodified, and cobalt identity {{i}} is unchanged. This is an abstract discrete transport transaction, not a validated physical molecular transport mechanism. No spontaneous synchronization or automatic pumping is assumed.
