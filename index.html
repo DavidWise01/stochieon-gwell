@@ -1,365 +1,127 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>YOUYOU 3D · STOCHIEON GWELL 047</title><style>
-:root{color-scheme:dark;font:16px system-ui;background:#070e1b;color:#e1eeff}*{box-sizing:border-box}body{margin:0}a{color:#8defff}
-.skip{position:absolute;left:-9999px}.skip:focus{left:15px;top:8px;z-index:10;background:white;color:black;padding:12px}
-header,footer{padding:16px 22px;border-bottom:1px solid #324960}header strong{letter-spacing:.08em}main{display:grid;grid-template-columns:minmax(0,2fr) minmax(270px,1fr);gap:16px;max-width:1220px;margin:auto;padding:18px}
-section{background:#0f1b2b;border:1px solid #36506a;border-radius:12px;padding:16px;margin-bottom:16px}h1{font-size:1.35rem}h2{font-size:1rem;color:#a2e4fd}
-canvas{display:block;width:100%;max-width:640px;aspect-ratio:4/3;border-radius:8px;background:#060d1a;touch-action:none}label{display:block;margin:13px 0 5px}input{width:100%;accent-color:#39d7d4}
-button{padding:11px 12px;border-radius:8px;background:#14475b;border:1px solid #6ddbd8;color:white;cursor:pointer;margin:4px}
-button:focus-visible,input:focus-visible,canvas:focus-visible{outline:3px solid #ffe17b;outline-offset:3px}button:hover{background:#24667d}
-output,strong{font-variant-numeric:tabular-nums}pre{white-space:pre-wrap;word-break:break-word;font-size:12px;color:#c6ffdf}
-p{line-height:1.5}small{color:#b9c9d9}footer{border-top:1px solid #36506a;border-bottom:0}
-@media(max-width:790px){main{grid-template-columns:1fr}}
-@media(prefers-reduced-motion:reduce){canvas{scroll-behavior:auto}}
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>STOCHIEON · GWELL 059 · Three.js</title>
+<style>
+:root{color-scheme:dark;font:15px system-ui;background:#07101d;color:#e7f3ff}*{box-sizing:border-box}body{margin:0}header,footer{padding:14px 20px;background:#101e31;border-bottom:1px solid #304760}h1{font-size:1.25rem;margin:0 0 8px}h2{font-size:1rem;margin:0 0 12px;color:#8fe7ea}a{color:#86e5f3}main{display:grid;grid-template-columns:minmax(320px,2fr) minmax(275px,1fr);max-width:1400px;margin:auto;gap:14px;padding:14px}section{background:#102137;border:1px solid #35516f;border-radius:12px;padding:14px;margin-bottom:14px}#scene{width:100%;height:min(69vh,680px);min-height:420px;position:relative;background:radial-gradient(ellipse,#19334d,#040b16);border-radius:8px;overflow:hidden}#scene canvas{display:block;width:100%;height:100%;touch-action:none}#overlay{position:absolute;top:10px;left:12px;pointer-events:none;color:#d9edff;font:12px monospace;white-space:pre-line}button{background:#164e61;color:white;border:1px solid #6cd6d4;border-radius:8px;padding:9px 12px;margin:3px;cursor:pointer}button:focus-visible,input:focus-visible{outline:3px solid #ffe28e}label{display:block;margin:12px 0 5px}input[type=range]{width:100%;accent-color:#6ce3df}p{line-height:1.45}small,.muted{color:#aabfd2}pre{white-space:pre-wrap;word-break:break-word;background:#071523;border-radius:7px;padding:10px;max-height:230px;overflow:auto}#status{min-height:40px}.pill{display:inline-block;padding:3px 8px;border:1px solid #365d70;border-radius:30px;margin-right:5px}footer{font-size:12px}@media(max-width:810px){main{grid-template-columns:1fr}#scene{height:55vh;min-height:340px}}@media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
 </style></head><body>
-<a class="skip" href="#controls">Skip animation to controls</a><header><h1>STOCHIEON · YOUYOU 3D · GWELL 047</h1><a href="https://github.com/DavidWise01/stochieon-gwell">Source and canon</a></header>
-<main><div><section><h2>Three nested shells · Five atomic waldos · C intake</h2>
-<canvas id="view" width="640" height="480" tabindex="0" role="img" aria-label="Interactive three-dimensional projection of three nested shells, five color-coded rotating waldo rings and a spinning inward U around a stationary cobalt identity. Drag or use arrow keys to rotate the view.">3D view requires canvas support; all actions remain available below.</canvas>
-<p id="status" role="status" aria-live="polite">Ready. Upper minus sealed. Lower C intake open.</p>
-<div><button id="build">Build hydrogen-1</button><button id="unbuild">Unbuild last atom</button><button id="neutron">Add neutron</button><button id="removeNeutron">Remove neutron</button><button id="electron">Add electron</button><button id="removeElectron">Remove electron</button><button id="pause">Pause motion</button><button id="reset">Reset view</button></div>
-<p><small>Reduced resolution: 640 × 480 for improved browser compatibility. Drag the scene, use arrow keys when focused, or adjust camera sliders. Reduced-motion preference pauses automatic spin. This is a symbolic 3D projection, not a physical atom simulator.</small></p></section>
-<section><h2>Inventory and immutable identity</h2><p>Model atoms: <strong id="atoms">0</strong>. Current atom register: <strong id="species">none</strong>.</p>
-<p>Free p/n/e: <strong id="freep">12</strong> / <strong id="freen">12</strong> / <strong id="freee">12</strong>. Bound p/n/e: <strong id="boundp">0</strong> / <strong id="boundn">0</strong> / <strong id="bounde">0</strong>.</p>
-<p>Inventory invariant: <strong id="totals">12 / 12 / 12</strong> · electric charge (e): <strong id="charge">0</strong></p>
-<p>Identity: <strong>{{i}}</strong> (cobalt, unchanged) · Top port: <strong>SEALED</strong> · Intake: <strong>C only</strong></p>
-<p><small>Waldos assign and release individually tracked proton, neutron, and electron tokens. Build creates a neutral hydrogen-1 model from one p and one e. Neutron/electron operations act on the latest atom. No binding energy or physical stability is simulated.</small></p></section>
-<section><h2>Configuration validity · GWELL 28</h2><p id="validity" role="status">No atom yet. UNKNOWN is not INVALID.</p></section><section><h2>Electron orbital occupancy · GWELL 29</h2><p id="orbitals" role="status">No electronic configuration.</p><p><small>Aufbau filling-order approximation with subshell capacities; actual orbital energies and excited states require more detailed treatment.</small></p></section><section><h2>DIOTOMIC membrane transport · GWELL 40</h2>
-<p>Outside reservoir: <strong id="outside">12</strong> · Inside D1/D2/D3: <strong id="inside">0 / 0 / 0</strong> · Total: <strong id="transportTotal">12</strong></p>
-<label for="permeability">Pore permeability <output id="permeabilityValue">0.35</output></label><input id="permeability" type="range" min="0" max="1" step=".05" value=".35">
-<button id="intake">Transfer into D1</button><button id="relay">Relay D1 → D2 → D3</button><button id="release">Release D3</button>
-<p><small>Between DIOTOMICs, the pore opens only when the oscillator phase difference is within permeability × π radians. Outside intake and release use permeability only. Marker tokens remain conserved.</small></p></section><section><h2>GWELL 42 · Phase-lock witness</h2><p id="lockState" role="status" aria-live="polite">Measuring phase agreement</p><p><small>Continuous alignment must last at least 2 model-seconds to be reported as sustained. The observer does not drive or force synchronization.</small></p></section><section><h2>GWELL 43 · Resonant transfer window</h2><button id="witnessCycle">Attempt witnessed D1 → D2 → D3</button><p id="cycleState" role="status" aria-live="polite">No cycle attempted.</p><p><small>One token requires sustained phase alignment and both individual pore gates. A failed attempt does not mutate inventory.</small></p></section><section><h2>GWELL 44 · Two-hop latency</h2><label for="hopLatency">Hop duration (model seconds) <output id="hopLatencyValue">0.50</output></label><input id="hopLatency" type="range" min=".10" max="2" step=".10" value=".50"><button id="launch044">Launch D1 → D2 → D3</button><p id="latencyState" role="status" aria-live="polite">No in-flight token.</p><p><small>Store-and-forward model: the token resides in transit, then at D2, before the second hop. If the second gate closes, D2 buffers the token.</small></p></section><section><h2>GWELL 45 · Buffer and backpressure</h2><label for="bufferCap">D2 buffer capacity <output id="bufferCapValue">2</output></label><input id="bufferCap" type="range" min="1" max="6" step="1" value="2"><p id="backpressure" role="status">Buffer clear.</p><p><small>Full D2 prevents a new D1 → D2 hop. In-flight arrivals reserve buffer capacity. Zero drops are permitted.</small></p></section><section><h2>GWELL 46 · Identified packet FIFO</h2><p id="packetState" role="status" aria-live="polite">12 identified packets at source.</p><button id="packetSend">Queue next packet</button><button id="packetForward">Forward FIFO head</button><button id="packetAck">Acknowledge at D3</button><p><small>Independent twelve-packet Ethernet analogy ledger, separate from the existing anonymous marker controls. Immutable IDs, FIFO forwarding and exactly-once acknowledgment.</small></p></section><section><h2>GWELL 47 · End-to-end provenance</h2><label for="tracePacket">Packet history</label><select id="tracePacket"><option value="PKT-001">PKT-001</option></select><pre id="traceLog" aria-live="polite">Awaiting observations.</pre><button id="verifyTrace">Verify provenance</button><p id="traceStatus" role="status">No verification yet.</p></section><section><h2>GWELL 048 · Deterministic replay</h2><button id="replay048">Replay packet evidence</button><pre id="replayOutput" aria-live="polite">No replay yet.</pre><p><small>Reconstructs packet locations from recorded events only; no modifications to the event log.</small></p></section><section><h2>GWELL 049 · Three independent witnesses</h2><button id="witness049">Compare D1 / D2 / D3</button><pre id="witnessReport049" aria-live="polite">No comparison yet.</pre><p><small>Each node reports only events at its own boundary. The observer compares reports, identifies the earliest missing or out-of-order handoff, and does not vote or modify evidence.</small></p></section><section><h2>GWELL 055 · Foundation vectors /0\\</h2><p><code>{{ ` 00 11 24 33 42 33 24 11 00 ` }}</code></p><label for="torusRadius">Toroid major radius <output id="torusRadiusValue">150</output></label><input id="torusRadius" type="range" min="110" max="190" step="5" value="150"><p id="torusStatus" role="status">Patricia / Toph / Icarium · all pinned to /0\\</p><p><small>The three vectors are drawn from scalar-zero in 3D; they do not imply a closed loop.</small></p></section><section><h2>GWELL 056 · Strand stretch</h2><label for="stretch056">Stretch <output id="stretch056Value">0.50</output></label><input id="stretch056" type="range" min="0" max="1" step=".01" value=".50"><p id="stretch056State" role="status">|||| → //()\\ · four strand identities preserved</p></section><section><h2>GWELL 057 · Aperture torsion</h2><label for="torsion057">Twist angle <output id="torsion057Value">0°</output></label><input id="torsion057" type="range" min="-180" max="180" value="0"><p id="aperture057State" role="status">Aperture open only when stretch is positive.</p><p><small>A closed curve bounds the modeled aperture; four separate strands remain attached. Twist does not generate material or torque automatically.</small></p></section><section><h2>GWELL 058 · Enclosure continuity</h2><label for="seal058">Surface closure <output id="seal058Value">0%</output></label><input id="seal058" type="range" min="0" max="100" value="0"><p id="continuity058" role="status">Open ring — no sealed 3D containment.</p><p><small>A ring is a closed curve, not a sealed volume. The surface control draws a continuous closed spherical proxy only at 100% closure and positive stretch.</small></p></section><section><h2>Observation ledger</h2><pre id="log" aria-live="polite">No operations.</pre></section></div>
-<aside id="controls"><section><h2>Three diatom-inspired [()] resonance modules</h2><p><small>Two modeled overlapping silica-like valve faces + a girdle band + porous ribs around a resonating inner toroidal compartment; cube is an Ice IX proxy, not a real diatom or crystallographic reconstruction.</small></p>
-<label for="weak">Weak coupling W <output id="weakValue">0.30</output></label><input id="weak" type="range" min="0" max="1" step=".05" value=".30">
-<label for="medium">Medium coupling M <output id="mediumValue">0.55</output></label><input id="medium" type="range" min="0" max="1" step=".05" value=".55">
-<label for="strong">Strong coupling S <output id="strongValue">0.85</output></label><input id="strong" type="range" min="0" max="1" step=".05" value=".85">
-<button id="restartCubes">Reset cubic energy</button><p id="cubeStatus" aria-live="polite">3 diatom-inspired [()] modules · coupled conservative motion</p>
-<p><small>W, M, S are adjustable conservative spring constants, not weak or strong nuclear interactions. Changing a slider changes the Hamiltonian and can change total energy.</small></p></section><section><h2>Camera and motion</h2>
-<label for="yaw">Yaw <output id="yawValue">25°</output></label><input id="yaw" type="range" min="-180" max="180" value="25">
-<label for="tilt">Tilt <output id="tiltValue">18°</output></label><input id="tilt" type="range" min="-75" max="75" value="18">
-<label for="zoom">Zoom <output id="zoomValue">1.00×</output></label><input id="zoom" type="range" min="0.65" max="1.5" step=".05" value="1">
-<label for="speed">Waldo speed <output id="speedValue">0.75×</output></label><input id="speed" type="range" min="0" max="2" step=".05" value=".75">
-</section><section><h2>Canonical waldo channels</h2><p>− : violet inward gate<br>W : cyan weak band<br>M : teal medium band<br>S : amber strong band<br>+ : magenta outward orientation</p><p>All five act as manipulators around the same inner U, not independent physical force claims.</p></section>
-<section><h2>GWELL topology</h2><pre>      TOP − CLOSED
-       O3 / O2 / O1
-    + S M W −  (5)
-         U ↻
-     COBALT {{i}}
-          ↑
-        C INTAKE</pre></section></aside></main>
-<footer>GWELL 047 · Auditable symbolic assembly and 3D waldo geometry · STOCHIEON</footer>
-<script>
-"use strict";
-const $=id=>document.getElementById(id),canvas=$("view"),ctx=canvas.getContext("2d");
-let yaw=25*Math.PI/180,tilt=18*Math.PI/180,zoom=1,phase=0,last=0,paused=matchMedia("(prefers-reduced-motion: reduce)").matches,atoms=0,stock=12,bound=0,ledger=[],drag=null; const initial={p:12,n:12,e:12},free={...initial},species=[];
-const rings=[["−","#a58cff",70,-1],["W","#42cef8",105,1],["M","#4de9ae",140,-1],["S","#ffc06b",175,1],["+","#fb75b3",210,-1]];
-function status(t){$("status").textContent=t}
-function log(t){ledger.push(Object.freeze({step:ledger.length+1,action:t,atoms,stock,bound,identity:"{{i}}"}));$("log").textContent=ledger.slice(-8).map(x=>JSON.stringify(x)).join("\n")}
-const subshells=[["1s",2],["2s",2],["2p",6],["3s",2],["3p",6],["4s",2],["3d",10],["4p",6]];
-function occupancy(n){let left=n;const parts=[];for(const [name,cap] of subshells){if(!left)break;const num=Math.min(left,cap);parts.push(name+"^"+num);left-=num}if(left)parts.push("UNRESOLVED +"+left);return parts.join(" ")}
-function update(){
-  atoms=species.length;
-  const bound={p:0,n:0,e:0};
-  for(const a of species){bound.p+=a.p;bound.n+=a.n;bound.e+=a.e}
-  for(const k of ["p","n","e"]){$("free"+k).textContent=free[k];$("bound"+k).textContent=bound[k]}
-  $("atoms").textContent=atoms;
-  $("totals").textContent=["p","n","e"].map(k=>free[k]+bound[k]).join(" / ");
-  $("charge").textContent=species.reduce((v,a)=>v+a.p-a.e,0);
-  const a=species.at(-1);
-  $("species").textContent=a?"Z="+a.p+" N="+a.n+" e="+a.e:"none";
-  $("orbitals").textContent=a?"Electron configuration: "+occupancy(a.e)+" · occupancy total "+a.e:"No electronic configuration.";
-  $("validity").textContent=!a?"No atom yet.":a.p===1&&a.n===0&&a.e===1?"KNOWN CONFIGURATION: neutral hydrogen-1":a.p===1&&a.n===1&&a.e===1?"KNOWN CONFIGURATION: neutral deuterium":a.p===1&&a.n===2&&a.e===1?"KNOWN CONFIGURATION: neutral tritium (radioactive)":a.p===1&&a.n<=2?"KNOWN NUCLEUS: hydrogen isotope with modeled charge "+(a.p-a.e):"UNVERIFIED CONFIGURATION: inventory-valid does not establish nuclear stability";
+<header><h1>STOCHIEON · YOUYOU · GWELL 059 / Three.js</h1><a href="https://github.com/DavidWise01/stochieon-gwell">Repository</a> · <a href="canon/BOUNDARIES.md">Append-only canon</a> <span class="pill">/0\ pinned</span> <span class="pill">Three independent witnesses</span></header>
+<main><div>
+<section><h2>3D CALVIN / DIOTOMIC / Foundation</h2><div id="scene" role="img" aria-label="Interactive 3D scene with three diotomic resonators, four stretching strands, toroidal aperture, optional containment shell and Patricia Toph Icarium vectors"><div id="overlay">THREE.JS 3D
+Patricia −2,+3,−1 · Toph +2,−3,+1 · Icarium 0,0,0</div></div>
+<p id="status" role="status" aria-live="polite">Loading 3D engine…</p>
+<button id="pause">Pause</button><button id="reset">Reset camera</button><button id="kick">Excite D1</button><small>Drag to orbit · wheel to zoom · reduced-motion preference respected.</small></section>
+<section><h2>Conserved DIOTOMIC transport</h2><p>Outside <strong id="outside">12</strong> · D1/D2/D3 <strong id="inside">0 / 0 / 0</strong> · In flight <strong id="flight">0</strong> · Total <strong id="total">12</strong></p>
+<button id="intake">C → D1</button><button id="relay">D1 → D2</button><button id="relay2">D2 → D3</button><button id="release">D3 → outside</button><p id="transportStatus" class="muted">No transport events.</p></section>
+<section><h2>Identified packet and triple-witness ledger</h2><p id="packets">Source 12 · D2 queue 0 · D3 received 0 · ACK 0</p><button id="send">Send packet</button><button id="forward">Forward FIFO</button><button id="ack">ACK at D3</button><button id="replay">Replay witnesses</button>
+<pre id="ledger">No recorded observations.</pre><p id="audit" role="status">Evidence unverified.</p></section>
+</div><aside>
+<section><h2>Geometry</h2>
+<label for="stretch">Stretch |||| → //()\ <output id="stretchV">0.55</output></label><input id="stretch" type="range" min="0" max="1" step=".01" value=".55">
+<label for="twist">Aperture torsion <output id="twistV">0°</output></label><input id="twist" type="range" min="-180" max="180" step="1" value="0">
+<label for="seal">Enclosure surface <output id="sealV">30%</output></label><input id="seal" type="range" min="0" max="100" step="1" value="30">
+<p id="closure">Open surface. Curve closure is not volume closure.</p></section>
+<section><h2>Coupled resonance</h2>
+<label for="weak">W · weak model coupling <output id="weakV">0.30</output></label><input id="weak" type="range" min="0" max="1" step=".05" value=".30">
+<label for="medium">M · medium model coupling <output id="mediumV">0.55</output></label><input id="medium" type="range" min="0" max="1" step=".05" value=".55">
+<label for="strong">S · strong model coupling <output id="strongV">0.85</output></label><input id="strong" type="range" min="0" max="1" step=".05" value=".85">
+<label for="speed">Animation speed <output id="speedV">0.75</output></label><input id="speed" type="range" min="0" max="2" step=".05" value=".75">
+<label for="permeability">Pore opening <output id="permeabilityV">0.50</output></label><input id="permeability" type="range" min="0" max="1" step=".05" value=".50">
+<p id="energy">Energy baseline pending.</p><p id="phases">Phase witness pending.</p></section>
+<section><h2>Invariant</h2><pre>Patricia: (-2,+3,-1)
+Toph:     (+2,-3,+1)
+Icarium:  ( 0, 0, 0)
+SUM:      ( 0, 0, 0)
+Anchor:   /0\
+
+Four strands · three [()]
+No quorum · three witnesses
+No created tokens</pre></section></aside></main>
+<footer>Three.js module from CDN. Requires an internet connection and WebGL; displays a diagnostic instead of a blank canvas when unavailable. Geometry and couplings are symbolic models, not experimentally established Ice IX or Casimir dynamics.</footer>
+<script type="module">
+const $=id=>document.getElementById(id);
+const say=msg=>$("status").textContent=msg;
+let THREE,OrbitControls;
+try{
+ THREE=await import("https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js");
+ ({OrbitControls}=await import("https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/controls/OrbitControls.js"));
+}catch(e){say("3D loading failed: "+e.message+" — check network access or CDN blocking.");throw e}
+const host=$("scene"),scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(47,1,.1,500);
+camera.position.set(12,8,15);
+let renderer;try{renderer=new THREE.WebGLRenderer({antialias:true,alpha:true,powerPreference:"low-power"});renderer.setPixelRatio(Math.min(devicePixelRatio||1,1.5));host.appendChild(renderer.domElement)}
+catch(e){say("WebGL unavailable: "+e.message);throw e}
+const controls=new OrbitControls(camera,renderer.domElement);controls.enableDamping=true;controls.minDistance=5;controls.maxDistance=40;
+scene.add(new THREE.AmbientLight(0x8caabb,2.0));const key=new THREE.PointLight(0x91edff,95);key.position.set(5,9,7);scene.add(key);
+const root=new THREE.Group();scene.add(root);
+function line(points,color,opacity=.85){const geom=new THREE.BufferGeometry().setFromPoints(points.map(v=>new THREE.Vector3(...v))),mat=new THREE.LineBasicMaterial({color,transparent:true,opacity});const line=new THREE.Line(geom,mat);root.add(line);return line}
+const anchor=new THREE.Mesh(new THREE.SphereGeometry(.19,16,12),new THREE.MeshStandardMaterial({color:0xe8f7ff,emissive:0x76a9ff,emissiveIntensity:.65}));root.add(anchor);
+for(const [vec,color] of [[[ -2,3,-1],0xb88cff],[[2,-3,1],0x72ffac]]){line([[0,0,0],vec],color,1);const tip=new THREE.Mesh(new THREE.SphereGeometry(.13,12,8),new THREE.MeshBasicMaterial({color}));tip.position.set(...vec);root.add(tip)}
+function torusMaterial(color,opacity=1){return new THREE.MeshStandardMaterial({color,metalness:.26,roughness:.25,transparent:opacity<1,opacity,side:THREE.DoubleSide})}
+const hoops=[1.5,2.6,3.6].map((r,i)=>{const m=new THREE.Mesh(new THREE.TorusGeometry(r,.02,8,100),new THREE.MeshBasicMaterial({color:[0x54edaa,0x9a89ff,0x48c8ff][i]}));m.rotation.x=.6+i*.5;root.add(m);return m});
+const cubes=[],cubeColors=[0x77deff,0xc3fff3,0xffc991];
+for(let j=0;j<3;j++){const group=new THREE.Group();group.position.set((j-1)*3.8,0,0);root.add(group);
+const shell=new THREE.LineSegments(new THREE.EdgesGeometry(new THREE.BoxGeometry(1.75,1.75,1.75)),new THREE.LineBasicMaterial({color:cubeColors[j]}));group.add(shell);
+const core=new THREE.Mesh(new THREE.TorusGeometry(.54,.14,12,64),torusMaterial(cubeColors[j],.85));core.rotation.x=Math.PI/2;group.add(core);
+for(let n=-2;n<=2;n++){const rib=new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(n*.24,-.8,.88),new THREE.Vector3(n*.24,.8,.88)]),new THREE.LineBasicMaterial({color:cubeColors[j],transparent:true,opacity:.48}));group.add(rib)}
+cubes.push({group,core,q:j===0?1:0,v:0})}
+const apertureGroup=new THREE.Group();root.add(apertureGroup);
+const aperture=new THREE.Mesh(new THREE.TorusGeometry(1,.045,10,100),new THREE.MeshBasicMaterial({color:0xe5f9ff}));apertureGroup.add(aperture);
+const strands=[];for(let j=0;j<4;j++){const g=new THREE.BufferGeometry(),m=new THREE.LineBasicMaterial({color:j<2?0xb98bff:0x5df4a3});const obj=new THREE.Line(g,m);root.add(obj);strands.push(obj)}
+let shellMesh=null,paused=matchMedia("(prefers-reduced-motion: reduce)").matches,clock=0,last=performance.now(),energyRef=null,alignedFor=0;
+$("pause").textContent=paused?"Resume":"Pause";
+function geometry(){
+ const stretch=+$("stretch").value,twist=+$("twist").value*Math.PI/180,seal=+$("seal").value/100;
+ apertureGroup.scale.setScalar(Math.max(.001,stretch*1.6));apertureGroup.rotation.y=twist;
+ for(let j=0;j<4;j++){const side=j<2?-1:1,index=j%2,base=side*(.35+index*.25);
+ strands[j].geometry.dispose();strands[j].geometry=new THREE.BufferGeometry().setFromPoints([
+ new THREE.Vector3(base,-2,0),new THREE.Vector3(base+side*2*stretch,2,0)])}
+ if(shellMesh){root.remove(shellMesh);shellMesh.geometry.dispose();shellMesh.material.dispose()}
+ if(stretch>0&&seal>0){const geo=new THREE.SphereGeometry(stretch*1.6,20,16,0,Math.PI*2,0,Math.PI*seal);shellMesh=new THREE.Mesh(geo,new THREE.MeshBasicMaterial({color:0x69d7ee,wireframe:true,transparent:true,opacity:.19,side:THREE.DoubleSide}));shellMesh.rotation.y=twist;root.add(shellMesh)}else shellMesh=null;
+ $("closure").textContent=stretch===0?"Collapsed aperture":seal===1?"CLOSED SHELL PROXY, area "+(4*Math.PI*(1.6*stretch)**2).toFixed(2):"OPEN SURFACE — no sealed volume";
 }
-function mutate(action){
-  let a=species.at(-1),ok=true;
-  if(action==="BUILD"){if(free.p<1||free.e<1)ok=false;else{free.p--;free.e--;species.push({p:1,n:0,e:1})}}
-  if(action==="UNBUILD"){if(!a)ok=false;else{for(const k of ["p","n","e"])free[k]+=a[k];species.pop()}}
-  if(action==="ADD_N"){if(!a||free.n<1)ok=false;else{free.n--;a.n++}}
-  if(action==="REMOVE_N"){if(!a||a.n<1)ok=false;else{free.n++;a.n--}}
-  if(action==="ADD_E"){if(!a||free.e<1)ok=false;else{free.e--;a.e++}}
-  if(action==="REMOVE_E"){if(!a||a.e<1)ok=false;else{free.e++;a.e--}}
-  if(!ok){status("Blocked "+action+": unavailable constituent or atom");return}
-  update();log(action+" p/n/e tracked");status(action+" accepted; cobalt {{i}} preserved");
+for(const id of ["stretch","twist","seal","weak","medium","strong","speed","permeability"])$(id).addEventListener("input",()=>{
+ $(id+"V").textContent=id==="twist"?$(id).value+"°":id==="seal"?$(id).value+"%":Number($(id).value).toFixed(2);
+ if(["stretch","twist","seal"].includes(id))geometry();
+ if(["weak","medium","strong"].includes(id))energyRef=null;
+});
+geometry();
+const K=()=>[.3+2*+$("weak").value,.3+2*+$("medium").value,.3+2*+$("strong").value];
+function accel(q,k){return [-4*q[0]-k[0]*(q[0]-q[1])-k[2]*(q[0]-q[2]),-4*q[1]-k[0]*(q[1]-q[0])-k[1]*(q[1]-q[2]),-4*q[2]-k[1]*(q[2]-q[1])-k[2]*(q[2]-q[0])]}
+function energy(k){let E=0;for(const c of cubes)E+=.5*c.v*c.v+2*c.q*c.q;return E+.5*k[0]*(cubes[0].q-cubes[1].q)**2+.5*k[1]*(cubes[1].q-cubes[2].q)**2+.5*k[2]*(cubes[2].q-cubes[0].q)**2}
+function step(dt){const k=K(),a=accel(cubes.map(c=>c.q),k);for(let i=0;i<3;i++){cubes[i].q+=cubes[i].v*dt+.5*a[i]*dt*dt;cubes[i].v+=.5*a[i]*dt}const b=accel(cubes.map(c=>c.q),k);for(let i=0;i<3;i++)cubes[i].v+=.5*b[i]*dt}
+const reservoir={outside:12,inside:[0,0,0]},packet={source:Array.from({length:12},(_,j)=>"PKT-"+String(j+1).padStart(3,"0")),queue:[],received:[],acked:[]};let seq=0;const record=[];
+function renderLedger(){const total=reservoir.outside+reservoir.inside.reduce((x,y)=>x+y,0);$("outside").textContent=reservoir.outside;$("inside").textContent=reservoir.inside.join(" / ");$("total").textContent=total;
+ if(total!==12)throw Error("Transport conservation violated");
+ const all=[...packet.source,...packet.queue,...packet.received,...packet.acked];
+ if(all.length!==12||new Set(all).size!==12)throw Error("Packet identity conservation violated");
+ $("packets").textContent="Source "+packet.source.length+" · D2 queue "+packet.queue.length+" · D3 received "+packet.received.length+" · ACK "+packet.acked.length;
+ $("ledger").textContent=record.slice(-18).map(x=>x.seq+" "+x.id+" "+x.site+" "+x.event+" @"+x.time.toFixed(2)).join("\n")||"No recorded observations.";
 }
-$("build").onclick=()=>mutate("BUILD");
-$("unbuild").onclick=()=>mutate("UNBUILD");
-$("neutron").onclick=()=>mutate("ADD_N");
-$("removeNeutron").onclick=()=>mutate("REMOVE_N");
-$("electron").onclick=()=>mutate("ADD_E");
-$("removeElectron").onclick=()=>mutate("REMOVE_E");
-$("pause").onclick=()=>{paused=!paused;$("pause").textContent=paused?"Resume motion":"Pause motion"};
-$("reset").onclick=()=>{yaw=25*Math.PI/180;tilt=18*Math.PI/180;zoom=1;phase=0;for(const [id,value] of [["yaw",25],["tilt",18],["zoom",1]])$(id).value=value;sync();status("Camera reset; identity retained")};
-function sync(){for(const [id,unit] of [["yaw","°"],["tilt","°"],["zoom","×"],["speed","×"]])$(id+"Value").textContent=Number($(id).value).toFixed(unit==="°"?0:2)+unit}
-for(const id of ["yaw","tilt","zoom","speed"])$(id).addEventListener("input",()=>{yaw=+$("yaw").value*Math.PI/180;tilt=+$("tilt").value*Math.PI/180;zoom=+$("zoom").value;sync()});
-canvas.addEventListener("pointerdown",e=>{drag={x:e.clientX,y:e.clientY};canvas.setPointerCapture(e.pointerId)});
-canvas.addEventListener("pointermove",e=>{if(!drag)return;yaw+=(e.clientX-drag.x)*.008;tilt=Math.max(-1.3,Math.min(1.3,tilt+(e.clientY-drag.y)*.007));drag={x:e.clientX,y:e.clientY};$("yaw").value=Math.round(yaw*180/Math.PI);$("tilt").value=Math.round(tilt*180/Math.PI);sync()});
-canvas.addEventListener("pointerup",()=>drag=null);
-canvas.addEventListener("keydown",e=>{if(!["ArrowLeft","ArrowRight","ArrowUp","ArrowDown"].includes(e.key))return;e.preventDefault();yaw+=(e.key==="ArrowRight"?1:e.key==="ArrowLeft"?-1:0)*.09;tilt+=(e.key==="ArrowDown"?1:e.key==="ArrowUp"?-1:0)*.09});
-const W=640,H=480,ctr={x:320,y:230};
-function project(v){let [x,y,z]=v;const a=x*Math.cos(yaw)-z*Math.sin(yaw),b=x*Math.sin(yaw)+z*Math.cos(yaw);const cy=y*Math.cos(tilt)-b*Math.sin(tilt),cz=y*Math.sin(tilt)+b*Math.cos(tilt);const scale=.79*zoom*500/(500+cz*.43);return{x:ctr.x+a*scale,y:ctr.y+cy*scale,z:cz}}
-function line3(points,color,width=1,alpha=.55){ctx.beginPath();points.forEach((p,i)=>{let a=project(p);i?ctx.lineTo(a.x,a.y):ctx.moveTo(a.x,a.y)});ctx.strokeStyle=color;ctx.globalAlpha=alpha;ctx.lineWidth=width;ctx.stroke();ctx.globalAlpha=1}
-function circle3(r,rot,type,color,width=1,alpha=.5){const pts=[];for(let i=0;i<=140;i++){const a=i*2*Math.PI/140;let x=r*Math.cos(a),z=r*Math.sin(a),y=0;if(type===1){y=z*.7;z=z*.45}else if(type===2){y=x*.65;x=x*.5}const c=Math.cos(rot),s=Math.sin(rot);pts.push([x*c-z*s,y,x*s+z*c])}line3(pts,color,width,alpha)}
-const vertices=[[-1,-1,-1],[1,-1,-1],[1,1,-1],[-1,1,-1],[-1,-1,1],[1,-1,1],[1,1,1],[-1,1,1]];
-const edges=[[0,1],[1,2],[2,3],[3,0],[4,5],[5,6],[6,7],[7,4],[0,4],[1,5],[2,6],[3,7]];
-function drawCube(center,size,rot,color){
-  const c=Math.cos(rot),s=Math.sin(rot);
-  const verts=vertices.map(([x,y,z])=>{const a=x*c-z*s,b=x*s+z*c;return [center[0]+a*size,center[1]+y*size,center[2]+b*size]});
-  for(const [u,v] of edges)line3([verts[u],verts[v]],color,2.5,.96);
-  // Diatom-inspired frustule: paired valves, transverse girdle band, porous ribs.
-  const cc=Math.cos(rot),ss=Math.sin(rot);
-  function tx(x,y,z){return[center[0]+x*cc-z*ss,center[1]+y,center[2]+x*ss+z*cc]}
-  for(const z of [-size*.85,size*.85]){
-    for(let k=-2;k<=2;k++){let u=k*size*.31;line3([tx(u,-size*.83,z),tx(u,size*.83,z)],color,1.1,.48)}
-  }
-  for(let i=0;i<=24;i++){const t=i*Math.PI*2/24;line3([tx(Math.cos(t)*size*.9,Math.sin(t)*size*.9,-size*.18),tx(Math.cos(t)*size*.9,Math.sin(t)*size*.9,size*.18)],color,1.3,.65)}
-  // Inner () toroid: locally resonant cavity, kept distinct from outer [] shell.
-  const tor=[];for(let i=0;i<=60;i++){const t=i*Math.PI*2/60;tor.push(tx(Math.cos(t)*size*.48,Math.sin(t)*size*.48,0))}
-  line3(tor,"#f9e8ab",2.2,.95);
-  const p=project(center);ctx.fillStyle=color;ctx.beginPath();ctx.arc(p.x,p.y,3.5,0,Math.PI*2);ctx.fill();
-}
-// Unit-mass, three-body conservative lattice: velocity-Verlet, fixed-step integrator.
-const cubes=[{q:24,v:0},{q:0,v:0},{q:0,v:0}];
-let energyInitial=null,energyLast=0,drift=0,steps=0;
-function stiffness(){return [0.3+2*+$("weak").value,0.3+2*+$("medium").value,0.3+2*+$("strong").value]}
-function acceleration(q,k){return [
- -4*q[0]-k[0]*(q[0]-q[1])-k[2]*(q[0]-q[2]),
- -4*q[1]-k[0]*(q[1]-q[0])-k[1]*(q[1]-q[2]),
- -4*q[2]-k[1]*(q[2]-q[1])-k[2]*(q[2]-q[0])
-]}
-function energy(k){let sum=0;for(const c of cubes)sum+=.5*c.v*c.v+2*c.q*c.q;
-sum+=.5*k[0]*(cubes[0].q-cubes[1].q)**2+.5*k[1]*(cubes[1].q-cubes[2].q)**2+.5*k[2]*(cubes[2].q-cubes[0].q)**2;
-return sum}
-function integrate(dt){const k=stiffness(),a=acceleration(cubes.map(c=>c.q),k);for(let j=0;j<3;j++){cubes[j].q+=cubes[j].v*dt+.5*a[j]*dt*dt;cubes[j].v+=.5*a[j]*dt}
-const after=acceleration(cubes.map(c=>c.q),k);for(let j=0;j<3;j++)cubes[j].v+=.5*after[j]*dt;
-energyLast=energy(k);if(energyInitial===null)energyInitial=energyLast;drift=energyLast-energyInitial;steps++}
-function drawCubes(){
- const pos=[[-116,0,0],[0,0,0],[116,0,0]],colors=["#72ddff","#bafaf3","#ffc894"];
- for(let j=0;j<3;j++){const osc=cubes[j].q,shift=[pos[j][0],osc*.65,0],radius=27+Math.min(3,Math.abs(osc)*.12);
- drawCube(shift,radius,phase*(j%2?-.18:.18)+osc*.012,colors[j]);
- const p=project([shift[0],shift[1]+42,0]);ctx.fillStyle=colors[j];ctx.textAlign="center";ctx.font="13px monospace";ctx.fillText("DIOTOM "+(j+1),p.x,p.y)}
- $("cubeStatus").textContent="3 [()] diotomic modules | q: "+cubes.map(c=>c.q.toFixed(2)).join(" / ")+" | E: "+energyLast.toFixed(3)+" | ΔE: "+drift.toExponential(2);
-}
-for(const id of ["weak","medium","strong"])$(id).addEventListener("input",()=>$(id+"Value").textContent=Number($(id).value).toFixed(2));
-$("restartCubes").onclick=()=>{cubes[0]={q:24,v:0};cubes[1]={q:0,v:0};cubes[2]={q:0,v:0};steps=0;energyInitial=energy(stiffness());energyLast=energyInitial;drift=0;status("Three-cube displacement reset; energy reference established")};
-for(const id of ["weak","medium","strong"])$(id).addEventListener("change",()=>{energyInitial=energy(stiffness());drift=0;status("Coupling adjusted; energy baseline reset after parameter work")});
-energyInitial=energy(stiffness());energyLast=energyInitial;
-// Transport is a separate conservative ledger: existing oscillator energy is unchanged.
-const reservoir={outside:12,inside:[0,0,0]};
-let flight=null;
-function transportUpdate(){
- $("outside").textContent=reservoir.outside;
- $("inside").textContent=reservoir.inside.join(" / ");
- $("transportTotal").textContent=reservoir.outside+reservoir.inside.reduce((a,b)=>a+b,0)+(flight?1:0);
- $("permeabilityValue").textContent=Number($("permeability").value).toFixed(2);
-}
-function poreOpen(from,to){
- const p=+$("permeability").value;if(p<=0)return false;
- const phase=(j)=>Math.atan2(cubes[j].v/2,cubes[j].q);
- if(from==="outside"||to==="outside")return true;
- const gap=Math.acos(Math.cos(phase(from)-phase(to)));
- return gap<=p*Math.PI;
-}
-function transfer(from,to){
- if(!poreOpen(from,to)){status("Pore held: phase mismatch or permeability zero");return false}
- if(from==="outside"){if(reservoir.outside<=0)return false;reservoir.outside--}else{if(reservoir.inside[from]<=0)return false;reservoir.inside[from]--}
- if(to==="outside")reservoir.outside++;else reservoir.inside[to]++;
- transportUpdate();return true
-}
-$("intake").onclick=()=>status(transfer("outside",0)?"Intake: outside → D1; token conserved":"Intake blocked");
-$("relay").onclick=()=>{
- const step=reservoir.inside[1]>0?[1,2]:[0,1];
- status(transfer(step[0],step[1])?"Relay D"+(step[0]+1)+" → D"+(step[1]+1):"Relay blocked")
-};
-$("release").onclick=()=>status(transfer(2,"outside")?"Release: D3 → outside; token conserved":"Release blocked");
-$("permeability").addEventListener("input",transportUpdate);
-transportUpdate();
-let alignedFor=0,lockWitness="UNOBSERVED",lockDelta=0;
-let modelTime=0,delivered044=0,blocked045=0;
-function reservedD2(){return reservoir.inside[1]+(flight&&flight.index===1?1:0)}
-function bufferCapacity(){return Math.max(+$("bufferCap").value,reservoir.inside[1])}
-function bufferStatus(){const cap=bufferCapacity(),used=reservedD2();$("bufferCapValue").textContent=cap;$("backpressure").textContent="D2 reserved "+used+"/"+cap+" | blocked launches "+blocked045+(used>=cap?" | BACKPRESSURE":" | READY")}
-$("bufferCap").addEventListener("input",bufferStatus);
-function latencyUpdate(){const f=flight;
- $("hopLatencyValue").textContent=(+$("hopLatency").value).toFixed(2);
- $("latencyState").textContent=f?"IN FLIGHT "+f.from+" → "+f.to+" | remaining "+Math.max(0,f.arrive-modelTime).toFixed(2)+" s | delivered "+delivered044:
- reservoir.inside[1]>0?"D2 buffer: "+reservoir.inside[1]+" tokens | delivered "+delivered044:"No in-flight token | delivered "+delivered044;
-}
-function beginHop(from,to){
- if(flight||!poreOpen(from,to)||reservoir.inside[from]<=0)return false;
- if(to===1&&reservedD2()>=bufferCapacity()){blocked045++;bufferStatus();return false}
- reservoir.inside[from]--;flight={from:"D"+(from+1),to:"D"+(to+1),index:to,arrive:modelTime+(+$("hopLatency").value)};
- transportUpdate();latencyUpdate();bufferStatus();return true;
-}
-$("launch044").onclick=()=>{
- if(lockWitness!=="SUSTAINED ALIGNMENT"){status("GWELL 047 held: no sustained witness");return}
- if(!beginHop(0,1))status("GWELL 047 held: D1 empty, link closed, busy, or D2 full");
- else status("GWELL 047 first hop launched");
-};
-$("hopLatency").addEventListener("input",latencyUpdate);
-function advanceFlight(dt){
- modelTime+=dt;
- if(flight && modelTime>=flight.arrive){
-  const arrived=flight;flight=null;reservoir.inside[arrived.index]++;
-  if(arrived.index===2)delivered044++;
-  status("GWELL 047 received at "+arrived.to+"; token accounted");
- }
- if(!flight&&reservoir.inside[1]>0&&lockWitness==="SUSTAINED ALIGNMENT")beginHop(1,2);
- transportUpdate();latencyUpdate();bufferStatus();
-}
-latencyUpdate();bufferStatus();
-$("witnessCycle").onclick=()=>{
- const before=reservoir.outside+reservoir.inside.reduce((x,y)=>x+y,0);
- const eligible=lockWitness==="SUSTAINED ALIGNMENT"&&reservoir.inside[0]>0&&poreOpen(0,1)&&poreOpen(1,2);
- if(!eligible){$("cycleState").textContent="HELD: sustained alignment, D1 inventory, or pore gates unavailable";return}
- reservoir.inside[0]--;reservoir.inside[2]++;
- const after=reservoir.outside+reservoir.inside.reduce((x,y)=>x+y,0);
- if(before!==after)throw Error("GWELL 047 inventory conservation failure");
- transportUpdate();$("cycleState").textContent="WITNESSED: D1 → D2 → D3, one token; conservation verified";
- status("GWELL 047 transfer accepted under simultaneous gates");
-};
-function observeLock(dt){
- const p=+$("permeability").value;
- const angles=cubes.map(c=>Math.atan2(c.v/2,c.q));
- const gap=(a,b)=>Math.acos(Math.max(-1,Math.min(1,Math.cos(a-b))));
- lockDelta=Math.max(gap(angles[0],angles[1]),gap(angles[1],angles[2]),gap(angles[2],angles[0]));
- const aligned=p>0 && lockDelta<=Math.min(.35,Math.PI*p);
- alignedFor=aligned?alignedFor+dt:0;
- lockWitness=alignedFor>=2?"SUSTAINED ALIGNMENT":aligned?"TRANSIENT ALIGNMENT":"UNLOCKED";
- $("lockState").textContent=lockWitness+" | max Δφ "+lockDelta.toFixed(3)+" rad | held "+alignedFor.toFixed(2)+" s";
-}
-// GWELL 047 packet-identity lane: independent from the earlier anonymous marker lane.
-const trace047=[],traceByPacket=new Map(),initialIds=Array.from({length:12},(_,i)=>"PKT-"+String(i+1).padStart(3,"0"));
-let sequence047=0;
-function record047(id,site,event){
- const entry=Object.freeze({sequence:++sequence047,time:Number(modelTime.toFixed(3)),id,site,event});
- trace047.push(entry);if(!traceByPacket.has(id))traceByPacket.set(id,[]);
- traceByPacket.get(id).push(entry);traceView();
-}
-function traceView(){const id=$("tracePacket").value;const rows=traceByPacket.get(id)||[];$("traceLog").textContent=rows.map(x=>x.sequence+" @"+x.time+"s "+x.site+" "+x.event).join("\n")||"No packet events yet."}
-for(const id of initialIds){const option=document.createElement("option");option.value=id;option.textContent=id;$("tracePacket").append(option)}
-$("tracePacket").firstElementChild.remove();$("tracePacket").addEventListener("change",traceView);
-$("verifyTrace").onclick=()=>{
- const allowed=["D1:send","D2:receive","D2:forward","D3:receive","D3:ack"];
- const ok=initialIds.every(id=>{
- const entries=traceByPacket.get(id)||[];
- return entries.every((e,i)=>allowed[i]===e.site+":"+e.event&&e.sequence>0&&(i===0||e.sequence>entries[i-1].sequence));
- })&&trace047.every((e,i)=>e.sequence===i+1);
- $("traceStatus").textContent=ok?"PASS: deterministic sequence and packet event prefixes":"FAIL: sequence or packet event-order mismatch";
-};
-$("replay048").onclick=()=>{
- const state=new Map(initialIds.map(id=>[id,"SOURCE"]));
- const expected=[["SOURCE","D1","send","SENT"],["SENT","D2","receive","FIFO"],["FIFO","D2","forward","FORWARDED"],["FORWARDED","D3","receive","RECEIVED"],["RECEIVED","D3","ack","ACK"]];
- let failure=null;
- for(const e of trace047){const step=expected.find(x=>x[0]===state.get(e.id)&&x[1]===e.site&&x[2]===e.event);
-  if(!step){failure=e;break}state.set(e.id,step[3])}
- const actual=new Map();
- for(const id of packet046.source)actual.set(id,"SOURCE");
- for(const id of packet046.queue)actual.set(id,"FIFO");
- for(const id of packet046.received)actual.set(id,"RECEIVED");
- for(const id of packet046.acked)actual.set(id,"ACK");
- const discrepancy=[...state].find(([id,v])=>actual.get(id)!==(v==="SENT"?"SOURCE":v==="FORWARDED"?"FIFO":v));
- $("replayOutput").textContent=failure?"FIRST DIVERGENCE event "+failure.sequence+" "+failure.id+" "+failure.site+" "+failure.event:
- discrepancy?"FIRST STATE MISMATCH "+discrepancy[0]+" replay="+discrepancy[1]+" actual="+actual.get(discrepancy[0]):
- "PASS: "+trace047.length+" events, "+state.size+" packet states reconciled; record unchanged";
-};
-$("witness049").onclick=()=>{
- const views={D1:trace047.filter(e=>e.site==="D1"),D2:trace047.filter(e=>e.site==="D2"),D3:trace047.filter(e=>e.site==="D3")};
- const byId=new Map(initialIds.map(id=>[id,[]]));
- for(const e of trace047)byId.get(e.id)?.push(e);
- const expected=["D1:send","D2:receive","D2:forward","D3:receive","D3:ack"];
- let first=null;
- for(const id of initialIds){
-  const rows=byId.get(id)||[];
-  for(let k=0;k<rows.length;k++){
-   if(k>=expected.length||rows[k].site+":"+rows[k].event!==expected[k]){
-    const candidate={id,sequence:rows[k].sequence,expected:expected[k]||"END",observed:rows[k].site+":"+rows[k].event};
-    if(!first||candidate.sequence<first.sequence)first=candidate;
-    break;
-   }
-  }
- }
- const counts="D1 "+views.D1.length+" observations | D2 "+views.D2.length+" | D3 "+views.D3.length;
- $("witnessReport049").textContent=counts+"\n"+(first?"FIRST DIVERGENCE: "+JSON.stringify(first):"NO RECORDED CONTRADICTION. Missing future observations remain UNKNOWN.");
-};
-const packet046={source:Array.from({length:12},(_,i)=>"PKT-"+String(i+1).padStart(3,"0")),queue:[],received:[],acked:[]};
-function packetSummary(){
- const p=packet046,all=[...p.source,...p.queue,...p.received,...p.acked];
- if(all.length!==12||new Set(all).size!==12)throw Error("GWELL 047 packet identity invariant breached");
- $("packetState").textContent="Source "+p.source.length+" | D2 FIFO ["+p.queue.join(", ")+"] | D3 ["+p.received.join(", ")+"] | ACK ["+p.acked.join(", ")+"] | total "+all.length;
-}
-$("packetSend").onclick=()=>{
- const p=packet046,cap=bufferCapacity();
- if(!p.source.length||p.queue.length>=cap||+$("permeability").value===0){status("GWELL 047 held: empty source, full FIFO, or closed pore");return}
- const id=p.source.shift();p.queue.push(id);record047(id,"D1","send");record047(id,"D2","receive");packetSummary();status(id+" entered FIFO");
-};
-$("packetForward").onclick=()=>{
- const p=packet046;
- if(!p.queue.length||!poreOpen(1,2)){status("GWELL 047 held: FIFO empty or pore closed");return}
- const id=p.queue.shift();p.received.push(id);record047(id,"D2","forward");record047(id,"D3","receive");packetSummary();status(id+" delivered at D3");
-};
-$("packetAck").onclick=()=>{
- const p=packet046;if(!p.received.length){status("GWELL 047 held: no receipt");return}
- const id=p.received.shift();p.acked.push(id);record047(id,"D3","ack");packetSummary();status("ACK "+id+" recorded exactly once");
-};
-packetSummary();
-// GWELL 054: Preserve the user's three vectors exactly; coordinates are x,y,z.
-const foundation055=[
- {name:"PATRICIA",xyz:[-2,3,-1],color:"#bd8bff"},
- {name:"TOPH",xyz:[2,-3,1],color:"#67f7a3"},
- {name:"ICARIUM",xyz:[0,0,0],color:"#f0f5ff"}
-];
-function drawStargate053(){
- const origin=[0,0,0],scale=35;
- for(const node of foundation055){
-  const tip=node.xyz.map(v=>v*scale);
-  if(node.name!=="ICARIUM")line3([origin,tip],node.color,3,.95);
-  const p=project(tip);ctx.fillStyle=node.color;ctx.beginPath();ctx.arc(p.x,p.y,node.name==="ICARIUM"?7:5,0,Math.PI*2);ctx.fill();
-  ctx.font="12px monospace";ctx.textAlign="left";ctx.fillText(node.name,p.x+9,p.y-8);
- }
- $("torusRadiusValue").textContent=$("torusRadius").value;
- $("torusStatus").textContent="PATRICIA + TOPH = (0,0,0) | ICARIUM = /0\\\\ | all pinned to origin";
-}
-function drawStretch056(){
- const t=+$("stretch056").value,span=50+40*t;
- // Four strands survive the deformation; left/right pairs lean around central enclosure.
- for(let k=0;k<4;k++){const left=k<2,ix=k%2,base=(left?-1:1)*(16+ix*12);
- const a=[base, -55, 0],b=[base+(left?-1:1)*span*t,55,0];
- line3([a,b],left?"#bd8bff":"#67f7a3",2.7,.85);}
- const theta=+$("torsion057").value*Math.PI/180,ring=[];
- for(let j=0;j<=80;j++){const u=j*2*Math.PI/80;
-  const x=24*t*Math.cos(u),y=24*t*Math.sin(u);
-  ring.push([x*Math.cos(theta),y,x*Math.sin(theta)]);
- }
- if(t>0)line3(ring,"#e9f6ff",2.3,.9);
- const seal=+$("seal058").value/100,rad=24*t;
- if(seal>0&&rad>0){
-  // Latitude rings of a closed spherical proxy, swept from equator toward poles.
-  for(let k=1;k<=9;k++){const lat=(-.5+k/10)*Math.PI*seal,rr=rad*Math.cos(lat),yy=rad*Math.sin(lat),pts=[];
-   for(let n=0;n<=64;n++){const u=2*Math.PI*n/64;pts.push([rr*Math.cos(u),yy,rr*Math.sin(u)])}
-   line3(pts,"#89d9ec",1.25,.3+seal*.45)}
-  if(seal===1)for(let q=0;q<8;q++){const u=2*Math.PI*q/8,pts=[];
-   for(let n=0;n<=64;n++){const v=-Math.PI/2+Math.PI*n/64;pts.push([rad*Math.cos(v)*Math.cos(u),rad*Math.sin(v),rad*Math.cos(v)*Math.sin(u)])}
-   line3(pts,"#89d9ec",1.1,.6)}
- }
- $("seal058Value").textContent=Math.round(seal*100)+"%";
- $("continuity058").textContent=t===0?"DEGENERATE: zero aperture":seal===1?"CLOSED SURFACE PROXY | shell area "+(4*Math.PI*rad*rad).toFixed(1)+" model²":"OPEN SURFACE | unsealed boundaries";
- $("torsion057Value").textContent=$("torsion057").value+"°";
- $("aperture057State").textContent=t>0?"CLOSED CURVE | OPEN INTERIOR | area πr² = "+(Math.PI*(24*t)**2).toFixed(1)+" model² | twist "+$("torsion057").value+"°":"COLLAPSED APERTURE | area 0";
- $("stretch056Value").textContent=t.toFixed(2);
- $("stretch056State").textContent=(t===0?"||||":t===1?"//()\\":"|||| → //()\\")+" | four continuous strands | /0\\ pinned";
-}
-function render(t){const dt=Math.min(.05,(t-last)/1000||0);last=t;if(!paused){const speed=Number($("speed").value);phase+=dt*speed;const n=6;for(let j=0;j<n;j++)integrate(dt*speed/n);observeLock(dt*speed);advanceFlight(dt*speed)}ctx.clearRect(0,0,W,H);
-const bg=ctx.createRadialGradient(320,230,0,320,230,330);bg.addColorStop(0,"#172d4c");bg.addColorStop(1,"#050b17");ctx.fillStyle=bg;ctx.fillRect(0,0,W,H);
-for(let i=2;i>=0;i--){const r=65+i*54;for(let m=0;m<3;m++)circle3(r,phase*.14*(i%2?-1:1),m,["#41f0bc","#a28af9","#4ab7ff"][i],1.8,.35)}
-for(const [j,f] of rings.entries()){const rot=phase*f[3]*(.6+j*.15);for(let k=0;k<3;k++)circle3(f[2],rot+k*.38,k,f[1],2,.58)}
-for(let j=0;j<5;j++){const r=34+j*7,a=phase*2+j*1.25;line3(Array.from({length:75},(_,i)=>{const q=i/74;const th=a+q*2.6;const rr=r+55*q;return[rr*Math.cos(th),15*Math.sin(th*2),rr*Math.sin(th)]}),"#52abff",2,.65)}
-drawCubes();drawStargate053();drawStretch056();
-const p=project([0,0,0]);const grad=ctx.createRadialGradient(p.x,p.y,2,p.x,p.y,65*zoom);grad.addColorStop(0,"#bde5ff");grad.addColorStop(.27,"#1a67b4");grad.addColorStop(1,"rgba(13,50,120,0)");ctx.beginPath();ctx.arc(p.x,p.y,65*zoom,0,2*Math.PI);ctx.fillStyle=grad;ctx.fill();
-ctx.fillStyle="#e0f6ff";ctx.font="bold 29px monospace";ctx.textAlign="center";ctx.fillText("{{i}}",p.x,p.y+10);ctx.font="18px monospace";ctx.fillStyle="#93c5fd";ctx.fillText("COBALT",p.x,p.y+57);
-ctx.strokeStyle="#ff718d";ctx.lineWidth=7;ctx.beginPath();ctx.moveTo(245,35);ctx.lineTo(395,35);ctx.stroke();ctx.fillStyle="#ff9fb4";ctx.fillText("− SEALED",320,24);
-ctx.strokeStyle="#69f3c0";ctx.lineWidth=5;ctx.beginPath();ctx.arc(320,420,37,0,Math.PI);ctx.stroke();ctx.fillStyle="#a4ffe2";ctx.fillText("C ↑ INTAKE",320,470);
-ctx.font="17px monospace";ctx.textAlign="left";ctx.fillStyle="#bdd7f5";ctx.fillText("3 ICE IX CUBES · W/M/S",15,56);ctx.fillText("ATOMS: "+atoms+" · P/N/E",15,78);
-requestAnimationFrame(render)}
-window.addEventListener("error",e=>{status("Renderer error: "+e.message);console.error(e.error)});
-// First frame renders immediately; requestAnimationFrame drives subsequent frames.
-sync();update();$("pause").textContent=paused?"Resume motion":"Pause motion";requestAnimationFrame(render);
+function witness(id,site,event){record.push(Object.freeze({seq:++seq,id,site,event,time:clock}));renderLedger()}
+function move(src,dest){if(+$("permeability").value<=0||src.value<=0){$("transportStatus").textContent="HELD: empty source or closed pore";return}src.value--;dest.value++;renderLedger();$("transportStatus").textContent="TRANSFER ACCEPTED · conserved";}
+for(const [id,from,to] of [["intake",3,0],["relay",0,1],["relay2",1,2],["release",2,3]])$(id).onclick=()=>{const slots=[...reservoir.inside];const fromValue=from===3?reservoir.outside:slots[from];if(+$("permeability").value===0||fromValue<=0){$("transportStatus").textContent="HELD";return}
+if(from===3)reservoir.outside--;else reservoir.inside[from]--;
+if(to===3)reservoir.outside++;else reservoir.inside[to]++;
+renderLedger();$("transportStatus").textContent="TRANSFER "+id+" witnessed · 12 conserved"};
+$("send").onclick=()=>{if(!packet.source.length||packet.queue.length>=2||+$("permeability").value===0)return say("Send held: source empty, FIFO full, or pore closed");
+const id=packet.source.shift();packet.queue.push(id);witness(id,"D1","send");witness(id,"D2","receive");say(id+" queued")};
+$("forward").onclick=()=>{if(!packet.queue.length||+$("permeability").value===0)return say("Forward held");const id=packet.queue.shift();packet.received.push(id);witness(id,"D2","forward");witness(id,"D3","receive");say(id+" at D3")};
+$("ack").onclick=()=>{if(!packet.received.length)return say("No receipt to ACK");const id=packet.received.shift();packet.acked.push(id);witness(id,"D3","ack");say(id+" ACK")};
+$("replay").onclick=()=>{const expected=["D1:send","D2:receive","D2:forward","D3:receive","D3:ack"],progress=new Map();let mismatch=null;
+for(const e of record){const p=progress.get(e.id)||0;if(expected[p]!==e.site+":"+e.event){mismatch=e;break}progress.set(e.id,p+1)}
+$("audit").textContent=mismatch?"FIRST DIVERGENCE: "+mismatch.id+" event "+mismatch.seq:"PASS: "+record.length+" ordered observations, no recorded contradiction; absent reports remain UNKNOWN"};
+$("kick").onclick=()=>{cubes[0].q+=.7;energyRef=null;say("D1 excited; energy reference reset")};
+$("pause").onclick=()=>{paused=!paused;$("pause").textContent=paused?"Resume":"Pause"};
+$("reset").onclick=()=>{camera.position.set(12,8,15);controls.target.set(0,0,0);controls.update()};
+const resize=new ResizeObserver(()=>{const w=host.clientWidth,h=host.clientHeight;camera.aspect=w/h;camera.updateProjectionMatrix();renderer.setSize(w,h,false)});resize.observe(host);
+renderLedger();say("Three.js ready · WebGL scene active · /0\\ pinned");
+function animate(now){const dt=Math.min(.04,(now-last)/1000);last=now;if(!paused){const speed=+$("speed").value;for(let j=0;j<5;j++)step(dt*speed/5);clock+=dt*speed}
+const E=energy(K());if(energyRef===null)energyRef=E;
+for(let j=0;j<3;j++){cubes[j].group.position.y=cubes[j].q*.24;cubes[j].core.rotation.z=clock*(j%2?-1:1);cubes[j].group.rotation.y=clock*(j%2?-.1:.1)}
+for(let j=0;j<hoops.length;j++)hoops[j].rotation.z=clock*(j%2?-.2:.2);
+const ang=cubes.map(c=>Math.atan2(c.v/2,c.q)),gap=(a,b)=>Math.acos(Math.max(-1,Math.min(1,Math.cos(a-b)))),maxGap=Math.max(gap(ang[0],ang[1]),gap(ang[1],ang[2]),gap(ang[2],ang[0]));
+const aligned=+$("permeability").value>0&&maxGap<=Math.min(.35,Math.PI*+$("permeability").value);alignedFor=aligned?alignedFor+dt:0;
+$("phases").textContent=(alignedFor>=2?"SUSTAINED":aligned?"TRANSIENT":"UNLOCKED")+" · Δφ "+maxGap.toFixed(2)+" rad";
+$("energy").textContent="Model mechanical energy "+E.toFixed(4)+" · drift "+(E-energyRef).toExponential(2);
+controls.update();renderer.render(scene,camera);requestAnimationFrame(animate)}
+requestAnimationFrame(animate);
 </script></body></html>
