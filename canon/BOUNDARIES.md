@@ -149,3 +149,19 @@ Each BUILD transfers exactly one token from available to bound and increments th
 The page supports pointer drag, keyboard arrow-key camera control, labeled camera sliders, pause for reduced motion, clearly named actions, responsive layout, and a text-based status and history display. The 3D view is projected on a 2D canvas with depth rotation, rather than WebGL or a volumetric physical simulation.
 
 **Invariant 026**: no source-less creation or deletion of symbolic constituent inventory; `available + bound` is constant, and cobalt identity is unchanged. Physical atomic conservation and binding energetics remain unspecified.
+
+## GWELL 027 — Distinct proton, neutron and electron inventory
+
+The five rotating waldos are now explicit, reversible manipulators of three token classes: proton (p), neutron (n) and electron (e). Each class has an independent inventory; build/unbuild no longer increments an undifferentiated token register.
+
+**Reference transitions:** BUILD allocates one p and one e into a new neutral hydrogen-1 model; UNBUILD returns all of the selected (latest) model atom's constituents to their respective free pools. ADD_N / REMOVE_N and ADD_E / REMOVE_E change only the selected model register, with inverse inventory transactions. These are six user commands routed through the five waldo channels; they do not imply a one-to-one mapping of commands to waldos.
+
+For each constituent `x in {p,n,e}`:
+
+```text
+free[x] + Σ atom[j][x] = initial[x]
+charge(atom) = p - e
+mass-number(atom) = p + n
+```
+
+**Invariant 027:** per-species constituent accounting is preserved across every admitted operation; attempts to consume unavailable constituents or remove nonexistent constituents are blocked. Cobalt `{{i}}` identity and the sealed upper port remain unchanged. This is a token/inventory model. Real reactions would require energy, nuclear binding, mass-energy, conservation of additional quantum numbers, and viable atomic configurations; the app does not establish physical atomic construction.
