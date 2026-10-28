@@ -199,3 +199,11 @@ Three unit-mass cubic oscillator proxies are coupled pairwise by conservative ha
 Energy is `E = Σ_i[0.5*v_i²+2*q_i²] + 0.5 Σ_(ij) k_ij(q_i-q_j)²`. Display `E` and numerical drift `ΔE = E-E_reference`; neither is guaranteed exactly zero under finite-step integration. Deliberately changing the coupling sliders changes the Hamiltonian and constitutes parameter work, so the energy reference is reset on change. A reset button re-establishes initial displacement and energy.
 
 **Invariant 037:** three cubes; symmetric pair forces; no hidden periodic driver; fixed couplings conserve total ideal mechanical energy; numerical drift is measured rather than concealed; proton/neutron/electron ledger and cobalt `{{i}}` remain untouched. The proxy uses arbitrary units and does not establish the actual vibration spectrum of pressure-dependent Ice IX.
+
+## GWELL 039 — Diatom-derived [()] diotomic architecture
+
+Each of the three minimum Ice IX proxies is now represented as a diatom-inspired **DIOTOMIC [()] module**, preserving a rigid outer `[]` shell and mechanically resonating inner `()` toroidal compartment. The reference HTML depicts paired outer valve faces, ribs/pores, girdle bands, and an internal toroid for each of three units. The three-body conservative coupling model and energy-drift ledger from GWELL 037 remain the transfer mechanism; this change adds internal geometry rather than asserting unmodeled biochemical energy conversion.
+
+Diatoms in biology have siliceous frustules consisting of two overlapping valves joined by girdle bands; intricate porous shells motivate the depicted geometry. See https://diatoms.org/glossary/frustule and https://www.nature.com/articles/s41598-020-76318-5 . A genuine diatom is biological and primarily silica-walled; ice IX under high pressure is an entirely different material. Here `DIOTOMIC` is a named synthetic geometric abstraction.
+
+**Invariant 039:** `N_[()] >= 3`; each unit preserves its paired-valve containment and its distinguished inner cavity; inter-unit W/M/S springs conserve energy for fixed parameters up to numerical integration error; the `{{i}}` identity remains unchanged. Material porosity and pore conductance are illustrative only and have no physical transport equation in this boundary.
