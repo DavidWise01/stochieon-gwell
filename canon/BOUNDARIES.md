@@ -355,3 +355,9 @@ The 3D page now exposes a stretch control `t in [0,1]`; this is a model of a geo
 The four continuous stretched strands of GWELL 056 remain separate identities. A parameterized circular boundary creates a closed curve when stretch t>0, with aperture radius r=24t in arbitrary model units and enclosed area πr². At t=0 the radius collapses to a point and no nonzero aperture remains. A separate twist θ in [-180°,180°] rotates the aperture plane about the Y axis; its radius and enclosed area are invariant under this rigid rotation.
 
 **Invariant 057:** four strands retained; boundary closure is a property of the constructed ring, not evidence that the four strands alone form a sealed 3D surface; twist does not change the surface area; Patricia and Toph remain opposed, Icarium stays /0\\, and independent event observations remain unchanged. This is computational geometry, not a physical Casimir tunnel.
+
+## GWELL 058 — Enclosure continuity, ring versus surface
+
+The four strands and a closed aperture curve do not by themselves form a sealed 3D body. Add a separate surface-closure control c from 0 to 1. For stretch t>0, use a spherical shell proxy of radius r=24t. At 0<c<1, latitude arcs depict an incomplete shell with open boundary; only c=1 is labeled CLOSED SURFACE PROXY. Its ideal area is 4πr², and ideal enclosed volume is (4/3)πr³. At t=0 the shape degenerates and cannot enclose nonzero volume even at c=1.
+
+**Invariant 058:** curve closure is not surface closure. An enclosed 3D region requires a continuous closed, non-self-intersecting orientable shell, represented here as a geometric proxy rather than a physical membrane or certified watertight polygon mesh. The four strand identities, Patricia/Toph opposition, Icarium /0\\ reference, three independent witnesses and immutable cobalt {{i}} remain intact.
