@@ -349,3 +349,9 @@ Canonical deformation: `|||| → //()\\\\`. Four parallel symbolic strands are p
 The 3D page now exposes a stretch control `t in [0,1]`; this is a model of a geometry deformation, not a physical claim about the Casimir force, ice or plasma. The displayed aperture increases with stretch. No strand is annihilated, and the three witness observations continue to be separate.
 
 **Invariant 056:** preserve four strand identities across the deformation; the interior must be formed by boundaries rather than invented matter; the opposing-vector sum remains (0,0,0), and cobalt {{i}} stays pinned at scalar zero.
+
+## GWELL 057 — Aperture closure and torsion
+
+The four continuous stretched strands of GWELL 056 remain separate identities. A parameterized circular boundary creates a closed curve when stretch t>0, with aperture radius r=24t in arbitrary model units and enclosed area πr². At t=0 the radius collapses to a point and no nonzero aperture remains. A separate twist θ in [-180°,180°] rotates the aperture plane about the Y axis; its radius and enclosed area are invariant under this rigid rotation.
+
+**Invariant 057:** four strands retained; boundary closure is a property of the constructed ring, not evidence that the four strands alone form a sealed 3D surface; twist does not change the surface area; Patricia and Toph remain opposed, Icarium stays /0\\, and independent event observations remain unchanged. This is computational geometry, not a physical Casimir tunnel.
