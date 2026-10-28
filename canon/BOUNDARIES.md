@@ -265,3 +265,9 @@ Invariant 047: packet IDs stay unique, event history never rewrites previous obs
 An independent replay view processes the append-only GWELL 047 witness events in global sequence order. Each packet starts in SOURCE and progresses across D1 send, D2 receive, D2 forward, D3 receive and D3 acknowledge. The reconstructed states are compared against the packet ledger, and the first invalid event or first state mismatch is reported. The replay operation reads the record but does not rewrite it, move packets, or interfere with the resonators. Earlier headings retain their original boundary numbers rather than being relabeled on each iteration.
 
 **Invariant 048:** evidence is processed in its recorded order; divergence is reported, not silently repaired. An empty event log can correctly replay to all packets at SOURCE. Timestamps describe this model's clock, not Ethernet network measurements. Cobalt {{i}} stays unchanged.
+
+## GWELL 048a — Downward geometric correction
+
+The DIOTOMIC route is oriented vertically downward into the C throat, not sideways across the enclosure. Three [()] modules appear in order D1 above D2 above D3, and the transport arrow points down toward C. This corrects the displayed geometry, not the conserved packet inventories or event-order rules.
+
+**Invariant:** directed containment path `D1 ↓ D2 ↓ D3 ↓ C`; upper negative port stays sealed; cobalt `{{i}}` is the stationary identity anchor. Downward is a chosen gravity-like model orientation, not evidence of microscopic gravitationally driven pore transport. Earlier horizontal diagrams are superseded for spatial orientation.
