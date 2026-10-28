@@ -165,3 +165,13 @@ mass-number(atom) = p + n
 ```
 
 **Invariant 027:** per-species constituent accounting is preserved across every admitted operation; attempts to consume unavailable constituents or remove nonexistent constituents are blocked. Cobalt `{{i}}` identity and the sealed upper port remain unchanged. This is a token/inventory model. Real reactions would require energy, nuclear binding, mass-energy, conservation of additional quantum numbers, and viable atomic configurations; the app does not establish physical atomic construction.
+
+## GWELL 028 — Configuration validity and low-resolution recovery
+
+The page now renders its software-projected 3D field at 640×480 rather than 960×720, retaining adjustable camera rotation, five symbolic waldos, three outer shells, inward C geometry and cobalt `{{i}}`.
+
+Conservation of p/n/e inventory (GWELL 027) does **not** establish physical validity. Each built register receives an independent descriptive classification: neutral hydrogen-1, deuterium, tritium, a known hydrogen nucleus with other modeled charge, or unverified configuration. Radioactivity and binding energies are not simulated.
+
+**Invariant 028**: `accounted constituents ≠ experimentally established stable atom`. The interface must not silently turn an unknown or unverified configuration into a verified one. Reduced rendering resolution cannot change the logical state or the `{{i}}` identity.
+
+**Browser note:** The reported screenshot displayed a local file named `GWELL-025-residence-resonance-canvas.html`, which is separate from the repository's `index.html`. The reduced-resolution page change does not automatically modify a separate local download.
