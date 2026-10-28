@@ -308,3 +308,9 @@ Canonical user-supplied Stargate path (immutable literal):
 The nine symbolic stops form a palindrome, with index sequence 0..8 and mirrored equality `P[k] = P[8-k]`. Map a two-digit stop `ab` to an ordered coordinate `(a,b)` in a *symbolic path plane*, not automatically a 3D physical vector. Its difference vectors are `(+1,+1), (+1,+3), (+1,-1), (+1,-1), (-1,+1), (-1,+1), (-1,-3), (-1,-1)`; they sum to (0,0) and the path returns to `00`. The 3D embedding `(x,y,z)` needs a separately defined projection/orientation, so do not invent z. The path is a deterministic address walk within the toroidal model, not an experimentally established Stargate or proof of a Riemann-zeta zero.
 
 **Invariant 052:** every stop is referenced to the same immutable origin; every recorded vector is the difference of successive addresses; reverse symmetry is preserved; each event retains three distinct observation records without consensus, manufactured causality, or alteration to cobalt `{{i}}`.
+
+## GWELL 053 — Three-dimensional toroidal embedding
+
+Embed the exact path `00 11 24 33 42 33 24 11 00` as ordered symbolic coordinate pairs `(a,b)`, with parametric torus `P(a,b)=((R+r cos(v))cos(u),(R+r cos(v))sin(u),r sin(v))`, `u=aπ/2, v=bπ/2`, minor radius `r=38` model units, major radius adjustable `R=110…190`. This is a discrete illustrative four-by-four angular embedding: repeated symbols resolve to the same surface point, and the return exactly retraces the outbound path.
+
+**Invariant 053:** nine ordered stops, eight transitions, `P[k]=P[8-k]`; the sum of successive displacement vectors is exactly zero by telescoping; the torus center `O=(0,0,0)` remains the reference and is not confused with an occupied surface point. Three witness records per event remain distinct; visual projection does not assert a physical portal or a proven Riemann-zeta zero.
