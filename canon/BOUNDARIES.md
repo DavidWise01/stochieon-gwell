@@ -191,3 +191,11 @@ The reference 3D renderer displays **three** discrete vibrating, rotating cubica
 A reference displacement mode for cube `j` is `q_j(t) = sin(ω_j t+φ_j)+0.3 k_j sin(ω_c t)` with dimensionless `k_j ∈ [0,1]`. Distinct phase and frequency proxies provide visually distinguishable motion. This is not yet a dynamically coupled differential equation or an experimentally calibrated ice-IX phonon spectrum.
 
 **Invariant 036:** `N_cubes >= 3`, every cube has its own bounded vibratory state, `0 <= k_W,k_M,k_S <= 1`, inventory accounting remains unchanged, cobalt identity `{{i}}` is immutable, and the upper negative port is sealed. Further work requires a material stiffness tensor, density, pressure, damping, inter-cube force laws, and an energy ledger for physical predictions.
+
+## GWELL 037 — Conservative resonance transfer among three Ice IX proxies
+
+Three unit-mass cubic oscillator proxies are coupled pairwise by conservative harmonic springs, each with a pinning stiffness `k0=4`. W controls coupling 1–2, M controls 2–3, S controls 3–1, each mapped to `k=0.3+2*slider`. Their dynamics are `q̈_i = -4q_i - Σ_j k_ij(q_i-q_j)`. The page uses a fixed-substep velocity-Verlet integrator for ordinary playback. Initial conditions displace only cube 1; subsequent motion transfers energy to cubes 2 and 3.
+
+Energy is `E = Σ_i[0.5*v_i²+2*q_i²] + 0.5 Σ_(ij) k_ij(q_i-q_j)²`. Display `E` and numerical drift `ΔE = E-E_reference`; neither is guaranteed exactly zero under finite-step integration. Deliberately changing the coupling sliders changes the Hamiltonian and constitutes parameter work, so the energy reference is reset on change. A reset button re-establishes initial displacement and energy.
+
+**Invariant 037:** three cubes; symmetric pair forces; no hidden periodic driver; fixed couplings conserve total ideal mechanical energy; numerical drift is measured rather than concealed; proton/neutron/electron ledger and cobalt `{{i}}` remain untouched. The proxy uses arbitrary units and does not establish the actual vibration spectrum of pressure-dependent Ice IX.
