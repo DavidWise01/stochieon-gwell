@@ -94,3 +94,26 @@ At the lower C intake, incoming events are observations, not automatically cause
 Reference rule: an observation must include `id`, `source`, `value` and `arrival`. Inference results must include `status: observed | hypothesis | supported | unknown`, plus references to supporting observation IDs. In this demonstration, a single observation is insufficient to declare a cause.
 
 This is a computational epistemic boundary, not physical proof of a gravitational or subatomic phenomenon.
+
+## GWELL 024 — The −+5 nested force spheres and spinning U
+
+The lower C remains the only intake; the upper minus gate remains sealed. The U spirals inward around the same cobalt `{{i}}` identity anchor. Add **five concentric projected force spheres**, all rotating at independently signed relative rates, with composite field `F`.
+
+Ordered channels (inner → outer): `−, W, M, S, +`. Here `W`, `M`, `S` denote the user's weak / medium / strong model bands; `−` and `+` represent orientation/polarity endpoints. `F=(−,W,M,S,+)` denotes the collection, not an additional sphere. Each sphere retains its own radius, color and rotation rate.
+
+```text
+             TOP − SEALED
+         +  [ sphere 5 ]
+         S  [ sphere 4 ]
+         M  [ sphere 3 ]
+         W  [ sphere 2 ]
+         −  [ sphere 1 ]
+               U ↻
+           COBALT {{i}}
+                ↑
+             C INTAKE
+```
+
+**Invariant 024:** five symbolic force surfaces orbit one and the same `U`; none duplicates or replaces `{{i}}`. Each surface may rotate in either direction while the C intake is still inward-only. No unsupported cause is inferred from animation. The Earth analogy is a visualization metaphor; these five model channels do not constitute a verified decomposition of Earth's gravitational, magnetic, atmospheric, or nuclear interactions.
+
+The browser page has two further controls: field strength and field speed. This is a visual geometry model rather than a force-field or gravitational physics solver.
