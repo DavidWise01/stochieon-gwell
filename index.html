@@ -37,13 +37,14 @@ Four strands · three [()]
 No quorum · three witnesses
 No created tokens</pre></section></aside></main>
 <footer>Three.js module from CDN. Requires an internet connection and WebGL; displays a diagnostic instead of a blank canvas when unavailable. Geometry and couplings are symbolic models, not experimentally established Ice IX or Casimir dynamics.</footer>
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
 <script type="module">
 const $=id=>document.getElementById(id);
 const say=msg=>$("status").textContent=msg;
 let THREE,OrbitControls;
 try{
- THREE=await import("https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js");
- ({OrbitControls}=await import("https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/controls/OrbitControls.js"));
+ THREE=await import("three");
+ ({OrbitControls}=await import("three/addons/controls/OrbitControls.js"));
 }catch(e){say("3D loading failed: "+e.message+" — check network access or CDN blocking.");throw e}
 const host=$("scene"),scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(47,1,.1,500);
 camera.position.set(12,8,15);
