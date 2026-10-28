@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>STOCHIEON · GWELL 3:1</title>
+<style>body{margin:0;background:#080d19;color:#dceafa;font:16px system-ui}main{max-width:980px;margin:auto;padding:32px}h1{color:#7dd3fc}section{background:#101d30;border:1px solid #263f59;border-radius:18px;padding:24px;margin:20px 0}pre{white-space:pre-wrap;color:#a7f3d0}button{background:#164e63;color:white;border:1px solid #38bdf8;border-radius:9px;padding:12px 18px;cursor:pointer}button:hover{background:#155e75}.shell{border:2px solid #38bdf8;border-radius:50%;display:grid;place-items:center;margin:auto;width:270px;height:270px}.two{border-color:#a78bfa;width:195px;height:195px}.one{border-color:#34d399;width:120px;height:120px}.well{font-weight:bold;color:#fcd34d}small{color:#94a3b8}#log{max-height:220px;overflow:auto}</style></head>
+<body><main><h1>STOCHIEON / GWELL</h1><p>Canonical nested sapphon · three outer shells / one inner well · <code>-U+</code></p>
+<section><div class="shell">O3<div class="shell two">O2<div class="shell one">O1<div class="well">− U +</div></div></div></div></section>
+<section><h2>Boundary 020–021: isolate, observe, recover</h2><p>Single authoritative inner well. No voting, quorum, silent repair or history rewriting.</p>
+<p>Committed U: <strong id="state">0</strong> · Records: <strong id="count">0</strong></p>
+<button id="good">Admit + drive</button> <button id="bad">Observe dispute</button> <button id="dependent">Dependent event</button> <button id="resolve">Append recovery</button> <button id="reset">Reset demonstration</button>
+<pre id="log" aria-live="polite"></pre><small>Local demonstration only; no storage or network writes. Model rules are proposed, not experimentally established particle physics.</small></section>
+<section><h2>Canonical boundary chain</h2><p>001 Geometry → 002 Facing → 003 Coupling → 004 Impedance → 005 Accounting → 006 Cycle → 007 Phase → 008 Locking → 009 Coherence → 010 Winding → 011 Transport → 012 Pinning → 013 Memory → 014 Propagation → 015 Horizon → 016 Convergence → 017 Ordering → 018 Replay → 019 Divergence → 020 Isolation → 021 Recovery provenance.</p></section>
+</main><script type="module">
+import {newLedger,record,recovery} from "./src/gwell.mjs";
+let ledger=newLedger(),n=0,dispute=null;
+const out=document.getElementById("log");
+function render(){document.getElementById("state").textContent=ledger.state;document.getElementById("count").textContent=ledger.history.length;out.textContent=ledger.history.map(e=>JSON.stringify(e)).join("\n");out.scrollTop=out.scrollHeight}
+document.getElementById("good").onclick=()=>{record(ledger,{id:"e"+(++n),drive:.9});render()};
+document.getElementById("bad").onclick=()=>{dispute="e"+(++n);record(ledger,{id:dispute,drive:.1,disputed:true});render()};
+document.getElementById("dependent").onclick=()=>{record(ledger,{id:"e"+(++n),drive:.1,dependsOn:dispute?[dispute]:[]});render()};
+document.getElementById("resolve").onclick=()=>{if(!dispute)return alert("Observe a dispute first");recovery(ledger,{id:"r"+(++n),disputeId:dispute,evidence:"separate observation",decision:"reject"});render()};
+document.getElementById("reset").onclick=()=>{ledger=newLedger();n=0;dispute=null;render()};render();
+</script></body></html>
