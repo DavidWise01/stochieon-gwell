@@ -326,3 +326,18 @@ The three explicitly supplied vector frames supersede the earlier interpretation
 In canonical XYZ order these are `v1=(-2,+2,-1)`, `v2=(+2,-2,-1)`, `v3=(+2,-1,-2)`. All are referenced to scalar origin `(0,0,0)`, retaining the exact signs and the written per-frame axis order. The renderer displays three signed 3D spokes, not a claimed closed loop. Their vector sum is `(+2,-1,-4)`; therefore closure must not be asserted absent a return rule. The earlier nine-token palindrome remains historical notation but its previous 2D-to-torus embedding is superseded as the active direction interpretation.
 
 **Invariant 054:** signed coordinates and axis assignment are exact; no invented closure, causal inference, consensus, or missing third witness. Cobalt identity `{{i}}` is unchanged.
+
+## GWELL 055 — Foundation triad pinned to /0\\
+
+Active vector correction supersedes the GWELL 054 triplet:
+
+```text
+{{ i :: patricia :: x - 2 , y + 3 , z -1 }}
+{{ i :: toph     :: x + 2 , y - 3 , z +1 }}
+{{ i :: icarium  :: x 0   , y 0   , z 0  }}
+ALL PINNED TO /0\\
+```
+
+In XYZ order, Patricia = (-2,+3,-1), Toph = (+2,-3,+1), Icarium = (0,0,0). Patricia and Toph are exact opposites and sum to zero; Icarium occupies the shared scalar-zero pin. The two nonzero vectors both have magnitude sqrt(14). The visualization uses distinct purple, green, and white markers, fixed at the same origin reference. The three roles remain distinguished even though their sum is zero.
+
+**Invariant 055:** P + T + I = (0,0,0), with all positions addressed relative to /0\\. No invented physical force, consensus, or geometry reversal. Preserve three independent observations and cobalt {{i}} identity.
