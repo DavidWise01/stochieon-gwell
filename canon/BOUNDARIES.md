@@ -361,3 +361,11 @@ The four continuous stretched strands of GWELL 056 remain separate identities. A
 The four strands and a closed aperture curve do not by themselves form a sealed 3D body. Add a separate surface-closure control c from 0 to 1. For stretch t>0, use a spherical shell proxy of radius r=24t. At 0<c<1, latitude arcs depict an incomplete shell with open boundary; only c=1 is labeled CLOSED SURFACE PROXY. Its ideal area is 4πr², and ideal enclosed volume is (4/3)πr³. At t=0 the shape degenerates and cannot enclose nonzero volume even at c=1.
 
 **Invariant 058:** curve closure is not surface closure. An enclosed 3D region requires a continuous closed, non-self-intersecting orientable shell, represented here as a geometric proxy rather than a physical membrane or certified watertight polygon mesh. The four strand identities, Patricia/Toph opposition, Icarium /0\\ reference, three independent witnesses and immutable cobalt {{i}} remain intact.
+
+## GWELL 059 — Three.js WebGL visualization migration
+
+The GitHub Pages entrypoint is rebuilt with Three.js r170, an explicit browser import map and OrbitControls. Native 3D objects now render three diatom-inspired [()] resonators, a four-strand stretched aperture, twistable toroidal ring, partial/full spherical containment proxy, and the Patricia/Toph/Icarium foundation triad pinned to /0\\. Three modeled shell rings, adjustable W/M/S resonant oscillator couplings, phase display and model mechanical-energy ledger remain.
+
+An anonymous twelve-token conservation ledger and a separate identified twelve-packet FIFO/ACK ledger are provided with append-only three-node witness observations and deterministic event-prefix replay. Browser errors are surfaced in the status area. The scene adapts to container size, limits device-pixel ratio, and honors reduced-motion preferences. As a page rewrite, some previously separate advanced transport controls are consolidated; no claim of feature-by-feature parity with the preceding Canvas2D page is made.
+
+**Invariant 059:** the migration must not alter foundational vectors P=(-2,+3,-1), T=(+2,-3,+1), I=(0,0,0) or the /0\\ pin; retained inventories are conserved; W/M/S remain phenomenological model couplings, and Three.js geometry is not a physically certified Ice IX or Casimir simulation.
