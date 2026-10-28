@@ -241,3 +241,9 @@ The marker-token invariant expands to `outside + D1 + D2 + D3 + in_flight = 12`.
 **Ethernet comparison:** An Ethernet store-and-forward switch receives/buffers a complete frame before forwarding; link serialization, processing, propagation and queuing contribute to latency. This model resembles a two-hop buffered path, but its resonance-based gate is NOT Ethernet's addressing, link layer, physical signals or frame error checking, and units are model-seconds, not observed network timings. Reference: https://www.ciscopress.com/articles/article.asp?p=3089352&seqNum=7 and https://www.rfc-editor.org/info/rfc8238/ .
 
 **Invariant 044:** a closed pore can delay but not annihilate the transported token; finite transit must appear in the ledger; `{{i}}` is unchanged.
+
+## GWELL 045 — Finite buffer capacity and backpressure
+
+The D2 store-and-forward compartment now exposes a configurable capacity (1–6 tokens). The count reserved against capacity includes tokens already buffered at D2 and any token currently in flight to D2. A D1→D2 launch is rejected when reserved occupancy equals capacity; the token remains at D1 and the interface increments a blocked-launch counter. A token already in flight has reserved its destination slot, so its arrival cannot overflow D2. A lowered capacity is treated as at least the number of tokens already resident, avoiding retroactive deletion. Existing D2→D3 forwarding can relieve backpressure.
+
+**Invariant 045:** D2 never exceeds effective configured capacity; no denied launch changes token inventory. The conserved twelve-token ledger continues to include any in-flight token. This is a bounded FIFO-like store-and-forward analogy; it is not an Ethernet implementation and does not yet provide distinct packet identifiers or ordering guarantees.
