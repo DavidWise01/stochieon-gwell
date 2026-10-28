@@ -219,3 +219,9 @@ Invariant 040: outside + D1 + D2 + D3 = 12. No negative inventory, source-less c
 DIOTOMIC-to-DIOTOMIC relay is permitted only when the instantaneous oscillator phase difference is within a specified gate. Define phase φ_i = atan2(v_i / 2, q_i), a dimensionless reference for the oscillator with pinning stiffness 4 and unit mass. Circular phase gap Δφ_ij = acos(cos(φ_i−φ_j)) lies in [0,π]. The pore is open when Δφ_ij ≤ πp where p ∈ (0,1] is the permeability slider. At p=0 every pore is closed. External intake/release uses the simpler p>0 gate.
 
 Invariant 041: phase can block or admit a transfer, but cannot create or destroy token inventory; W/M/S mechanical coupling and cobalt identity {{i}} remain unchanged. The phase-gating function is a model rule, not a measured physical law for Ice IX or diatom pores.
+
+## GWELL 042 — Passive phase-lock witness
+
+The observer derives oscillator phase for each of three DIOTOMIC proxy modes by `φ_i = atan2(v_i/2, q_i)` and records the **maximum pairwise circular phase gap**. Three-way alignment is true when permeability `p>0` and all pair gaps are at most `min(0.35 rad, πp)`. Alignment held for less than two model seconds is reported as TRANSIENT; uninterrupted alignment for two or more model seconds as SUSTAINED ALIGNMENT; all other observations are UNLOCKED. The witness records observation rather than applying synchronizing torque or changing the mechanical state.
+
+**Invariant 042:** the phase-lock observer cannot drive motion, alter W/M/S couplings, transfer tokens, manipulate mechanical energy, or change cobalt `{{i}}`. Sustained alignment is not guaranteed to occur; a passive three-oscillator conservative model need not spontaneously phase-lock.
