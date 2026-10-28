@@ -253,3 +253,9 @@ The D2 store-and-forward compartment now exposes a configurable capacity (1–6 
 An independent identified-packet lane accompanies the earlier anonymous marker-token transport. Twelve unique packets `PKT-001` through `PKT-012` start at the source. A manual send moves one to D2's ordered FIFO subject to capacity and positive permeability; forward removes only the queue head and places it at D3, subject to the D2→D3 pore gate; acknowledgment moves the oldest delivered packet into a permanent ACK register. Each transition moves the same ID, never clones it.
 
 **Invariant 046:** IDs are immutable and unique; the union of source, FIFO, delivered and ACK lists contains exactly the twelve original IDs, with no duplicates; the FIFO head is forwarded first and an ID is acknowledged at most once. This is an explicitly separate logical packet experiment, not a migration of the earlier anonymous-tokens ledger. It is analogous to store-and-forward networking but is not an implementation of Ethernet framing, addressing or IEEE 802.3.
+
+## GWELL 047 — Packet provenance witness
+
+Each packet has an append-only event sequence: D1 send, D2 receive, D2 forward, D3 receive, D3 acknowledge. Observations use a global increasing integer sequence and a local model-time stamp. Each packet's record must be a prefix of this ordered sequence. The witness does not vote, alter packets, or infer unseen actions.
+
+Invariant 047: packet IDs stay unique, event history never rewrites previous observations, and receipt precedes acknowledgment. The record is an in-memory observation log, not cryptographic proof or persistent storage. Cobalt {{i}} remains unchanged.
