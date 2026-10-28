@@ -117,3 +117,23 @@ Ordered channels (inner → outer): `−, W, M, S, +`. Here `W`, `M`, `S` denote
 **Invariant 024:** five symbolic force surfaces orbit one and the same `U`; none duplicates or replaces `{{i}}`. Each surface may rotate in either direction while the C intake is still inward-only. No unsupported cause is inferred from animation. The Earth analogy is a visualization metaphor; these five model channels do not constitute a verified decomposition of Earth's gravitational, magnetic, atmospheric, or nuclear interactions.
 
 The browser page has two further controls: field strength and field speed. This is a visual geometry model rather than a force-field or gravitational physics solver.
+
+## GWELL 025 — Five atomic waldos: build / unbuild
+
+**Correction to 024:** the five rotating spheres are *waldos* (manipulator channels), not simply passive force spheres. The canonical channels remain `− / W / M / S / +`, where W/M/S are user-defined manipulation bands, not verified fundamental interactions.
+
+The waldos assemble and disassemble **symbolic atom registers** through explicit BUILD and UNBUILD events around the spinning U. The lower C is the permitted input, the upper − port remains sealed, and the cobalt `{{i}}` identity is unchanged.
+
+```text
+           - TOP SEALED
+     [+] [S] [M] [W] [-]    ← FIVE WALDOS
+             U ↻
+         COBALT {{i}}
+             ↑
+          C INTAKE
+
+BUILD:   A[n] -> A[n+1]  (modeled register)
+UNBUILD: A[n] -> A[n-1]  (floor n=0)
+```
+
+**Invariant 025:** reversible construction intent, explicit operation ledger, single core identity. Each model operation records previous register count, new count, direction and waldo set. No physical nuclear synthesis, elemental chemistry, binding energies, particle conservation or radioactive decay is claimed by the visualization. Real atomic assembly would need explicit constituent inventories, energy and conservation laws.
