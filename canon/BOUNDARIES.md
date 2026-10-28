@@ -175,3 +175,11 @@ Conservation of p/n/e inventory (GWELL 027) does **not** establish physical vali
 **Invariant 028**: `accounted constituents ≠ experimentally established stable atom`. The interface must not silently turn an unknown or unverified configuration into a verified one. Reduced rendering resolution cannot change the logical state or the `{{i}}` identity.
 
 **Browser note:** The reported screenshot displayed a local file named `GWELL-025-residence-resonance-canvas.html`, which is separate from the repository's `index.html`. The reduced-resolution page change does not automatically modify a separate local download.
+
+## GWELL 029 — Electron orbital occupancy
+
+Waldos must assign electronic occupancy independently of the nuclear proton/neutron inventory. The reference page now displays a simplified Aufbau subshell filling sequence for the selected modeled atom: `1s(2), 2s(2), 2p(6), 3s(2), 3p(6), 4s(2), 3d(10), 4p(6)`. Subshell occupancy never exceeds its listed capacity. Electrons beyond this limited table are marked UNRESOLVED instead of silently placed.
+
+`sum(orbital occupancy) + unresolved electrons = e_bound_for_atom`.
+
+**Invariant 029:** The electronic configuration is derived from the atom's existing electron count; assigning electrons to modeled orbitals does not create or destroy electrons, alter the nuclear proton/neutron inventory, unseal the top port, or change cobalt `{{i}}`. This is an idealized occupancy display, not an accurate many-electron quantum calculation or spectroscopic prediction. Ground-state filling exceptions and spin-resolved Pauli/Hund behavior are beyond this boundary.
