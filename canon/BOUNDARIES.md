@@ -427,3 +427,9 @@ The cortex center is `{{i}}`. Left and right bridges retain isolated queues and 
 Scheduling interpretation: left shifts the five-slot pattern by 2 indices and right by 3 indices, corresponding to the symbolic offsets `2/5i` and `3/5i`. The current release interval uses the digit at the shifted slot (5 or 7 model ticks). No direct left-right bridge exists.
 
 **Invariant 068:** a packet is neither released before due nor duplicated by release; source attribution survives transit; the fixed center is `{{i}}`; six centers remain observe/report. Browser bridge queue durability and independent live browser testing are still outstanding.
+
+## GWELL 069 — Persistent bridge queue recovery
+
+The six report centers remain `ff,fr,cf,cr,rf,rr`, with cortex center `{{i}}`. The left `55577` bridge and right `55777` bridge retain independent phase offsets. Browser storage now records held and delivered packet queues, unique identifiers, due ticks, destinations and origins. A restored queue is validated before use. Each transfer saves the updated queue and its delivery ledger. A manual recovery check is available on the page.
+
+**Invariant 069:** no duplicated packet identifiers and no early release. Browser-local storage is not atomic across independent rotor and bridge records, nor is it cross-device persistence. GitHub tracks the implementation; it does not automatically receive runtime packets.
