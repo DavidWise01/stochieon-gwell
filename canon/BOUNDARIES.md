@@ -517,3 +517,9 @@ At cortex `{{i}}`, the release operation scans the isolated L/C/R destination qu
 Each Advance rotor action now calls `advanceAndRelease083`: first derive the next six-phase rotor snapshot, then inspect both timed bridge queues at the new tick and move all packets whose due tick has arrived into their delivered ledgers. The proposed rotor, untouched six Observe & Report center logs, and modified bridge queues are saved together using the automatic SHA-256 anchored transition path before page state activation. Left `55577` / `2/5i` and right `55777` / `3/5i` timings remain independent; cortex center remains `{{i}}`.
 
 **Invariant 083:** one rotor tick produces one combined candidate and one anchored checkpoint; no packet released before its due tick, and no packet is both pending and delivered. This is a browser-model state update, not an external delivery or independently verified live-browser test. Automatic handling occurs when Advance rotor is invoked, not while the page is idle.
+
+## GWELL 084 — Release provenance continuity
+
+Each automatically released packet now retains its original origin, source/destination compartment, bridge identity, scheduled due tick, and recorded release tick. `advanceAndRelease084` advances the rotor, releases eligible packets and annotates those newly delivered with the release tick before the existing unified SHA-256 commit. `provenance084` produces a read-only report over delivered packets. Cortex `{{i}}` remains the center; the separate rhythms `55577||55777` and six observe/report centers remain intact.
+
+**Invariant 084:** the recorded release tick must be at or after the due tick. Provenance is derived from committed packet fields; historical deliveries made before this version can have an unknown release tick, which must not be invented. Bridge routing, source identity, and packet uniqueness stay unchanged. GitHub source commits do not establish live browser execution.
