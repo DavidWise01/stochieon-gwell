@@ -351,3 +351,24 @@ export function advanceAndRelease084(current){
  const move=releaseWithProvenance084(current.bridges,rotor.tick);
  return {rotor,centers:current.centers,bridges:move.state,released:move.released};
 }
+
+export const MEMORY_KEY085="stochieon.gwell085.memory.v1";
+export function memory085(){return {schema:85,core:"{{i}}",records:[]}}
+export function remember085(store,center,content,tick){
+ if(!CENTERS065.includes(center)||!Number.isSafeInteger(tick)||tick<0||typeof content!=="string"||!content.trim())throw Error("Invalid memory input");
+ const next=JSON.parse(JSON.stringify(store));
+ next.records.push({id:next.records.length+1,center,createdTick:tick,content,accesses:[]});
+ return next;
+}
+export function recall085(store,id,tick){
+ const next=JSON.parse(JSON.stringify(store));
+ const item=next.records.find(x=>x.id===id);
+ if(!item||!Number.isSafeInteger(tick)||tick<item.createdTick)throw Error("Memory unavailable");
+ item.accesses.push({tick,ordinal:item.accesses.length+1});
+ return {store:next,memory:{id:item.id,center:item.center,createdTick:item.createdTick,content:item.content}};
+}
+export function verifyMemory085(store){
+ if(store?.schema!==85||store.core!=="{{i}}"||!Array.isArray(store.records))throw Error("Invalid memory store");
+ store.records.forEach((r,i)=>{if(r.id!==i+1||!CENTERS065.includes(r.center)||typeof r.content!=="string"||!Array.isArray(r.accesses))throw Error("Invalid memory record")});
+ return true;
+}
