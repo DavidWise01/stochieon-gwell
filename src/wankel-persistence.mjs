@@ -414,3 +414,32 @@ export function lineage087(mesh,domain,level){
  if(!DOMAINS086.includes(domain)||![0,1,2].includes(level))throw Error("Invalid layer");
  return mesh.domains[domain][level].records.map(r=>({memoryId:r.memoryId,ordinal:r.ordinal,parentLevel:r.parentLevel??null,parentOrdinal:r.parentOrdinal??null,originTick:r.originTick??r.tick,kind:r.kind??"direct"}));
 }
+
+export const TIERS088=Object.freeze([
+ {level:0,term:"short",strength:"weak",token:"{{i}}"},
+ {level:1,term:"medium",strength:"medium",token:"{{id}}"},
+ {level:2,term:"long",strength:"strong",token:"{{sid}}"}
+]);
+export function verifyLineage088(mesh){
+ const results=[];
+ for(const domain of DOMAINS086){
+  const cells=mesh.domains?.[domain];
+  if(!Array.isArray(cells)||cells.length!==3)throw Error("Missing compartment "+domain);
+  for(let level=0;level<3;level++){
+   const list=cells[level].records;
+   for(let i=0;i<list.length;i++){
+    const record=list[i];if(record.ordinal!==i+1)throw Error("Ordinal mismatch "+domain);
+    if(level>0&&record.kind==="shadow"){
+     const parent=cells[level-1].records[record.parentOrdinal-1];
+     if(!parent||record.parentLevel!==level-1||record.originDomain!==domain||parent.memoryId!==record.memoryId)throw Error("Broken lineage "+domain+" L"+level);
+     if(level===2&&parent.kind==="shadow"){
+      const origin=cells[0].records[parent.parentOrdinal-1];
+      if(!origin||origin.memoryId!==record.memoryId)throw Error("Broken root "+domain);
+     }
+    }
+   }
+   results.push({domain,level,term:TIERS088[level].term,strength:TIERS088[level].strength,count:list.length});
+  }
+ }
+ return {valid:true,tiers:results};
+}
