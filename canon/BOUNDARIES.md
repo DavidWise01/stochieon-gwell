@@ -511,3 +511,9 @@ Cortex `{{i}}` now compares pending bridge packet due ticks with the persisted r
 At cortex `{{i}}`, the release operation scans the isolated L/C/R destination queues using the current rotor tick. A queued packet with `due <= tick` moves once into its destination delivered ledger; later attempts find no copy in the pending queue. A packet with `due > tick` remains held. Left and right schedules remain `55577||55777`, offset by `2/5i` and `3/5i`. The six `ff,fr,cf,cr,rf,rr` centers only observe and report.
 
 **Invariant 082:** no release before due, no duplicate within the validated queue/delivery inventory, no direct L/R shortcut. The Three.js control explicitly initiates eligible release through the existing unified anchored transition; this is not a background timer or externally authenticated dispatch. GitHub commits do not prove live browser runtime execution.
+
+## GWELL 083 — Atomic rotor advance and eligible release
+
+Each Advance rotor action now calls `advanceAndRelease083`: first derive the next six-phase rotor snapshot, then inspect both timed bridge queues at the new tick and move all packets whose due tick has arrived into their delivered ledgers. The proposed rotor, untouched six Observe & Report center logs, and modified bridge queues are saved together using the automatic SHA-256 anchored transition path before page state activation. Left `55577` / `2/5i` and right `55777` / `3/5i` timings remain independent; cortex center remains `{{i}}`.
+
+**Invariant 083:** one rotor tick produces one combined candidate and one anchored checkpoint; no packet released before its due tick, and no packet is both pending and delivered. This is a browser-model state update, not an external delivery or independently verified live-browser test. Automatic handling occurs when Advance rotor is invoked, not while the page is idle.
