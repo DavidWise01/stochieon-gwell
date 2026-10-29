@@ -296,3 +296,14 @@ export function health080(current,prior=null,limits={queue:6}){
  if(prior)for(const id of CENTERS065)if(current.reports[id]===prior.reports?.[id])flags.push("NO_NEW_REPORT:"+id);
  return {status:flags.length?"ATTENTION":"OBSERVED",flags,tick:current.tick,head:current.head};
 }
+
+export function cadence081(rotor,bridges){
+ validate(rotor);validate069(bridges);
+ const groups={WAITING:[],DUE:[],OVERDUE:[]};
+ for(const domain of DOMAINS066)for(const p of bridges.queues[domain]){
+  const delta=rotor.tick-p.due;
+  const status=delta<0?"WAITING":delta===0?"DUE":"OVERDUE";
+  groups[status].push({id:p.id,domain,due:p.due,tick:rotor.tick,delta,origin:p.origin});
+ }
+ return {core:"{{i}}",tick:rotor.tick,groups,counts:Object.fromEntries(Object.entries(groups).map(([k,v])=>[k,v.length]))};
+}
