@@ -330,3 +330,24 @@ export function advanceAndRelease083(current){
  const move=releaseEligible082(current.bridges,rotor.tick);
  return {rotor,centers:current.centers,bridges:move.state,released:move.released};
 }
+
+export function provenance084(bridges){
+ validate069(bridges);
+ const entries=[];
+ for(const domain of DOMAINS066)for(const packet of bridges.delivered[domain]){
+  entries.push({id:packet.id,origin:packet.origin,from:packet.from,to:packet.to,bridge:packet.from==="L"||packet.to==="L"?"left":"right",due:packet.due,createdTick:packet.payload?.tick??null,releaseTick:packet.releaseTick??null,core:packet.core});
+ }
+ return entries.sort((a,b)=>a.id-b.id);
+}
+export function releaseWithProvenance084(bridges,tick){
+ const result=releaseEligible082(bridges,tick);
+ for(const domain of DOMAINS066)for(const packet of result.state.delivered[domain]){
+  if(packet.releaseTick===undefined&&result.released.some(e=>e.id===packet.id))packet.releaseTick=tick;
+ }
+ return result;
+}
+export function advanceAndRelease084(current){
+ const rotor=step(current.rotor);
+ const move=releaseWithProvenance084(current.bridges,rotor.tick);
+ return {rotor,centers:current.centers,bridges:move.state,released:move.released};
+}
