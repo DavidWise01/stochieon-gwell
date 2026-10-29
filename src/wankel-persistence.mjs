@@ -307,3 +307,20 @@ export function cadence081(rotor,bridges){
  }
  return {core:"{{i}}",tick:rotor.tick,groups,counts:Object.fromEntries(Object.entries(groups).map(([k,v])=>[k,v.length]))};
 }
+
+export function releaseEligible082(bridges,tick){
+ validate069(bridges);
+ if(!Number.isSafeInteger(tick)||tick<0)throw Error("Invalid rotor tick");
+ let state=JSON.parse(JSON.stringify(bridges));
+ const released=[];
+ for(const domain of DOMAINS066){
+  const pending=state.queues[domain],held=[];
+  for(const packet of pending){
+   if(packet.due<=tick){state.delivered[domain].push(packet);released.push({id:packet.id,domain,origin:packet.origin,due:packet.due})}
+   else held.push(packet);
+  }
+  state.queues[domain]=held;
+ }
+ validate069(state);
+ return {state,released};
+}
