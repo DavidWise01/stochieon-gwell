@@ -54,3 +54,26 @@ export function compare064(logs,tick){
  const abc2=entries.some(e=>!e)?"INCOMPLETE":entries.every(e=>JSON.stringify(e.value)===JSON.stringify(entries[0].value))?"MATCH":"DIVERGENT";
  return {abc2,entries,zero:[0,0,0]};
 }
+
+export const CENTERS065=Object.freeze(["ff","fr","cf","cr","rf","rr"]);
+export const CENTER_KEY065="stochieon.gwell065.centers.v1";
+export function centers065(){return Object.fromEntries(CENTERS065.map(id=>[id,[]]))}
+export function observeReport065(logs,id,tick,observation){
+ if(!CENTERS065.includes(id)||!Number.isSafeInteger(tick)||tick<0)throw Error("Invalid report address");
+ const next=JSON.parse(JSON.stringify(logs)),list=next[id];
+ if(list.length&&tick<list[list.length-1].tick)throw Error("Out-of-order report");
+ list.push({seq:list.length+1,tick,observation:JSON.parse(JSON.stringify(observation))});
+ return next;
+}
+export function inspect065(logs,tick){
+ const reports=CENTERS065.map(id=>({center:id,record:(logs[id]||[]).filter(x=>x.tick===tick).at(-1)||null}));
+ return {tick,origin:[0,0,0],reports,received:reports.filter(x=>x.record).length};
+}
+export function store065(storage,logs){storage.setItem(CENTER_KEY065,JSON.stringify(logs))}
+export function restoreCenters065(storage){
+ const raw=storage.getItem(CENTER_KEY065);if(!raw)return centers065();
+ const logs=JSON.parse(raw);
+ for(const id of CENTERS065){if(!Array.isArray(logs[id]))throw Error("Center ledger absent "+id);
+ logs[id].forEach((e,i)=>{if(e.seq!==i+1||!Number.isSafeInteger(e.tick)||(i&&e.tick<logs[id][i-1].tick))throw Error("Invalid center sequence "+id)})}
+ return logs;
+}
