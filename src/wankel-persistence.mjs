@@ -443,3 +443,21 @@ export function verifyLineage088(mesh){
  }
  return {valid:true,tiers:results};
 }
+
+export function consolidate089(mesh,tick){
+ if(!Number.isSafeInteger(tick)||tick<0)throw Error("Invalid consolidation tick");
+ verifyLineage088(mesh);
+ let next=JSON.parse(JSON.stringify(mesh)),events=[];
+ for(const domain of DOMAINS086){
+  for(let level=0;level<2;level++){
+   const src=next.domains[domain][level],dst=next.domains[domain][level+1];
+   const candidate=src.records.find(r=>!dst.records.some(d=>d.kind==="shadow"&&d.parentLevel===level&&d.parentOrdinal===r.ordinal));
+   if(!candidate){events.push({domain,from:level,to:level+1,action:"HOLD",reason:"NO_UNINHERITED_PARENT",tick});continue}
+   const result=inherit087(next,domain,level,tick);
+   next=result.mesh;
+   events.push({domain,from:level,to:level+1,action:"INHERIT",count:result.added,sourceOrdinal:candidate.ordinal,tick});
+  }
+ }
+ verifyLineage088(next);
+ return {mesh:next,events,tiers:verifyLineage088(next).tiers};
+}
