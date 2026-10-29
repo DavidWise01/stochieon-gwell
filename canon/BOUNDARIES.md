@@ -451,3 +451,9 @@ The six-center rotor uses `transition071` to prepare a proposed state, validate 
 The single-key GWELL 071 checkpoint is tested with an injected storage write failure. `recoveryTest072` saves an initial combined rotor/report/bridge state, attempts a rotor transition using storage that throws before committing, and then checks that restoration still returns the complete preceding snapshot. A subsequent successful transition must restore the new complete snapshot. The Three.js page exposes a Test interrupted write button; the test is isolated from the live checkpoint.
 
 **Invariant 072:** failed writes do not activate a partial candidate; successful writes restore the combined state. This checks a simulated exception prior to storage mutation, not torn-write recovery, sudden device power loss, or cross-device durability. Cortex remains `{{i}}`; six control centers and both bridge timing patterns are unchanged.
+
+## GWELL 073 — SHA-256 checkpoint integrity chain
+
+The Three.js page can append and verify a sequence of unified state snapshots. Each entry stores its ordinal, preceding digest, serialized rotor/center/bridge checkpoint, and SHA-256 of `previous|snapshot`. The initial predecessor is `GENESIS`. Verification recomputes each link and reports the first altered or missing intermediate link visible in the retained list. The center remains `{{i}}` and the six control centers remain `ff,fr,cf,cr,rf,rr`.
+
+**Invariant 073:** linked records are tamper-evident relative to a retained trusted head, not tamper-proof; deletion of the entire chain or synchronized rewriting cannot be detected without an external anchor. Current interface requires manual Anchor state; it does not automatically hash every transition. Browser localStorage remains the storage boundary and live browser execution is unverified.
