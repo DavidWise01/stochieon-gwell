@@ -397,3 +397,20 @@ export function observeLayer086(lattice,domain,level){
  const cell=lattice.domains[domain][level];
  return {domain,level,token:cell.token,shadow:cell.shadow,modes:[...cell.modes],count:cell.records.length};
 }
+
+export function inherit087(mesh,domain,fromLevel,tick){
+ if(!DOMAINS086.includes(domain)||![0,1].includes(fromLevel)||!Number.isSafeInteger(tick)||tick<0)throw Error("Invalid inheritance address");
+ const next=JSON.parse(JSON.stringify(mesh)),parent=next.domains[domain][fromLevel],child=next.domains[domain][fromLevel+1];
+ const existing=new Set(child.records.filter(r=>r.parentLevel===fromLevel).map(r=>r.parentOrdinal));
+ let added=0;
+ for(const record of parent.records){
+  if(existing.has(record.ordinal))continue;
+  child.records.push({memoryId:record.memoryId,tick,ordinal:child.records.length+1,parentLevel:fromLevel,parentOrdinal:record.ordinal,originDomain:domain,originTick:record.originTick??record.tick,kind:"shadow"});
+  added++;
+ }
+ return {mesh:next,added};
+}
+export function lineage087(mesh,domain,level){
+ if(!DOMAINS086.includes(domain)||![0,1,2].includes(level))throw Error("Invalid layer");
+ return mesh.domains[domain][level].records.map(r=>({memoryId:r.memoryId,ordinal:r.ordinal,parentLevel:r.parentLevel??null,parentOrdinal:r.parentOrdinal??null,originTick:r.originTick??r.tick,kind:r.kind??"direct"}));
+}
