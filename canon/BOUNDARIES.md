@@ -475,3 +475,9 @@ The six-center observe/report system retains separate ledgers for ff,fr,cf,cr,rf
 Anchored state transitions now request an exclusive named Web Locks API lock before entering the serialized state transition function. The operation reads the latest checkpoint while holding the lock, then verifies and commits the next hash-linked rotor/center/bridge state. Six `ff,fr,cf,cr,rf,rr` observe/report histories remain distinct, with cortex `{{i}}` and independent bridge clocks.
 
 **Invariant 076:** cooperating tabs on the same browser origin must not execute the protected transition simultaneously. If Web Locks is unavailable, the protected write fails closed. This does not coordinate across devices, non-cooperating old tabs, or unrelated storage writers; a browser runtime test remains outstanding.
+
+## GWELL 077 — Distributed proposal boundary
+
+A remote device must submit an identified action and the SHA-256 history head it observed. `proposal077` packages the device, base head and proposed action. `accept077` checks the proposal's base head against the locally verified anchored chain and returns STALE if that head has advanced. Matching heads return READY_FOR_AUTHORITY, not an executed transaction. The page exposes a local proposal preflight. Center `{{i}}`, six separate observe/report centers, and independently timed bridges remain unchanged.
+
+**Invariant 077:** a stale proposal is not silently applied. A matching digest is necessary but insufficient for a cross-device commit: a shared authenticated transactional authority is not connected, and this boundary does not claim remote durability or multi-device serialization.
