@@ -403,3 +403,11 @@ The active persistent rotor control plane is six addressed centers: `{{ff,fr,cf,
 The historical `a1,b1,c1,abc2,0` witness formulation remains preserved in earlier canon and legacy source, but it is superseded for *active* persistence control: the centers now **observe and report**, rather than voting, witnessing by default, or generating fake attestations. The origin remains `/0\\`, a fixed `(0,0,0)` address. Reports are stored under a versioned browser-localStorage key separate from the rotor checkpoint.
 
 **Invariant 065:** six center identities, six distinct append-only report streams, one zero origin. An uncalled center must not report; observations do not imply agreement, quorum, external sensor provenance, or cross-device durability. GitHub commits contain the persistent implementation, not live runtime records.
+
+## GWELL 066 — Isolated hemispheres, isolated cortex, explicit bridges
+
+Canonical topology: `{{ [left hemisphere[isolated(with bridge)]] [cortex[isolated(with 2x bridge L/R)]] [right hemisphere[isolated(with bridge)]] }}`.
+
+Three separate domains are L (ff,fr), C (cf,cr), and R (rf,rr). Authorized directed links are L↔C and C↔R only. L→R and R→L are forbidden as direct transmissions; cross-hemisphere transfer requires two explicit hops through C. A bridge queues a message into the destination domain, and only explicit receive removes it from the queue and records local delivery. The message preserves source identity; the recipient does not become its origin.
+
+**Invariant 066:** isolated local states, explicit bridge-only transfers, no hidden L/R short circuit; six observe/report centers remain separately addressed. The current browser control surface implements bridge queues but does not yet persist those new queues across reloads. This is a computational architecture, not an anatomical claim.
