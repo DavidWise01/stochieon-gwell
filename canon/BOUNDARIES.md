@@ -523,3 +523,9 @@ Each Advance rotor action now calls `advanceAndRelease083`: first derive the nex
 Each automatically released packet now retains its original origin, source/destination compartment, bridge identity, scheduled due tick, and recorded release tick. `advanceAndRelease084` advances the rotor, releases eligible packets and annotates those newly delivered with the release tick before the existing unified SHA-256 commit. `provenance084` produces a read-only report over delivered packets. Cortex `{{i}}` remains the center; the separate rhythms `55577||55777` and six observe/report centers remain intact.
 
 **Invariant 084:** the recorded release tick must be at or after the due tick. Provenance is derived from committed packet fields; historical deliveries made before this version can have an unknown release tick, which must not be invented. Bridge routing, source identity, and packet uniqueness stay unchanged. GitHub source commits do not establish live browser execution.
+
+## GWELL 085 — Persistent memory, not packet transport
+
+The intended system is persistent memory centered on `{{i}}`. The six centers `ff,fr,cf,cr,rf,rr` observe and report; each memory has a stable ID, originating center, creation tick and unchanged content. Recall reads that content and appends an access observation instead of altering the original. A dedicated versioned browser store retains memory records across ordinary reloads. Earlier transport boundaries remain historical models for retention, phase, retrieval and provenance, not the primary purpose.
+
+**Invariant 085:** writing memory and recalling memory are distinct operations; neither substitutes a fabricated observation. Browser localStorage is not durable across devices or browser-data deletion. This first memory store is separate from the unified SHA-256 chain and has not been independently browser-tested; integration with the anchored transaction is the next requirement.
