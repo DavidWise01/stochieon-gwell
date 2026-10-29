@@ -463,3 +463,9 @@ The Three.js page can append and verify a sequence of unified state snapshots. E
 The active transition path commits one combined browser-storage record containing the next rotor, six observe-and-report logs, timed bridge inventories and the full SHA-256 predecessor chain. Each successful rotor advance, report, enqueue or release appends one integrity entry and saves the state plus chain together. Startup recovery verifies the chain and ensures its latest snapshot matches the restored state. Center `{{i}}`, the six control centers and independent 55577/55777 bridge clocks remain unchanged.
 
 **Invariant 074:** validate and write the next combined state before activating it; refuse a failed integrity check instead of silently repairing history. Only one browser tab's normal sequential operations are modeled. This does not provide multi-tab locking, power-loss guarantees, independent external anchoring or protection from full-chain rewriting. Legacy buttons and stores predate the anchored protocol.
+
+## GWELL 075 — Serialized local report continuity
+
+The six-center observe/report system retains separate ledgers for ff,fr,cf,cr,rf,rr. Each local operation now enters a promise-serialized chain before transitioning, hashing and saving the unified state. The current state is reloaded from the committed record by the transition engine; each operation must derive from that latest record. `verifyContinuity075` checks the retained SHA-256 links and that the head snapshot equals the saved state. The cortex anchor remains `{{i}}`, and left/right bridge timing stays `55577||55777`.
+
+**Invariant 075:** distinct observations stay distinct; locally concurrent actions are serialized in one browser JavaScript module instance, not voted into agreement. This does not coordinate across browser tabs or devices; those require an inter-tab lock or external transactional store. Browser execution remains to be independently verified.
