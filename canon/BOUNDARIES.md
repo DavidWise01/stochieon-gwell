@@ -457,3 +457,9 @@ The single-key GWELL 071 checkpoint is tested with an injected storage write fai
 The Three.js page can append and verify a sequence of unified state snapshots. Each entry stores its ordinal, preceding digest, serialized rotor/center/bridge checkpoint, and SHA-256 of `previous|snapshot`. The initial predecessor is `GENESIS`. Verification recomputes each link and reports the first altered or missing intermediate link visible in the retained list. The center remains `{{i}}` and the six control centers remain `ff,fr,cf,cr,rf,rr`.
 
 **Invariant 073:** linked records are tamper-evident relative to a retained trusted head, not tamper-proof; deletion of the entire chain or synchronized rewriting cannot be detected without an external anchor. Current interface requires manual Anchor state; it does not automatically hash every transition. Browser localStorage remains the storage boundary and live browser execution is unverified.
+
+## GWELL 074 — Automatic SHA-256 chain anchoring
+
+The active transition path commits one combined browser-storage record containing the next rotor, six observe-and-report logs, timed bridge inventories and the full SHA-256 predecessor chain. Each successful rotor advance, report, enqueue or release appends one integrity entry and saves the state plus chain together. Startup recovery verifies the chain and ensures its latest snapshot matches the restored state. Center `{{i}}`, the six control centers and independent 55577/55777 bridge clocks remain unchanged.
+
+**Invariant 074:** validate and write the next combined state before activating it; refuse a failed integrity check instead of silently repairing history. Only one browser tab's normal sequential operations are modeled. This does not provide multi-tab locking, power-loss guarantees, independent external anchoring or protection from full-chain rewriting. Legacy buttons and stores predate the anchored protocol.
