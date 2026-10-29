@@ -395,3 +395,11 @@ Frame `{{ a1,b1,c1,abc2,0 }}` binds three named observation slots, a comparison 
 The rotor frame remains `{{ a1,b1,c1,abc2,0 }}`. Witnesses a1, b1 and c1 have separate append-only observation arrays in `src/wankel-persistence.mjs`. `append064` records one named observation without fabricating the others. `compare064` returns INCOMPLETE until all three slots report, MATCH for equal reported values, and DIVERGENT otherwise. No voting or quorum. Origin zero remains [0,0,0]. This is model evidence, not independently authenticated external observation.
 
 **Invariant 064:** never create an absent witness entry; never turn a mismatch into agreement. Browser UI wiring and crash-safe external storage are separate requirements, not established by this source commit.
+
+## GWELL 065 — Persistent observe-and-report control centers
+
+The active persistent rotor control plane is six addressed centers: `{{ff,fr,cf,cr,rf,rr}}`. They map in order to the six rotor phase slots `past,present,future,future,present,past`. Each center has a separate append-only `{seq,tick,observation}` report stream. A report is created only when the corresponding center is explicitly invoked. Missing reports remain absent and are shown as UNOBSERVED.
+
+The historical `a1,b1,c1,abc2,0` witness formulation remains preserved in earlier canon and legacy source, but it is superseded for *active* persistence control: the centers now **observe and report**, rather than voting, witnessing by default, or generating fake attestations. The origin remains `/0\\`, a fixed `(0,0,0)` address. Reports are stored under a versioned browser-localStorage key separate from the rotor checkpoint.
+
+**Invariant 065:** six center identities, six distinct append-only report streams, one zero origin. An uncalled center must not report; observations do not imply agreement, quorum, external sensor provenance, or cross-device durability. GitHub commits contain the persistent implementation, not live runtime records.
