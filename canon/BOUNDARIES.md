@@ -493,3 +493,9 @@ The proposed shared-commit path at cortex `{{i}}` now requires an authorization 
 The center `{{i}}` now exposes a read-only monitor of the locally persisted anchored checkpoint. `cortexMonitor079` verifies the saved hash-chain continuity and reports rotor tick, chain head, chain length, counts for six observe/report centers `ff,fr,cf,cr,rf,rr`, and pending/delivered inventories for the isolated L,C,R domains. The Three.js page can inspect this report and responds to other-tab storage changes. Unknown or corrupt state is reported, not repaired automatically.
 
 **Invariant 079:** monitoring never generates an observation, releases a packet or modifies state. `VERIFIED_LOCAL` only describes local chain consistency. Authenticated remote commit authority is NOT instantiated without a real server-side identity and transactional store, and page-origin browser storage cannot provide that guarantee.
+
+## GWELL 080 — Passive cortex health and continuity
+
+The `{{i}}` cortex can compare two manually acquired, locally verified monitor snapshots. `health080` reports an unchanged tick and chain as NO_PROGRESS_OBSERVED, queue occupancy above a configurable threshold as QUEUE_HIGH, and unchanged per-center report counters as NO_NEW_REPORT. Corrupt or missing checkpoints produce UNKNOWN or an integrity alert rather than fabricated data. The Three.js page offers a Check cortex health control. Six centers `ff,fr,cf,cr,rf,rr` and timed bridges are unchanged.
+
+**Invariant 080:** diagnostics observe and report only; they do not release packets, rewrite histories, or issue votes. An unchanged snapshot is not proof of a stalled process without an expected cadence, and no new report does not by itself mean a failure. Comparison is between user-triggered observations, not continuous background monitoring.
