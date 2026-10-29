@@ -372,3 +372,28 @@ export function verifyMemory085(store){
  store.records.forEach((r,i)=>{if(r.id!==i+1||!CENTERS065.includes(r.center)||typeof r.content!=="string"||!Array.isArray(r.accesses))throw Error("Invalid memory record")});
  return true;
 }
+
+export const DOMAINS086=Object.freeze(["LH","CH","RH"]);
+export const LAYERS086=Object.freeze([
+ {level:0,token:"{{i}}",shadow:0,modes:["active","absorbing","observing"]},
+ {level:1,token:"{{id}}",shadow:1,modes:["active","absorbing","osmosis"]},
+ {level:2,token:"{{sid}}",shadow:2,modes:["active","absorbing","osmosis","holography"]}
+]);
+export function lattice086(){
+ return {schema:86,domains:Object.fromEntries(DOMAINS086.map(domain=>[domain,LAYERS086.map(layer=>({
+  level:layer.level,token:layer.token,shadow:layer.shadow,modes:[...layer.modes],records:[],reports:[]
+ }))]))};
+}
+export function absorb086(lattice,domain,level,memoryId,tick){
+ if(!DOMAINS086.includes(domain)||![0,1,2].includes(level))throw Error("Unknown layer");
+ if(!Number.isSafeInteger(memoryId)||memoryId<1||!Number.isSafeInteger(tick)||tick<0)throw Error("Invalid memory address");
+ const next=JSON.parse(JSON.stringify(lattice));
+ const cell=next.domains[domain][level];
+ cell.records.push({memoryId,tick,ordinal:cell.records.length+1});
+ return next;
+}
+export function observeLayer086(lattice,domain,level){
+ if(!DOMAINS086.includes(domain)||![0,1,2].includes(level))throw Error("Unknown layer");
+ const cell=lattice.domains[domain][level];
+ return {domain,level,token:cell.token,shadow:cell.shadow,modes:[...cell.modes],count:cell.records.length};
+}
