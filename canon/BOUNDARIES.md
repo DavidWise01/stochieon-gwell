@@ -529,3 +529,14 @@ Each automatically released packet now retains its original origin, source/desti
 The intended system is persistent memory centered on `{{i}}`. The six centers `ff,fr,cf,cr,rf,rr` observe and report; each memory has a stable ID, originating center, creation tick and unchanged content. Recall reads that content and appends an access observation instead of altering the original. A dedicated versioned browser store retains memory records across ordinary reloads. Earlier transport boundaries remain historical models for retention, phase, retrieval and provenance, not the primary purpose.
 
 **Invariant 085:** writing memory and recalling memory are distinct operations; neither substitutes a fabricated observation. Browser localStorage is not durable across devices or browser-data deletion. This first memory store is separate from the unified SHA-256 chain and has not been independently browser-tested; integration with the anchored transaction is the next requirement.
+
+## GWELL 086 — Three compartment / nine-layer persistent-memory lattice
+
+Canonical structure: LH || CH || RH, with each compartment independently containing:
+- Layer 0: `{{i}}` — active, absorbing, observing.
+- Layer 1: `{{id}}` — shadow +1, active, absorbing, osmosis.
+- Layer 2: `{{sid}}` — shadow +2, active, absorbing, osmosis, holography.
+
+The compartments are isolated memory namespaces. A symbolic shadow is an addressable derived layer, not automatically an independent observation; osmosis denotes an explicitly authorized memory-reference exchange, and holography denotes a derived representation, not a physical optical claim. Nine layer registers retain memory IDs and observation ticks, preserving original memory content in the separate GWELL 085 store. The page exposes compartment, layer, bind-latest-memory and read-only inspect controls.
+
+**Invariant 086:** 3 compartments × 3 layers = 9 distinct registers; preserve LH and RH isolation except through explicit CH bridges; no invented memory, observations or layer replication. The versioned nine-layer store is browser-local and is not yet committed atomically with the GWELL 074 rotor chain; a live browser render and restore test remain unverified.
