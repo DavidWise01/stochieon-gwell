@@ -324,3 +324,9 @@ export function releaseEligible082(bridges,tick){
  validate069(state);
  return {state,released};
 }
+
+export function advanceAndRelease083(current){
+ const rotor=step(current.rotor);
+ const move=releaseEligible082(current.bridges,rotor.tick);
+ return {rotor,centers:current.centers,bridges:move.state,released:move.released};
+}
