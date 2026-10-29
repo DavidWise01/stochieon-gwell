@@ -505,3 +505,9 @@ The `{{i}}` cortex can compare two manually acquired, locally verified monitor s
 Cortex `{{i}}` now compares pending bridge packet due ticks with the persisted rotor tick. The independent `55577||55777` schedules and phase offsets `2/5i` and `3/5i` remain the source of due ticks. `cadence081` reports WAITING before a packet's deadline, DUE at its deadline, and OVERDUE after the deadline, preserving each packet's origin and destination. This is a passive observation: it does not release packets or change state.
 
 **Invariant 081:** a pending packet before its due tick is not late; at the due tick it is eligible for release; after its due tick it is overdue for release within the model. No wall-clock guarantee or automatic execution is implied. Six observe/report centers remain separate.
+
+## GWELL 082 — Eligible timed packet release
+
+At cortex `{{i}}`, the release operation scans the isolated L/C/R destination queues using the current rotor tick. A queued packet with `due <= tick` moves once into its destination delivered ledger; later attempts find no copy in the pending queue. A packet with `due > tick` remains held. Left and right schedules remain `55577||55777`, offset by `2/5i` and `3/5i`. The six `ff,fr,cf,cr,rf,rr` centers only observe and report.
+
+**Invariant 082:** no release before due, no duplicate within the validated queue/delivery inventory, no direct L/R shortcut. The Three.js control explicitly initiates eligible release through the existing unified anchored transition; this is not a background timer or externally authenticated dispatch. GitHub commits do not prove live browser runtime execution.
