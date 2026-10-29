@@ -184,3 +184,26 @@ export function recoveryTest072(){
  const complete=JSON.stringify(next)===JSON.stringify(afterSuccess)&&next.rotor.tick===1;
  return {pass:interrupted&&unchanged&&complete,interrupted,unchanged,complete};
 }
+
+export const CHAIN_KEY073="stochieon.gwell073.chain.v1";
+export async function hash073(input){
+ const data=new TextEncoder().encode(input);
+ const digest=await crypto.subtle.digest("SHA-256",data);
+ return [...new Uint8Array(digest)].map(x=>x.toString(16).padStart(2,"0")).join("");
+}
+export async function verify073(entries){
+ let previous="GENESIS";
+ for(let i=0;i<entries.length;i++){
+  const e=entries[i];
+  if(e.previous!==previous||e.ordinal!==i+1||await hash073(previous+"|"+e.snapshot)!==e.hash)throw Error("Chain divergence at "+(i+1));
+  previous=e.hash;
+ }
+ return {count:entries.length,head:previous};
+}
+export async function append073(storage,state){
+ const entries=JSON.parse(storage.getItem(CHAIN_KEY073)||"[]");
+ const checked=await verify073(entries),snapshot=JSON.stringify(checkpoint070(state.rotor,state.centers,state.bridges));
+ const entry={ordinal:entries.length+1,previous:checked.head,snapshot,hash:await hash073(checked.head+"|"+snapshot)};
+ storage.setItem(CHAIN_KEY073,JSON.stringify([...entries,entry]));
+ return entry;
+}
