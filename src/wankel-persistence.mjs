@@ -145,3 +145,20 @@ export function validate069(state){
 }
 export function save069(storage,state){validate069(state);storage.setItem(BRIDGE_KEY069,JSON.stringify(state))}
 export function load069(storage){const raw=storage.getItem(BRIDGE_KEY069);if(raw===null)return network066();const state=JSON.parse(raw);validate069(state);return state}
+
+export const ATOMIC_KEY070="stochieon.gwell070.atomic.v1";
+export function checkpoint070(rotor,centers,bridges){
+ const r=decode(encode(rotor));restoreCenters065({getItem:()=>JSON.stringify(centers)});validate069(bridges);
+ for(const id of CENTERS065)for(const entry of centers[id])if(entry.tick>r.tick)throw Error("Report ahead of rotor");
+ return {schema:70,core:"{{i}}",rotor:r,centers:JSON.parse(JSON.stringify(centers)),bridges:JSON.parse(JSON.stringify(bridges))};
+}
+export function restore070(storage){
+ const raw=storage.getItem(ATOMIC_KEY070);if(raw===null)return null;
+ const pack=JSON.parse(raw);if(pack.schema!==70||pack.core!=="{{i}}")throw Error("Invalid atomic header");
+ return checkpoint070(pack.rotor,pack.centers,pack.bridges);
+}
+export function commit070(storage,rotor,centers,bridges){
+ const pack=checkpoint070(rotor,centers,bridges);
+ storage.setItem(ATOMIC_KEY070,JSON.stringify(pack));
+ return pack;
+}
