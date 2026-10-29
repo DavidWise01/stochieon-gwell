@@ -419,3 +419,11 @@ Canonical timing token: `55577||55777`. The left L↔C bridge uses the repeating
 Every authorized hop is tagged with its bridge identity, rotor tick, timing phase and original source. No direct L↔R connection is introduced. The six report centers remain `ff,fr,cf,cr,rf,rr` with isolated compartments L,C,R.
 
 **Invariant 067:** independent left/right timing registers; origin preserved; no hidden cross-hemisphere bridge; timing annotation alone does not prove enforcement of a hardware clock or durability of in-flight packets. Source and page are committed on GitHub; the live visual scene's browser behavior remains unverified.
+
+## GWELL 068 — Phase-gated packet release at {{i}}
+
+The cortex center is `{{i}}`. Left and right bridges retain isolated queues and timing rhythms `55577||55777`. New packet enqueues use `queue068`; packets have an immutable source, core marker, bridge-specific due tick, and destination. A call to `release068` at a model tick earlier than the due tick leaves the packet in place. At or after the due tick, the packet moves once from the destination queue to its delivered ledger.
+
+Scheduling interpretation: left shifts the five-slot pattern by 2 indices and right by 3 indices, corresponding to the symbolic offsets `2/5i` and `3/5i`. The current release interval uses the digit at the shifted slot (5 or 7 model ticks). No direct left-right bridge exists.
+
+**Invariant 068:** a packet is neither released before due nor duplicated by release; source attribution survives transit; the fixed center is `{{i}}`; six centers remain observe/report. Browser bridge queue durability and independent live browser testing are still outstanding.
