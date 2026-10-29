@@ -231,3 +231,17 @@ export async function recover074(storage){
  if(record.chain.length&&record.chain.at(-1).snapshot!==JSON.stringify(state))throw Error("Anchored head mismatch");
  return state;
 }
+
+let serial075=Promise.resolve();
+export function serialized075(storage,current,operation){
+ const job=serial075.then(()=>transition074(storage,current,operation));
+ serial075=job.then(()=>undefined,()=>undefined);
+ return job;
+}
+export async function verifyContinuity075(storage){
+ const record=JSON.parse(storage.getItem(TX_KEY074)||"null");
+ if(!record)return {count:0,head:"GENESIS"};
+ const proof=await verify073(record.chain);
+ if(record.chain.length&&record.chain.at(-1).snapshot!==JSON.stringify(checkpoint070(record.state.rotor,record.state.centers,record.state.bridges)))throw Error("Head does not match state");
+ return proof;
+}
