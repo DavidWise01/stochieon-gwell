@@ -77,3 +77,22 @@ export function restoreCenters065(storage){
  logs[id].forEach((e,i)=>{if(e.seq!==i+1||!Number.isSafeInteger(e.tick)||(i&&e.tick<logs[id][i-1].tick))throw Error("Invalid center sequence "+id)})}
  return logs;
 }
+
+export const DOMAINS066=Object.freeze(["L","C","R"]);
+export const ROUTES066=Object.freeze({L:["C"],C:["L","R"],R:["C"]});
+export const CENTER_DOMAIN066=Object.freeze({ff:"L",fr:"L",cf:"C",cr:"C",rf:"R",rr:"R"});
+export function network066(){return {schema:1,queues:{L:[],C:[],R:[]},delivered:{L:[],C:[],R:[]},sequence:0}}
+export function send066(state,from,to,payload){
+ if(!DOMAINS066.includes(from)||!ROUTES066[from].includes(to))throw Error("Bridge forbidden");
+ const next=JSON.parse(JSON.stringify(state));
+ const id=++next.sequence;
+ next.queues[to].push({id,from,to,payload:JSON.parse(JSON.stringify(payload))});
+ return next;
+}
+export function receive066(state,domain){
+ if(!DOMAINS066.includes(domain))throw Error("Unknown compartment");
+ const next=JSON.parse(JSON.stringify(state));
+ const packet=next.queues[domain].shift()||null;
+ if(packet)next.delivered[domain].push(packet);
+ return {state:next,packet};
+}
