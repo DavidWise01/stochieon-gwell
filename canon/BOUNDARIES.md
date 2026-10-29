@@ -546,3 +546,9 @@ The compartments are isolated memory namespaces. A symbolic shadow is an address
 Each isolated LH, CH and RH memory stack supports a one-way derived-reference path: layer 0 `{{i}}` to layer 1 `{{id}}`, then layer 1 to layer 2 `{{sid}}`. `inherit087` appends child records identifying the parent layer, parent ordinal, original memory ID and creation tick. Existing parent records are never overwritten. Previously inherited parent ordinals are not duplicated on repeated derivation. `lineage087` reports the stored ancestry without changing it.
 
 **Invariant 087:** derived shadow records are references, not copied or invented original observations. No LH-to-RH shortcut; compartment identity remains fixed. Engine source is committed, but Three.js controls are not yet wired and nine-layer browser storage is separate from the anchored state transaction.
+
+## GWELL 088 — Three memory terms
+
+Within LH, CH and RH: L0 `{{i}}` = SHORT / WEAK (active, absorbing, observing); L1 `{{id}}` = MEDIUM / MEDIUM (shadow +1, active, absorbing, osmosis); L2 `{{sid}}` = LONG / STRONG (shadow +2, active, absorbing, osmosis, holography). `verifyLineage088` checks inherited memory references back through the parent layer and original L0 record, retaining each compartment identity.
+
+**Invariant 088:** nine distinct layer registers, parent records unchanged, no silent cross-compartment inheritance. Weak/medium/strong are symbolic memory-tier classifications; persistence duration and automatic promotion are not yet implemented. Direct upper-layer references without parent information are not certified inherited shadows.
