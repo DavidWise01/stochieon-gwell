@@ -481,3 +481,9 @@ Anchored state transitions now request an exclusive named Web Locks API lock bef
 A remote device must submit an identified action and the SHA-256 history head it observed. `proposal077` packages the device, base head and proposed action. `accept077` checks the proposal's base head against the locally verified anchored chain and returns STALE if that head has advanced. Matching heads return READY_FOR_AUTHORITY, not an executed transaction. The page exposes a local proposal preflight. Center `{{i}}`, six separate observe/report centers, and independently timed bridges remain unchanged.
 
 **Invariant 077:** a stale proposal is not silently applied. A matching digest is necessary but insufficient for a cross-device commit: a shared authenticated transactional authority is not connected, and this boundary does not claim remote durability or multi-device serialization.
+
+## GWELL 078 — Explicit authority boundary
+
+The proposed shared-commit path at cortex `{{i}}` now requires an authorization decision and current SHA-256 base head. The `authority078` function rejects unauthenticated proposals, checks the proposed base head, and only accepts the supported rotor-step action when initialized state exists. It is a local implementation of an authority interface, not a deployed or authenticated network service. The browser demonstrates the closed gate without claiming remote credentials.
+
+**Invariant 078:** no authority, no commit. Stale proposals must not overwrite new history. This prototype does not yet perform an atomic compare-and-swap under a distributed transaction lock; external authentication, server-side persistence and safe concurrent remote commits remain unimplemented. Six observe/report centers and two independent bridge clocks retain their identities.
