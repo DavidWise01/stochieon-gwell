@@ -207,3 +207,27 @@ export async function append073(storage,state){
  storage.setItem(CHAIN_KEY073,JSON.stringify([...entries,entry]));
  return entry;
 }
+
+export const TX_KEY074="stochieon.gwell074.anchored.v1";
+export async function transition074(storage,current,operation){
+ const existing=storage.getItem(TX_KEY074);
+ const record=existing?JSON.parse(existing):{schema:74,chain:[],state:checkpoint070(current.rotor,current.centers,current.bridges)};
+ const checked=await verify073(record.chain);
+ const baseline=checkpoint070(record.state.rotor,record.state.centers,record.state.bridges);
+ const next=operation(baseline);
+ const state=checkpoint070(next.rotor,next.centers,next.bridges);
+ const snapshot=JSON.stringify(state);
+ const entry={ordinal:checked.count+1,previous:checked.head,snapshot,hash:await hash073(checked.head+"|"+snapshot)};
+ const updated={schema:74,state,chain:[...record.chain,entry]};
+ storage.setItem(TX_KEY074,JSON.stringify(updated));
+ return updated;
+}
+export async function recover074(storage){
+ const raw=storage.getItem(TX_KEY074);
+ if(!raw)return null;
+ const record=JSON.parse(raw);if(record.schema!==74)throw Error("Invalid anchored state");
+ await verify073(record.chain);
+ const state=checkpoint070(record.state.rotor,record.state.centers,record.state.bridges);
+ if(record.chain.length&&record.chain.at(-1).snapshot!==JSON.stringify(state))throw Error("Anchored head mismatch");
+ return state;
+}
