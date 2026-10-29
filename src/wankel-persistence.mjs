@@ -169,3 +169,18 @@ export function transition071(storage,current,operation){
  const saved=commit070(storage,next.rotor,next.centers,next.bridges);
  return saved;
 }
+
+export function recoveryTest072(){
+ const memory=new Map(),storage={getItem:k=>memory.has(k)?memory.get(k):null,setItem:(k,v)=>memory.set(k,v)};
+ const base={rotor:genesis(),centers:centers065(),bridges:network066()};
+ const old=commit070(storage,base.rotor,base.centers,base.bridges);
+ let interrupted=false;
+ const failed={getItem:storage.getItem,setItem:()=>{throw Error("simulated interruption")}};
+ try{transition071(failed,old,p=>({...p,rotor:step(p.rotor)}))}catch(e){interrupted=true}
+ const afterFailure=restore070(storage);
+ const unchanged=JSON.stringify(afterFailure)===JSON.stringify(old);
+ const next=transition071(storage,old,p=>({...p,rotor:step(p.rotor)}));
+ const afterSuccess=restore070(storage);
+ const complete=JSON.stringify(next)===JSON.stringify(afterSuccess)&&next.rotor.tick===1;
+ return {pass:interrupted&&unchanged&&complete,interrupted,unchanged,complete};
+}
