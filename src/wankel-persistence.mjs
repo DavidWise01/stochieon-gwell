@@ -96,3 +96,13 @@ export function receive066(state,domain){
  if(packet)next.delivered[domain].push(packet);
  return {state:next,packet};
 }
+
+export const TIMING067=Object.freeze({left:[5,5,5,7,7],right:[5,5,7,7,7],offset:{left:2/5,right:3/5}});
+export function phase067(side,tick){if(!["left","right"].includes(side))throw Error("Unknown bridge");const seq=TIMING067[side];const pos=((tick%seq.length)+seq.length)%seq.length;return {side,position:pos,duration:seq[pos],phase:(pos+TIMING067.offset[side])%seq.length}}
+export function send067(state,from,to,payload,tick){
+ const side=(from==="L"||to==="L")?"left":(from==="R"||to==="R")?"right":null;
+ if(!side||!ROUTES066[from]?.includes(to))throw Error("No direct bridge");
+ const p=phase067(side,tick);
+ const next=send066(state,from,to,{...payload,bridge:side,timing:p,origin:payload.origin||from});
+ return next;
+}
