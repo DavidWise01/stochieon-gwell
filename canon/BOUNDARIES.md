@@ -433,3 +433,9 @@ Scheduling interpretation: left shifts the five-slot pattern by 2 indices and ri
 The six report centers remain `ff,fr,cf,cr,rf,rr`, with cortex center `{{i}}`. The left `55577` bridge and right `55777` bridge retain independent phase offsets. Browser storage now records held and delivered packet queues, unique identifiers, due ticks, destinations and origins. A restored queue is validated before use. Each transfer saves the updated queue and its delivery ledger. A manual recovery check is available on the page.
 
 **Invariant 069:** no duplicated packet identifiers and no early release. Browser-local storage is not atomic across independent rotor and bridge records, nor is it cross-device persistence. GitHub tracks the implementation; it does not automatically receive runtime packets.
+
+## GWELL 070 — Unified recoverable checkpoint
+
+The atomic model state contains rotor phase/tick and event history, six isolated observe-and-report ledgers `ff,fr,cf,cr,rf,rr`, and pending/delivered bridge packets spanning L ↔ `{{i}}` ↔ R. `checkpoint070` validates the rotor by replay, verifies all six report streams and bridge identities, and rejects report ticks beyond the rotor clock. `commit070` writes the validated package as one JSON value under a versioned browser-localStorage key. `restore070` verifies the entire package before replacing active page objects. Separate earlier browser keys remain legacy storage.
+
+**Invariant 070:** all three groups are selected from a single saved checkpoint during explicit restore; no partial restore on failure. This is a single-key browser persistence unit, not a transactional system against power loss, rollback protection, automated commits per rotor tick, or cross-device durable storage. Manual Save unified checkpoint is required; normal tick/report/bridge controls still operate in memory and their separate legacy keys.
