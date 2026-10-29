@@ -287,3 +287,12 @@ export async function cortexMonitor079(storage){
  const delivered=Object.fromEntries(DOMAINS066.map(id=>[id,state.bridges.delivered[id].length]));
  return {status:"VERIFIED_LOCAL",core:"{{i}}",tick:state.rotor.tick,head:verified.head,chain:verified.count,reports,queued,delivered};
 }
+
+export function health080(current,prior=null,limits={queue:6}){
+ const flags=[];
+ if(current.status!=="VERIFIED_LOCAL")return {status:"UNKNOWN",flags:["No verified local checkpoint"]};
+ if(prior&&current.tick===prior.tick&&current.chain===prior.chain)flags.push("NO_PROGRESS_OBSERVED");
+ for(const [id,n] of Object.entries(current.queued))if(n>limits.queue)flags.push("QUEUE_HIGH:"+id);
+ if(prior)for(const id of CENTERS065)if(current.reports[id]===prior.reports?.[id])flags.push("NO_NEW_REPORT:"+id);
+ return {status:flags.length?"ATTENTION":"OBSERVED",flags,tick:current.tick,head:current.head};
+}
