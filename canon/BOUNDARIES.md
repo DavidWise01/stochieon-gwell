@@ -445,3 +445,9 @@ The atomic model state contains rotor phase/tick and event history, six isolated
 The six-center rotor uses `transition071` to prepare a proposed state, validate it, write one versioned browser checkpoint, and only then activate it. Rotor advance, center observe/report, packet enqueue and phase-gated release use this operation. On startup, a valid checkpoint restores the combined rotor, six report ledgers, and bridge queues. The center is `{{i}}`.
 
 **Invariant 071:** failed validation or failed storage prevents activation of the proposed state. Browser storage does not guarantee cross-device or physical crash-safe persistence. Legacy manual rotor controls are separate from the unified model.
+
+## GWELL 072 — Recovery integrity after interrupted writes
+
+The single-key GWELL 071 checkpoint is tested with an injected storage write failure. `recoveryTest072` saves an initial combined rotor/report/bridge state, attempts a rotor transition using storage that throws before committing, and then checks that restoration still returns the complete preceding snapshot. A subsequent successful transition must restore the new complete snapshot. The Three.js page exposes a Test interrupted write button; the test is isolated from the live checkpoint.
+
+**Invariant 072:** failed writes do not activate a partial candidate; successful writes restore the combined state. This checks a simulated exception prior to storage mutation, not torn-write recovery, sudden device power loss, or cross-device durability. Cortex remains `{{i}}`; six control centers and both bridge timing patterns are unchanged.
