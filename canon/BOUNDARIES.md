@@ -411,3 +411,11 @@ Canonical topology: `{{ [left hemisphere[isolated(with bridge)]] [cortex[isolate
 Three separate domains are L (ff,fr), C (cf,cr), and R (rf,rr). Authorized directed links are L↔C and C↔R only. L→R and R→L are forbidden as direct transmissions; cross-hemisphere transfer requires two explicit hops through C. A bridge queues a message into the destination domain, and only explicit receive removes it from the queue and records local delivery. The message preserves source identity; the recipient does not become its origin.
 
 **Invariant 066:** isolated local states, explicit bridge-only transfers, no hidden L/R short circuit; six observe/report centers remain separately addressed. The current browser control surface implements bridge queues but does not yet persist those new queues across reloads. This is a computational architecture, not an anatomical claim.
+
+## GWELL 067 — Separate bridges, phased centrifugal timing
+
+Canonical timing token: `55577||55777`. The left L↔C bridge uses the repeating sequence `[5,5,5,7,7]` with offset `(2/5)i`; the right C↔R bridge uses `[5,5,7,7,7]` with offset `(3/5)i`. Here `i` labels a symbolic phase-axis displacement; these are model scheduling offsets, not imaginary-valued delays or measured physical frequencies.
+
+Every authorized hop is tagged with its bridge identity, rotor tick, timing phase and original source. No direct L↔R connection is introduced. The six report centers remain `ff,fr,cf,cr,rf,rr` with isolated compartments L,C,R.
+
+**Invariant 067:** independent left/right timing registers; origin preserved; no hidden cross-hemisphere bridge; timing annotation alone does not prove enforcement of a hardware clock or durability of in-flight packets. Source and page are committed on GitHub; the live visual scene's browser behavior remains unverified.
