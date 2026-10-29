@@ -252,3 +252,15 @@ export async function crossTab076(storage,current,operation,locks=globalThis.nav
   return serialized075(storage,current,operation);
  });
 }
+
+export function proposal077(device,baseHead,action){
+ if(!device||typeof device!=="string"||!["rotor-step","observe","enqueue","release"].includes(action.type))throw Error("Invalid proposal");
+ return {schema:77,device,baseHead,action};
+}
+export async function accept077(storage,proposal){
+ if(proposal.schema!==77)throw Error("Invalid proposal schema");
+ const current=JSON.parse(storage.getItem(TX_KEY074)||"null");
+ const head=current?(await verify073(current.chain)).head:"GENESIS";
+ if(proposal.baseHead!==head)return {status:"STALE",head};
+ return {status:"READY_FOR_AUTHORITY",head,proposal};
+}
