@@ -106,3 +106,25 @@ export function send067(state,from,to,payload,tick){
  const next=send066(state,from,to,{...payload,bridge:side,timing:p,origin:payload.origin||from});
  return next;
 }
+
+export const CORE068="{{i}}";
+export function due068(side,tick){
+ const seq=TIMING067[side],shift=side==="left"?2:3;
+ if(!seq||!Number.isSafeInteger(tick)||tick<0)throw Error("Bad phase");
+ return tick+seq[(tick+shift)%5];
+}
+export function queue068(state,from,to,payload,tick){
+ if(!ROUTES066[from]?.includes(to))throw Error("Forbidden route");
+ const side=from==="L"||to==="L"?"left":"right";
+ const next=JSON.parse(JSON.stringify(state));
+ next.queues[to].push({id:++next.sequence,from,to,origin:payload.origin||from,core:CORE068,due:due068(side,tick),payload});
+ return next;
+}
+export function release068(state,to,tick){
+ const next=JSON.parse(JSON.stringify(state)),q=next.queues[to];
+ if(!q||!Number.isSafeInteger(tick))throw Error("Bad destination");
+ const i=q.findIndex(p=>p.due!==undefined&&p.due<=tick);
+ if(i<0)return {state:next,packet:null};
+ const packet=q.splice(i,1)[0];next.delivered[to].push(packet);
+ return {state:next,packet};
+}
