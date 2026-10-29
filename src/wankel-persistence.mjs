@@ -162,3 +162,10 @@ export function commit070(storage,rotor,centers,bridges){
  storage.setItem(ATOMIC_KEY070,JSON.stringify(pack));
  return pack;
 }
+
+export function transition071(storage,current,operation){
+ const next=operation(checkpoint070(current.rotor,current.centers,current.bridges));
+ if(!next||!next.rotor||!next.centers||!next.bridges)throw Error("Invalid transaction");
+ const saved=commit070(storage,next.rotor,next.centers,next.bridges);
+ return saved;
+}
