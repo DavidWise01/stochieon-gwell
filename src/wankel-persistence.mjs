@@ -264,3 +264,15 @@ export async function accept077(storage,proposal){
  if(proposal.baseHead!==head)return {status:"STALE",head};
  return {status:"READY_FOR_AUTHORITY",head,proposal};
 }
+
+export async function authority078(storage,proposal,authorized=false){
+ if(!authorized)return {status:"UNAUTHORIZED"};
+ const preflight=await accept077(storage,proposal);
+ if(preflight.status!=="READY_FOR_AUTHORITY")return preflight;
+ const current=JSON.parse(storage.getItem(TX_KEY074)||"null");
+ if(!current)return {status:"NO_GENESIS"};
+ const a=proposal.action;
+ if(a.type!=="rotor-step")return {status:"UNSUPPORTED_ACTION"};
+ const next=await transition074(storage,current.state,p=>({...p,rotor:step(p.rotor)}));
+ return {status:"COMMITTED",head:next.chain.at(-1).hash,tick:next.state.rotor.tick};
+}
