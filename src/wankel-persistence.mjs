@@ -276,3 +276,14 @@ export async function authority078(storage,proposal,authorized=false){
  const next=await transition074(storage,current.state,p=>({...p,rotor:step(p.rotor)}));
  return {status:"COMMITTED",head:next.chain.at(-1).hash,tick:next.state.rotor.tick};
 }
+
+export async function cortexMonitor079(storage){
+ const record=JSON.parse(storage.getItem(TX_KEY074)||"null");
+ if(!record)return {status:"UNINITIALIZED",core:"{{i}}",head:"GENESIS"};
+ const verified=await verifyContinuity075(storage);
+ const state=checkpoint070(record.state.rotor,record.state.centers,record.state.bridges);
+ const reports=Object.fromEntries(CENTERS065.map(id=>[id,state.centers[id].length]));
+ const queued=Object.fromEntries(DOMAINS066.map(id=>[id,state.bridges.queues[id].length]));
+ const delivered=Object.fromEntries(DOMAINS066.map(id=>[id,state.bridges.delivered[id].length]));
+ return {status:"VERIFIED_LOCAL",core:"{{i}}",tick:state.rotor.tick,head:verified.head,chain:verified.count,reports,queued,delivered};
+}
