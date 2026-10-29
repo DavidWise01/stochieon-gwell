@@ -128,3 +128,20 @@ export function release068(state,to,tick){
  const packet=q.splice(i,1)[0];next.delivered[to].push(packet);
  return {state:next,packet};
 }
+
+export const BRIDGE_KEY069="stochieon.gwell069.bridges.v1";
+export function validate069(state){
+ if(!state||state.schema!==1||!Number.isSafeInteger(state.sequence)||state.sequence<0)throw Error("Bad bridge header");
+ const ids=[];
+ for(const d of DOMAINS066){
+  if(!Array.isArray(state.queues?.[d])||!Array.isArray(state.delivered?.[d]))throw Error("Missing ledger "+d);
+  for(const p of [...state.queues[d],...state.delivered[d]]){
+   if(!Number.isSafeInteger(p.id)||p.id<1||p.id>state.sequence||!ROUTES066[p.from]?.includes(p.to)||p.to!==d||p.core!==CORE068||!Number.isSafeInteger(p.due)||p.due<0)throw Error("Invalid packet");
+   ids.push(p.id);
+  }
+ }
+ if(new Set(ids).size!==ids.length)throw Error("Duplicate packet ID");
+ return true;
+}
+export function save069(storage,state){validate069(state);storage.setItem(BRIDGE_KEY069,JSON.stringify(state))}
+export function load069(storage){const raw=storage.getItem(BRIDGE_KEY069);if(raw===null)return network066();const state=JSON.parse(raw);validate069(state);return state}
