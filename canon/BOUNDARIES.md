@@ -469,3 +469,9 @@ The active transition path commits one combined browser-storage record containin
 The six-center observe/report system retains separate ledgers for ff,fr,cf,cr,rf,rr. Each local operation now enters a promise-serialized chain before transitioning, hashing and saving the unified state. The current state is reloaded from the committed record by the transition engine; each operation must derive from that latest record. `verifyContinuity075` checks the retained SHA-256 links and that the head snapshot equals the saved state. The cortex anchor remains `{{i}}`, and left/right bridge timing stays `55577||55777`.
 
 **Invariant 075:** distinct observations stay distinct; locally concurrent actions are serialized in one browser JavaScript module instance, not voted into agreement. This does not coordinate across browser tabs or devices; those require an inter-tab lock or external transactional store. Browser execution remains to be independently verified.
+
+## GWELL 076 — Cross-tab exclusive checkpoint access
+
+Anchored state transitions now request an exclusive named Web Locks API lock before entering the serialized state transition function. The operation reads the latest checkpoint while holding the lock, then verifies and commits the next hash-linked rotor/center/bridge state. Six `ff,fr,cf,cr,rf,rr` observe/report histories remain distinct, with cortex `{{i}}` and independent bridge clocks.
+
+**Invariant 076:** cooperating tabs on the same browser origin must not execute the protected transition simultaneously. If Web Locks is unavailable, the protected write fails closed. This does not coordinate across devices, non-cooperating old tabs, or unrelated storage writers; a browser runtime test remains outstanding.
