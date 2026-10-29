@@ -499,3 +499,9 @@ The center `{{i}}` now exposes a read-only monitor of the locally persisted anch
 The `{{i}}` cortex can compare two manually acquired, locally verified monitor snapshots. `health080` reports an unchanged tick and chain as NO_PROGRESS_OBSERVED, queue occupancy above a configurable threshold as QUEUE_HIGH, and unchanged per-center report counters as NO_NEW_REPORT. Corrupt or missing checkpoints produce UNKNOWN or an integrity alert rather than fabricated data. The Three.js page offers a Check cortex health control. Six centers `ff,fr,cf,cr,rf,rr` and timed bridges are unchanged.
 
 **Invariant 080:** diagnostics observe and report only; they do not release packets, rewrite histories, or issue votes. An unchanged snapshot is not proof of a stalled process without an expected cadence, and no new report does not by itself mean a failure. Comparison is between user-triggered observations, not continuous background monitoring.
+
+## GWELL 081 — Bridge cadence health classification
+
+Cortex `{{i}}` now compares pending bridge packet due ticks with the persisted rotor tick. The independent `55577||55777` schedules and phase offsets `2/5i` and `3/5i` remain the source of due ticks. `cadence081` reports WAITING before a packet's deadline, DUE at its deadline, and OVERDUE after the deadline, preserving each packet's origin and destination. This is a passive observation: it does not release packets or change state.
+
+**Invariant 081:** a pending packet before its due tick is not late; at the due tick it is eligible for release; after its due tick it is overdue for release within the model. No wall-clock guarantee or automatic execution is implied. Six observe/report centers remain separate.
