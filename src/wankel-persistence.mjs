@@ -245,3 +245,10 @@ export async function verifyContinuity075(storage){
  if(record.chain.length&&record.chain.at(-1).snapshot!==JSON.stringify(checkpoint070(record.state.rotor,record.state.centers,record.state.bridges)))throw Error("Head does not match state");
  return proof;
 }
+
+export async function crossTab076(storage,current,operation,locks=globalThis.navigator?.locks){
+ if(!locks?.request)throw Error("Web Locks API unavailable; cross-tab write blocked");
+ return locks.request("stochieon-gwell-anchored-state",{mode:"exclusive"},async()=>{
+  return serialized075(storage,current,operation);
+ });
+}
