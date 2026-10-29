@@ -487,3 +487,9 @@ A remote device must submit an identified action and the SHA-256 history head it
 The proposed shared-commit path at cortex `{{i}}` now requires an authorization decision and current SHA-256 base head. The `authority078` function rejects unauthenticated proposals, checks the proposed base head, and only accepts the supported rotor-step action when initialized state exists. It is a local implementation of an authority interface, not a deployed or authenticated network service. The browser demonstrates the closed gate without claiming remote credentials.
 
 **Invariant 078:** no authority, no commit. Stale proposals must not overwrite new history. This prototype does not yet perform an atomic compare-and-swap under a distributed transaction lock; external authentication, server-side persistence and safe concurrent remote commits remain unimplemented. Six observe/report centers and two independent bridge clocks retain their identities.
+
+## GWELL 079 — Cortex integrity monitor
+
+The center `{{i}}` now exposes a read-only monitor of the locally persisted anchored checkpoint. `cortexMonitor079` verifies the saved hash-chain continuity and reports rotor tick, chain head, chain length, counts for six observe/report centers `ff,fr,cf,cr,rf,rr`, and pending/delivered inventories for the isolated L,C,R domains. The Three.js page can inspect this report and responds to other-tab storage changes. Unknown or corrupt state is reported, not repaired automatically.
+
+**Invariant 079:** monitoring never generates an observation, releases a packet or modifies state. `VERIFIED_LOCAL` only describes local chain consistency. Authenticated remote commit authority is NOT instantiated without a real server-side identity and transactional store, and page-origin browser storage cannot provide that guarantee.
