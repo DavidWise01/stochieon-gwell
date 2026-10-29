@@ -552,3 +552,9 @@ Each isolated LH, CH and RH memory stack supports a one-way derived-reference pa
 Within LH, CH and RH: L0 `{{i}}` = SHORT / WEAK (active, absorbing, observing); L1 `{{id}}` = MEDIUM / MEDIUM (shadow +1, active, absorbing, osmosis); L2 `{{sid}}` = LONG / STRONG (shadow +2, active, absorbing, osmosis, holography). `verifyLineage088` checks inherited memory references back through the parent layer and original L0 record, retaining each compartment identity.
 
 **Invariant 088:** nine distinct layer registers, parent records unchanged, no silent cross-compartment inheritance. Weak/medium/strong are symbolic memory-tier classifications; persistence duration and automatic promotion are not yet implemented. Direct upper-layer references without parent information are not certified inherited shadows.
+
+## GWELL 089 — Observable agentic memory consolidation
+
+The browser agent independently scans LH, CH and RH memory compartments on each manual cycle or user-enabled two-second interval. For each compartment it derives L0 short/weak `{{i}}` references into L1 medium/medium `{{id}}`, followed by L1 into L2 long/strong `{{sid}}`. The `consolidate089` engine calls append-only `inherit087`, then checks parent ancestry with `verifyLineage088`. Each scan emits explicit `INHERIT` or `HOLD` decisions and layer counts to the page process log. Parent content is not rewritten, and no cross-compartment derivation occurs.
+
+**Invariant 089:** independent deterministic memory-processing agents, not language models or voting agents. The agent does not invent memories or promote when no unshadowed parent remains. The interval operates only while the GitHub Pages tab is running; it is not a GitHub server worker, a cross-device service, or long-term data durability. Browser-local layer state is not yet part of the unified SHA-256 checkpoint. Live browser tests are pending.
