@@ -540,3 +540,9 @@ Canonical structure: LH || CH || RH, with each compartment independently contain
 The compartments are isolated memory namespaces. A symbolic shadow is an addressable derived layer, not automatically an independent observation; osmosis denotes an explicitly authorized memory-reference exchange, and holography denotes a derived representation, not a physical optical claim. Nine layer registers retain memory IDs and observation ticks, preserving original memory content in the separate GWELL 085 store. The page exposes compartment, layer, bind-latest-memory and read-only inspect controls.
 
 **Invariant 086:** 3 compartments × 3 layers = 9 distinct registers; preserve LH and RH isolation except through explicit CH bridges; no invented memory, observations or layer replication. The versioned nine-layer store is browser-local and is not yet committed atomically with the GWELL 074 rotor chain; a live browser render and restore test remain unverified.
+
+## GWELL 087 — Shadow inheritance
+
+Each isolated LH, CH and RH memory stack supports a one-way derived-reference path: layer 0 `{{i}}` to layer 1 `{{id}}`, then layer 1 to layer 2 `{{sid}}`. `inherit087` appends child records identifying the parent layer, parent ordinal, original memory ID and creation tick. Existing parent records are never overwritten. Previously inherited parent ordinals are not duplicated on repeated derivation. `lineage087` reports the stored ancestry without changing it.
+
+**Invariant 087:** derived shadow records are references, not copied or invented original observations. No LH-to-RH shortcut; compartment identity remains fixed. Engine source is committed, but Three.js controls are not yet wired and nine-layer browser storage is separate from the anchored state transaction.
